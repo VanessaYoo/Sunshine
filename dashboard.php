@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) { //apakah ada nilai
+if (!isset($_SESSION['username'])) { //apakah ada nilai tes
     header("Location: login.php");
 }
 ?>
