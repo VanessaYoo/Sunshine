@@ -48,10 +48,10 @@ function login($data)
             //cek admin
             if ($row["email"] === "admin@gmail.com" && $pass === "admin") {
                 $_SESSION["admin"] = true;
-                echo "<script>alert('Berhasil login sebagai Admin Sunshine!'); document.location.href = 'admin-home.php';</script>";
+                echo "<script>alert('Berhasil login sebagai Admin Sunshine!'); document.location.href = 'admin-beranda.php';</script>";
             } else {
                 // Jika bukan admin
-                echo "<script>alert('Berhasil login ke Sunshine!');document.location.href = 'user-home.php';</script>";
+                echo "<script>alert('Berhasil login ke Sunshine!');document.location.href = 'user-beranda.php';</script>";
             }
         } else {
             $errors[] = "Email atau passwordmu salah. ";
