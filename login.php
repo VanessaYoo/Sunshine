@@ -2,6 +2,9 @@
 session_start();
 require "function.php";
 
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
 if (isset($_POST["login"])) {
     login($_POST);
 }
@@ -40,6 +43,18 @@ if (isset($_POST["login"])) {
                 </div>
 
                 <form action="" method="post" class="form-lr" data-aos="fade-up" data-aos-duration="1000">
+
+
+                    <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="error"><?= htmlspecialchars($error) ?></div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+
                     <input name="email" type="text" required autocomplete="off" placeholder="Email" class="input-lr" />
                     <input name="pass" type="password" required autocomplete="off" placeholder="Password" class="input-lr" />
                     <input name="login" type="submit" value="Login" class="submit-lr" />
@@ -54,7 +69,7 @@ if (isset($_POST["login"])) {
     </div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      AOS.init();
+        AOS.init();
     </script>
 </body>
 

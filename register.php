@@ -1,5 +1,10 @@
 <?php
+session_start();
 require "function.php";
+
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
 if (isset($_POST["register"])) {
     if (register($_POST) > 0) {
         echo "
@@ -11,8 +16,8 @@ if (isset($_POST["register"])) {
     } else {
         echo "
         <script>
-        alert('Registrasi akun gagal: " . mysqli_error($conn) . "');
-        document.location.href = 'login.php';
+        alert('Registrasi akun gagal');
+        document.location.href = 'register.php';
         </script>
         ";
     }
@@ -24,7 +29,7 @@ if (isset($_POST["register"])) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login Akun</title>
+    <title>Register Akun</title>
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playpen+Sans:wght@100..800&display=swap"
@@ -51,9 +56,17 @@ if (isset($_POST["register"])) {
                 </div>
 
                 <form action="" method="post" class="form-lr" data-aos="fade-up" data-aos-duration="1000">
+                    <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="error"><?= htmlspecialchars($error) ?></div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
                     <input name="email" type="text" required autocomplete="off" placeholder="Email" class="input-lr" />
                     <input name="pass" type="password" required autocomplete="off" placeholder="Password" class="input-lr" />
-                    <input name="pass2" type="password" required autocomplete="off" placeholder="Re-type Password" class="input-lr" />
+                    <input name="pass2" type="password" required autocomplete="off" placeholder="Konfirmasi Password" class="input-lr" />
                     <input name="register" type="submit" value="Register" class="submit-lr" />
                     <div class="l-register">
                         <div>Anda sudah memiliki akun?</div>

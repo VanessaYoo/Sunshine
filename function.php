@@ -21,8 +21,19 @@ function query($query)
 function login($data)
 {
     global $conn;
-    $email = $data["email"];
-    $pass = $data["pass"];
+    $errors = [];
+    $email = trim($data["email"] ?? '');
+    $pass = trim($data["pass"] ?? '');
+
+    // cek jika belum diisi dan valid
+    if ($email == '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) { //harus menggunakan formal nama + @gmail.com
+        $errors[] = "Email tidak valid.";
+    }
+
+    if ($pass == '') {
+        $errors[] = "Password wajib diisi.";
+    }
+
     $result = mysqli_query($conn, "SELECT * FROM user WHERE email='$email'"); //password tidak perlu karena diacak
 
     //cek username
@@ -42,10 +53,14 @@ function login($data)
                 // Jika bukan admin
                 echo "<script>alert('Berhasil login ke Sunshine!');document.location.href = 'user-home.php';</script>";
             }
+        } else {
+            $errors[] = "Email atau passwordmu salah. ";
         }
-    } else {
-        echo "<script>alert('Email atau passwordmu salah. Silahkan coba lagi.'); document.location.href = 'login.php';</script>
-    ";
+    }
+    if (!empty($errors)) { // (cek dulu) -> klo error di frm pendaftaran
+        $_SESSION['errors'] = $errors;
+        header("Location: login.php");
+        exit;
     }
 }
 
@@ -53,9 +68,21 @@ function login($data)
 function register($data)
 {
     global $conn;
-    $email = strtolower(stripslashes($data["email"])); //tidak ada kapital dan '\'
-    $pass = mysqli_real_escape_string($conn, $data["pass"]); //cegah hack dan tambah '\' di karakter yang mungkin bahaya
-    $pass2 = mysqli_real_escape_string($conn, $data["pass2"]);
+    $errors = [];
+    $email = trim(strtolower(stripslashes($data["email"])) ?? ''); //tidak ada kapital dan '\'
+    $pass = trim(mysqli_real_escape_string($conn, $data["pass"]) ?? ''); //cegah hack dan tambah '\' di karakter yang mungkin bahaya
+    $pass2 = trim(mysqli_real_escape_string($conn, $data["pass2"]) ?? '');
+
+    // cek jika belum diisi dan valid
+    if ($email == '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) { //harus menggunakan formal nama + @gmail.com
+        $errors[] = "Email tidak valid.";
+    }
+    if ($pass == '') {
+        $errors[] = "Password wajib diisi.";
+    }
+    if ($pass2 == '') {
+        $errors[] = "Konfirmasi password wajib diisi.";
+    }
 
     //cek user ada atau tidak
     $result = mysqli_query($conn, "SELECT email FROM user WHERE email='$email'");
@@ -65,10 +92,14 @@ function register($data)
     }
     //cek kesesuaian pass
     if ($pass != $pass2) {
-        echo "<script>alert('Password yang dimasukkan tidak sama!');</script>";
-        return false;
+        $errors[] = "Password tidak sama.";
     }
 
+    if (!empty($errors)) { // (cek dulu) -> klo error di frm pendaftaran
+        $_SESSION['errors'] = $errors;
+        header("Location: register.php");
+        exit;
+    }
     //hash atau enkripsi pass
     $pass = password_hash($pass, PASSWORD_DEFAULT);
 

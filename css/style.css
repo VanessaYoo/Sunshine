@@ -87,6 +87,20 @@ button {
   border: none;
   font-family: "Lexend";
 }
+.error {
+  background: #ffe0e0;
+  padding: 15px;
+  margin-bottom: 10px;
+  color: #8a0000;
+  border-radius: 10px;
+}
+.success {
+  background: #e0ffe5;
+  padding: 15px;
+  margin-bottom: 10px;
+  color: #006b1b;
+  border-radius: 10px;
+}
 
 /* nav */
 header {
