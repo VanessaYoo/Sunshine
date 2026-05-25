@@ -91,7 +91,7 @@ button {
 /* nav */
 header {
   width: 100%;
-  z-index: 100;
+  z-index: 10000;
   position: fixed;
   top: 0;
   transition: top 0.4s ease;
@@ -164,19 +164,19 @@ nav {
   scale: calc(1.03);
   color: #ff6a00;
 }
-.text-hubungi {
+.text-login {
   padding: 10px 15px;
   transition: 0.4s;
 }
-.text-hubungi:hover {
+.text-login:hover {
   color: #ff6a00;
 }
-.icon-hubungi {
+.icon-login {
   padding: 10px 15px;
   background-color: #ff6a00;
   border-radius: 50px;
 }
-.icon-hubungi img {
+.icon-login img {
   width: 10px;
 }
 .icon-nav {
@@ -198,7 +198,6 @@ section#top {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  z-index: -100;
 }
 #top::after {
   content: "";
@@ -208,13 +207,13 @@ section#top {
   bottom: 0;
   right: 0;
   background: linear-gradient(to top, #ff6a00, rgba(0, 0, 0, 0));
-  z-index: -100;
 }
 section#top p {
   color: white;
 }
 .text-top {
   color: white;
+  z-index: 100;
 }
 .text-top p.yellow {
   color: white;
@@ -244,6 +243,26 @@ section#top p {
   margin-right: 10px;
   border-radius: 50px;
   animation: line 1s ease-out;
+}
+.daftar p {
+  padding: 15px 20px;
+  color: #ff6a00 !important;
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+.daftar {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 30px;
+  border-radius: 100px;
+  background: white;
+  transition: 0.4s;
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.1),
+    0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+.daftar:hover {
+  scale: calc(1.03);
 }
 
 /*tentang*/
@@ -1041,6 +1060,102 @@ section#deskripsi-prestasi {
   flex-direction: column;
   align-items: start;
 }
+/* login register */
+.container-lr {
+  display: flex;
+  align-items: stretch;
+  max-height: 100vh;
+  overflow: hidden;
+}
+.left-lr {
+  flex: 1;
+  width: 50%;
+  height: 100vh;
+}
+.left-lr img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.lr {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-register {
+  width: 90%;
+  background: white;
+  padding: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+  gap: 30px;
+}
+.title-lr {
+  display: flex;
+  flex-direction: column;
+}
+.title-lr h1{
+  font-size: 2.8rem;
+}
+.form-lr {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.input-lr {
+  width: 100%;
+  height: 60px;
+  border: 1px solid #d7d7d7;
+  border-radius: 30px;
+  padding: 0 20px;
+  outline: none;
+  background: #ffffff;
+  color: #444;
+  transition: 0.3s;
+  font-family: "Lexend";
+  font-size: 1rem;
+}
+.input-lr::placeholder {
+  color: #b5b5b5;
+}
+.input-lr:focus {
+  border-color: #ff6a00;
+  box-shadow: 0 0 0 0.4rem rgba(243, 109, 13, 0.1);
+}
+.submit-lr {
+  height: 60px;
+  border: none;
+  border-radius: 30px;
+  background: #ff6a00;
+  color: white;
+  transition: 0.3s;
+  margin-top: 5px;
+  font-family: "Lexend";
+  font-size: 1rem;
+}
+.submit-lr:hover {
+  background: #ff2f00;
+  transform: translateY(-2px);
+}
+.l-register {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  color: #666;
+}
+.btn-l-register {
+  color: #ff2f00;
+  transition: 0.3s;
+}
+.btn-l-register:hover {
+  text-decoration: underline;
+}
 
 /* user-home */
 .sidebar {
@@ -1055,28 +1170,32 @@ section#deskripsi-prestasi {
   overflow-x: hidden;
   transition: all 0.5s linear;
   background: white;
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.05),
+    0 6px 20px 0 rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   gap: 30px;
+
 }
-.sidebar:hover{
-  width: 240px;
+.sidebar:hover {
+  width: 260px;
   transition: 0.5s;
 }
-.sidebar:hover .logo-bar h1{
+.sidebar:hover .logo-bar h1 {
   opacity: 1;
 }
-.logo-bar{
+.logo-bar {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin: 5px;
+  margin: 7px;
 }
-.logo-bar img{
-  width: 40px;
-  height: 40px;
+.logo-bar img {
+  width: 35px;
+  height: 35px;
 }
-.logo-bar h1{
+.logo-bar h1 {
   font-size: 1.6rem;
   opacity: 0;
   transition: 0.5s;
@@ -1095,20 +1214,21 @@ section#deskripsi-prestasi {
   border-radius: 8px;
   transition: all 0.5s ease-in-out;
 }
-.menu li:hover, .menu .active{
+.menu li:hover,
+.menu .active {
   background: #fff6e6;
   color: #ff6a00;
   font-weight: bold;
 }
-.menu a{
+.menu a {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.menu a span{
+.menu a span {
   overflow: hidden;
 }
-.logout-bar{
+.logout-bar {
   margin-top: auto !important;
 }
 
@@ -1186,6 +1306,10 @@ section#deskripsi-prestasi {
   }
   .p-top {
     font-size: 1rem;
+  }
+  .daftar p {
+    font-size: 1rem;
+    padding: 10px 15px;
   }
 
   /* tentang */
@@ -1440,6 +1564,30 @@ section#deskripsi-prestasi {
   .title-prestasi p {
     padding: 8px 13px;
     font-size: 0.9rem;
+  }
+
+  /* login register */
+  .container-lr {
+    justify-content: center;
+  }
+  .left-lr img {
+    display: none;
+  }
+  .title-lr h1{
+  font-size: 2rem;
+}
+  .lr {
+    flex: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .login-register {
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
   }
 }
 
@@ -1720,6 +1868,40 @@ section#deskripsi-prestasi {
   .right-deskripsi-prestasi h1 {
     font-size: 1.5rem;
   }
+
+  /* login register */
+  .container-lr {
+    justify-content: center;
+    background:
+      linear-gradient(rgba(255, 119, 0, 0.5), rgba(255, 119, 0, 0.5)),
+      url("../img/aset/foto-bersama-2.png");
+
+    background-size: cover;
+    background-position: center;
+  }
+  .left-lr img {
+    display: none;
+  }
+  .lr {
+    flex: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .login-register {
+    max-width: 480px;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.12);
+  }
+  .title-lr h1{
+  font-size: 2.5rem;
+}
+.input-lr, .submit-lr{
+  height: 50px;
+}
 }
 
 /* komputer */
@@ -1787,13 +1969,13 @@ section#deskripsi-prestasi {
   .right-nav a {
     font-size: 1.8rem;
   }
-  .text-hubungi {
+  .text-login {
     padding: 18px 27px;
   }
-  .icon-hubungi {
+  .icon-login {
     padding: 18px 27px;
   }
-  .icon-hubungi img {
+  .icon-login img {
     width: 18px;
   }
 
@@ -1811,6 +1993,13 @@ section#deskripsi-prestasi {
     width: 80px;
     height: 4px;
     margin-right: 20px;
+  }
+  .daftar p {
+    font-size: 2rem;
+    padding: 20px 40px;
+  }
+  .daftar {
+    margin-top: 50px;
   }
 
   /* tentang */

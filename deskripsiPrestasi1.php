@@ -34,22 +34,22 @@
         data-aos="fade-right"
         data-aos-duration="1000"
       >
-        <img src="img/prestasi/5.webp" alt="" />
+        <img src="img/prestasi/1.webp" alt="" />
       </div>
       <div class="right-deskripsi-prestasi">
         <div class="title-prestasi">
-          <h1>Juara 4 Jurus Dasar TK Putri (Grup B)</h1>
-          <p class="label">15 November 2026</p>
+          <h1>Consolation Prize Lomba Mewarnai, Menggunting, dan Menempel</h1>
+          <p class="label">28 Januari 2026</p>
         </div>
         <p>
-          Selamat kepada Alice Nathania Cung atas pencapaian prestasi dalam
-          meraih Juara 4 pada lomba jurus dasar TK Putri (Grup B) dalam rangka
-          Wushu Kubu Raya Championship 2025 yang diselenggarakan di Gaia Mall.
-          Prestasi ini mencerminkan perkembangan kemampuan fisik, keseimbangan,
-          serta ketekunan dalam berlatih yang sangat baik. Pihak sekolah merasa
-          bangga atas pencapaian ini dan berharap keberhasilan tersebut dapat
-          menjadi motivasi bagi peserta didik lainnya untuk terus berlatih,
-          berkembang, dan meraih prestasi di berbagai bidang.
+          Selamat kepada Gracia Milenka Yu atas pencapaian prestasi dengan
+          meraih Consolation Prize dalam lomba mewarnai, menggunting, dan
+          menempel yang diselenggarakan dalam rangka IGTKI tingkat Kecamatan
+          Pontianak Kota. Prestasi ini menunjukkan perkembangan kemampuan
+          motorik halus, kreativitas, serta ketelitian yang sangat baik. Pihak
+          sekolah merasa bangga atas pencapaian ini dan berharap keberhasilan
+          tersebut dapat menjadi motivasi bagi peserta didik lainnya untuk terus
+          mengembangkan potensi dan berprestasi di berbagai bidang.
         </p>
       </div>
     </section>
@@ -57,7 +57,7 @@
     <footer id="footer">
       <div class="isi-footer">
         <div class="left-footer" data-aos="fade-up" data-aos-duration="1000">
-          <a href="index.html"><h2>Sunshine</h2></a>
+          <a href="index.php"><h2>Sunshine</h2></a>
           <div class="text-footer">
             <p>
               Jl. Merdeka No. 603-601, Mariana, Kec. Pontianak Kota, Kota
@@ -70,7 +70,8 @@
               style="border: 0"
               allowfullscreen=""
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade" target="_blank"
+              referrerpolicy="no-referrer-when-downgrade"
+              target="_blank"
             ></iframe>
           </div>
         </div>
@@ -106,7 +107,8 @@
             <div class="line"></div>
             <div class="icon-medsos">
               <a
-                href="https://www.instagram.com/sunshine_pg_kindergarten?igsh=MWJpbzd4YnBvNHl1Zg==" target="_blank"
+                href="https://www.instagram.com/sunshine_pg_kindergarten?igsh=MWJpbzd4YnBvNHl1Zg=="
+                target="_blank"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#ffffff"
@@ -120,7 +122,9 @@
                   />
                 </svg>
               </a>
-              <a href="https://www.youtube.com/@sunshinecahayamentari7271" target="_blank"
+              <a
+                href="https://www.youtube.com/@sunshinecahayamentari7271"
+                target="_blank"
                 ><i class="fa-brands fa-youtube" style="color: white"></i
               ></a>
             </div>

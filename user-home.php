@@ -1,3 +1,14 @@
+<?php
+session_start();
+require 'function.php';
+
+if (!isset($_SESSION["login"])) {
+  header("Location: login.php");
+  exit;
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +61,7 @@
                 </a>
             </li>
             <li class="logout-bar">
-                <a href="logout.php">
+                <a href="logout.php" onclick="return confirm('Apakah Anda yakin untuk logout dari Sunshine?');">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span>Logout</span>
                 </a>

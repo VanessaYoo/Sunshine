@@ -39,7 +39,7 @@
     <section id="seluruh-prestasi">
       <div class="grid-prestasi">
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -57,7 +57,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi2.html"
+          href="deskripsiPrestasi2.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -75,7 +75,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi3.html"
+          href="deskripsiPrestasi3.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -93,7 +93,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi4.html"
+          href="deskripsiPrestasi4.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -111,7 +111,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi5.html"
+          href="deskripsiPrestasi5.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -129,7 +129,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi6.html"
+          href="deskripsiPrestasi6.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -147,7 +147,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -165,7 +165,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -183,7 +183,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -201,7 +201,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -219,7 +219,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -237,7 +237,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -255,7 +255,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -273,7 +273,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -291,7 +291,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -309,7 +309,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -327,7 +327,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -345,7 +345,7 @@
         </a>
 
         <a
-          href="deskripsiPrestasi1.html"
+          href="deskripsiPrestasi1.php"
           data-aos="zoom-in"
           data-aos-duration="1000"
         >
@@ -367,7 +367,7 @@
     <footer id="footer">
       <div class="isi-footer">
         <div class="left-footer" data-aos="fade-up" data-aos-duration="1000">
-          <a href="index.html"><h2>Sunshine</h2></a>
+          <a href="index.php"><h2>Sunshine</h2></a>
           <div class="text-footer">
             <p>
               Jl. Merdeka No. 603-601, Mariana, Kec. Pontianak Kota, Kota

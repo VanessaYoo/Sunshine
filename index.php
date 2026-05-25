@@ -26,7 +26,7 @@
     <header>
       <nav data-aos="fade-down" data-aos-duration="800">
         <div class="left-nav">
-          <a href="index.html"
+          <a href="index.php"
             ><div class="logo">
               <img src="img/aset/logo.png" alt="" />Sunshine
             </div>
@@ -41,11 +41,10 @@
         </div>
         <div class="right-nav">
           <a
-            href="https://wa.me/6282119228799"
-            class="btn-hubungi right-nav"
-            target="_blank"
-            ><div class="text-hubungi">Hubungi Kami</div>
-            <div class="icon-hubungi">
+            href="login.php"
+            class="btn-login right-nav"
+            ><div class="text-login">Login Akun</div>
+            <div class="icon-login">
               <img src="img/icon/contact.png" alt="" /></div
           ></a>
         </div>
@@ -64,7 +63,7 @@
       <div class="text-top">
         <div
           class="text-line-top"
-          data-aos="fade-down"
+          data-aos="fade-right"
           data-aos-duration="1000"
         >
           <div class="line"></div>
@@ -73,10 +72,11 @@
         <h1 class="h1-top" data-aos="fade-right" data-aos-duration="1000">
           Tumbuh Ceria, Berkembang Hebat
         </h1>
-        <p class="p-top white" data-aos="fade-up" data-aos-duration="1000">
+        <p class="p-top white" data-aos="fade-right" data-aos-duration="1000">
           Tempat belajar yang mendukung tumbuh kembang anak dalam suasana yang
           menyenangkan
         </p>
+        <div data-aos="fade-up" data-aos-duration="1000"><a href="login.php" class="daftar"><p>Daftar Sekarang</p></a></div>
       </div>
     </section>
 
@@ -554,7 +554,7 @@
     <!-- prestasi -->
     <section id="prestasi" data-group="prestasi">
       <div class="left-prestasi" data-aos="zoom-in" data-aos-duration="1000">
-        <a href="deskripsiPrestasi1.html">
+        <a href="deskripsiPrestasi1.php">
           <div class="content-prestasi">
             <img src="img/prestasi/1.webp" alt="" />
             <div class="text-timpa">
@@ -573,11 +573,11 @@
         <div class="text-prestasi">
           <h1>Prestasi Sunshine</h1>
           <div class="line-prestasi"></div>
-          <a href="prestasi.html" class="btn-prestasi">Lainnya</a>
+          <a href="prestasi.php" class="btn-prestasi">Lainnya</a>
         </div>
 
         <div class="box-prestasi" data-aos="fade-up" data-aos-duration="1000">
-          <a href="deskripsiPrestasi2.html" class="prestasi">
+          <a href="deskripsiPrestasi2.php" class="prestasi">
             <div class="img-prestasi">
               <img src="img/prestasi/2.webp" alt="" />
             </div>
@@ -595,7 +595,7 @@
               </p>
             </div>
           </a>
-          <a href="deskripsiPrestasi3.html" class="prestasi">
+          <a href="deskripsiPrestasi3.php" class="prestasi">
             <div class="img-prestasi">
               <img src="img/prestasi/3.webp" alt="" />
             </div>
@@ -611,7 +611,7 @@
               </p>
             </div>
           </a>
-          <a href="deskripsiPrestasi4.html" class="prestasi">
+          <a href="deskripsiPrestasi4.php" class="prestasi">
             <div class="img-prestasi">
               <img src="img/prestasi/4.webp" alt="" />
             </div>
@@ -653,7 +653,7 @@
     <footer id="footer">
       <div class="isi-footer">
         <div class="left-footer" data-aos="fade-up" data-aos-duration="1000">
-          <a href="index.html"><h2>Sunshine</h2></a>
+          <a href="index.php"><h2>Sunshine</h2></a>
           <div class="text-footer">
             <p>
               Jl. Merdeka No. 603-601, Mariana, Kec. Pontianak Kota, Kota
