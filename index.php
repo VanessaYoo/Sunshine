@@ -554,7 +554,7 @@
     <!-- prestasi -->
     <section id="prestasi" data-group="prestasi">
       <div class="left-prestasi" data-aos="zoom-in" data-aos-duration="1000">
-        <a href="deskripsiPrestasi1.php">
+        <a href="deskripsiPrestasi.php">
           <div class="content-prestasi">
             <img src="img/prestasi/1.webp" alt="" />
             <div class="text-timpa">
@@ -577,7 +577,7 @@
         </div>
 
         <div class="box-prestasi" data-aos="fade-up" data-aos-duration="1000">
-          <a href="deskripsiPrestasi2.php" class="prestasi">
+          <a href="deskripsiPrestasi.php" class="prestasi">
             <div class="img-prestasi">
               <img src="img/prestasi/2.webp" alt="" />
             </div>
@@ -595,7 +595,7 @@
               </p>
             </div>
           </a>
-          <a href="deskripsiPrestasi3.php" class="prestasi">
+          <a href="deskripsiPrestasi.php" class="prestasi">
             <div class="img-prestasi">
               <img src="img/prestasi/3.webp" alt="" />
             </div>
@@ -611,7 +611,7 @@
               </p>
             </div>
           </a>
-          <a href="deskripsiPrestasi4.php" class="prestasi">
+          <a href="deskripsiPrestasi.php" class="prestasi">
             <div class="img-prestasi">
               <img src="img/prestasi/4.webp" alt="" />
             </div>
