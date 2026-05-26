@@ -364,7 +364,7 @@
       </div>
     </section>
 
-    <footer id="footer">
+   <?php include "footer.php"; ?>">
       <div class="isi-footer">
         <div class="left-footer" data-aos="fade-up" data-aos-duration="1000">
           <a href="index.php"><h2>Sunshine</h2></a>
