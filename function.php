@@ -22,9 +22,8 @@ function login($data)
 {
     global $conn;
     $errors = [];
-    $email = trim($data["email"] ?? '');
+    $email = trim(strtolower(stripslashes($data["email"])) ?? '');
     $pass = md5(trim($data["pass"] ?? ''));
-    $pass_real= trim($data["pass"] ?? '');
 
     // cek jika belum diisi dan valid
     if ($email == '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) { //harus menggunakan formal nama + @gmail.com
@@ -47,7 +46,7 @@ function login($data)
             $_SESSION["login"] = true;
 
             //cek admin
-            if ($row["email"] === "admin@gmail.com" && $pass_real === "admin") {
+            if ($row["email"] === "admin@gmail.com" && $row["pass"] === "$pass") {
                 $_SESSION["admin"] = true;
                 echo "<script>alert('Berhasil login sebagai Admin Sunshine!'); document.location.href = 'admin/admin-beranda.php';</script>";
             } else {
@@ -71,7 +70,7 @@ function register($data)
     global $conn;
     $errors = [];
     $email = trim(strtolower(stripslashes($data["email"])) ?? ''); //tidak ada kapital dan '\'
-    $pass = trim($data["pass"] ?? ''); //cegah hack dan tambah '\' di karakter yang mungkin bahaya
+    $pass = trim($data["pass"] ?? '');
     $pass2 = trim($data["pass2"] ?? '');
 
     // cek jika belum diisi dan valid
@@ -103,8 +102,8 @@ function register($data)
     }
 
     //enkripsi md5
-    $pass_final= md5($pass);
-    
+    $pass_final = md5($pass);
+
     //tambahkan ke databes
     mysqli_query($conn, "INSERT INTO user VALUES ('', '$email','$pass_final')");
     return mysqli_affected_rows($conn);

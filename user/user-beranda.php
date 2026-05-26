@@ -31,70 +31,62 @@ if (!isset($_SESSION["login"])) {
 
 <body>
     <div class="container-ua">
-        <?php include "user-sidebar.php"; ?>
-      
 
-        <div class="halaman">
-            <!-- judul dan nama -->
-            <div class="user-title">
-                <h3>Beranda</h3>
-                <div class="user-name">
-                    <h3>Vanessa Fransiska</h3>
-                    <p class="user">Siswa</p>
+        <?php
+        $page = "beranda";
+        include "user-sidebar.php";
+        ?>
+
+        <!-- isi-halaman -->
+        <div class="content-ua">
+
+            <!-- alur -->
+            <div class="alur-card">
+                <h1>Selamat Datang di Portal PPDB</h1>
+                <p>
+                    Silakan ikuti alur pendaftaran di bawah ini untuk menjadi
+                    calon peserta didik baru tahun ajaran 2026/2027.
+                </p>
+
+                <div class="step">
+                    <div class="dot active-dot"></div>
+                    <div>
+                        <h3 class="active-step">Tahap 1: Pengisian Form</h3>
+                        <p>Anda belum mengisi formulir pendaftaran</p>
+                    </div>
                 </div>
+
+                <div class="step">
+                    <div class="dot"></div>
+                    <div>
+                        <h3>Tahap 2: Verifikasi Berkas</h3>
+                        <p>Menunggu Verifikasi</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="dot"></div>
+                    <div>
+                        <h3>Tahap 3: Pengumuman</h3>
+                        <p>Menunggu Pengumuman</p>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- isi-halaman -->
-            <div class="content-ua">
-
-                <!-- alur -->
-                <div class="alur-card">
-                    <h1>Selamat Datang di Portal PPDB</h1>
-                    <p>
-                        Silakan ikuti alur pendaftaran di bawah ini untuk menjadi
-                        calon peserta didik baru tahun ajaran 2026/2027.
-                    </p>
-
-                    <div class="step">
-                        <div class="dot active-dot"></div>
-                        <div>
-                            <h3 class="active-step">Tahap 1: Pengisian Form</h3>
-                            <p>Anda belum mengisi formulir pendaftaran</p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="dot"></div>
-                        <div>
-                            <h3>Tahap 2: Verifikasi Berkas</h3>
-                            <p>Menunggu Verifikasi</p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="dot"></div>
-                        <div>
-                            <h3>Tahap 3: Pengumuman</h3>
-                            <p>Menunggu Pengumuman</p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- bantuan -->
-                <div class="bantuan-card">
-                    <i class="fa-solid fa-headset"></i>
-                    <h2>Butuh Bantuan?</h2>
-                    <p>
-                        Hubungi panitia PPDB jika mengalami kendala teknis.
-                    </p>
-                    <a href="https://wa.me/6282119228799">
-                        Hubungi via WA
-                    </a>
-                </div>
+            <!-- bantuan -->
+            <div class="bantuan-card">
+                <i class="fa-solid fa-headset"></i>
+                <h2>Butuh Bantuan?</h2>
+                <p>
+                    Hubungi panitia PPDB jika mengalami kendala teknis.
+                </p>
+                <a href="https://wa.me/6282119228799">
+                    Hubungi via WA
+                </a>
             </div>
-
         </div>
+    </div>
     </div>
 </body>
 
