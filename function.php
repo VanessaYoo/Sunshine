@@ -23,7 +23,8 @@ function login($data)
     global $conn;
     $errors = [];
     $email = trim($data["email"] ?? '');
-    $pass = trim($data["pass"] ?? '');
+    $pass = md5(trim($data["pass"] ?? ''));
+    $pass_real= trim($data["pass"] ?? '');
 
     // cek jika belum diisi dan valid
     if ($email == '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) { //harus menggunakan formal nama + @gmail.com
@@ -41,17 +42,17 @@ function login($data)
 
         $row = mysqli_fetch_assoc($result);
         //cek password yang acak
-        if (password_verify($pass, $row["pass"])) {
+        if ($pass === $row['pass']) {
             $_SESSION['id_user'] = $row["id_user"];
             $_SESSION["login"] = true;
 
             //cek admin
-            if ($row["email"] === "admin@gmail.com" && $pass === "admin") {
+            if ($row["email"] === "admin@gmail.com" && $pass_real === "admin") {
                 $_SESSION["admin"] = true;
-                echo "<script>alert('Berhasil login sebagai Admin Sunshine!'); document.location.href = 'admin-beranda.php';</script>";
+                echo "<script>alert('Berhasil login sebagai Admin Sunshine!'); document.location.href = 'admin/admin-beranda.php';</script>";
             } else {
                 // Jika bukan admin
-                echo "<script>alert('Berhasil login ke Sunshine!');document.location.href = 'user-beranda.php';</script>";
+                echo "<script>alert('Berhasil login ke Sunshine!'); document.location.href = 'user/user-beranda.php';</script>";
             }
         } else {
             $errors[] = "Email atau passwordmu salah. ";
@@ -70,8 +71,8 @@ function register($data)
     global $conn;
     $errors = [];
     $email = trim(strtolower(stripslashes($data["email"])) ?? ''); //tidak ada kapital dan '\'
-    $pass = trim(mysqli_real_escape_string($conn, $data["pass"]) ?? ''); //cegah hack dan tambah '\' di karakter yang mungkin bahaya
-    $pass2 = trim(mysqli_real_escape_string($conn, $data["pass2"]) ?? '');
+    $pass = trim($data["pass"] ?? ''); //cegah hack dan tambah '\' di karakter yang mungkin bahaya
+    $pass2 = trim($data["pass2"] ?? '');
 
     // cek jika belum diisi dan valid
     if ($email == '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) { //harus menggunakan formal nama + @gmail.com
@@ -100,10 +101,11 @@ function register($data)
         header("Location: register.php");
         exit;
     }
-    //hash atau enkripsi pass
-    $pass = password_hash($pass, PASSWORD_DEFAULT);
 
+    //enkripsi md5
+    $pass_final= md5($pass);
+    
     //tambahkan ke databes
-    mysqli_query($conn, "INSERT INTO user VALUES ('', '$email','$pass')");
+    mysqli_query($conn, "INSERT INTO user VALUES ('', '$email','$pass_final')");
     return mysqli_affected_rows($conn);
 }

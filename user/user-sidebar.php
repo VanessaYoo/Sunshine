@@ -1,6 +1,6 @@
   <div class="sidebar">
             <div class="logo-bar">
-                <img src="img/aset/logo.png" alt="">
+                <img src="../img/aset/logo.png" alt="">
                 <h1>Sunshine</h1>
             </div>
             <ul class="menu">

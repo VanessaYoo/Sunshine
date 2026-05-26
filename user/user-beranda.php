@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'function.php';
+require '../function.php';
 
 if (!isset($_SESSION["login"])) {
     header("Location: login.php");
@@ -16,7 +16,7 @@ if (!isset($_SESSION["login"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beranda</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../css/style.css" type="text/css" />
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playpen+Sans:wght@100..800&display=swap"
         rel="stylesheet" />
