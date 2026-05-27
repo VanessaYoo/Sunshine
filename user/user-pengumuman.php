@@ -15,7 +15,7 @@ if (!isset($_SESSION["login"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendaftaran</title>
+    <title>Pengumuman</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css" type="text/css" />
     <link
@@ -42,7 +42,7 @@ if (!isset($_SESSION["login"])) {
         <div class="content-ua pengumuman-page">
 
             <?php //if ($status == 'diterima') : ?>
-                <div class="pengumuman-card diterima">
+                <div class="pengumuman-card t-m">
                     <div class="icon-status">
                         <i class="fa-solid fa-award"></i>
                     </div>
@@ -55,7 +55,7 @@ if (!isset($_SESSION["login"])) {
 
     <!-- <?php //elseif ($status == 'menunggu') : ?>
         <div class="content-ua pengumuman-page">
-            <div class="pengumuman-card menunggu">
+            <div class="pengumuman-card t-m">
                 <div class="icon-status">
                     <i class="fa-solid fa-clock"></i>
                 </div>
@@ -70,7 +70,7 @@ if (!isset($_SESSION["login"])) {
 
     <?php //elseif ($status == 'ditolak') : ?>
         <div class="content-ua pengumuman-page">
-            <div class="pengumuman-card ditolak">
+            <div class="pengumuman-card t-m">
                 <div class="icon-status">
                     <i class="fa-solid fa-circle-xmark"></i>
                 </div>
@@ -86,6 +86,7 @@ if (!isset($_SESSION["login"])) {
 
     </div>
     </div>
+    <script src="../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

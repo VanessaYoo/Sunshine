@@ -1176,78 +1176,168 @@ section#deskripsi-prestasi {
   position: sticky;
   top: 0;
   left: 0;
-  bottom: 0;
-  width: 110px;
+  width: 95px;
   height: 100vh;
-  padding: 30px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  transition: all 0.5s linear;
+  padding: 30px 20px;
   background: white;
   box-shadow:
-    0 4px 8px 0 rgba(0, 0, 0, 0.05),
-    0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    0 4px 8px rgba(0, 0, 0, 0.05),
+    0 6px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  flex-shrink: 0;
+  transition: width 0.3s ease;
+  z-index: 1000;
+}
+.sidebar::-webkit-scrollbar {
+  display: none;
 }
 .sidebar:hover {
-  width: 250px;
-  transition: 0.5s;
+  width: 260px;
 }
-.sidebar:hover .logo-bar h1 {
-  opacity: 1;
+.icon-nav.user {
+  display: none;
 }
 .logo-bar {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin: 7px;
+  padding: 0 10px;
+  min-height: 40px;
 }
 .logo-bar img {
   width: 35px;
   height: 35px;
+  flex-shrink: 0;
 }
 .logo-bar h1 {
   font-size: 1.6rem;
+  margin: 0;
   opacity: 0;
-  transition: 0.5s;
+  transition: 0.3s;
 }
-.menu {
+.sidebar:hover .logo-bar h1 {
+  opacity: 1;
+}
+.container-menu {
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  gap: 30px;
+}
+.menu {
   list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .menu li {
-  padding: 1rem;
-  margin: 8px 0;
-  border-radius: 8px;
-  transition: all 0.5s ease-in-out;
+  border-radius: 12px;
+  transition: 0.3s;
 }
 .menu li:hover,
 .menu .active {
   background: #fff6e6;
+}
+.menu li:hover a,
+.menu .active a {
   color: #ff6a00;
   font-weight: bold;
 }
 .menu a {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+.menu a i {
+  min-width: 20px;
+  font-size: 1rem;
+  text-align: center;
+  flex-shrink: 0;
 }
 .menu a span {
+  opacity: 0;
+  width: 0;
   overflow: hidden;
+  white-space: nowrap;
+  transition: 0.3s;
 }
-.logout-bar {
-  margin-top: auto !important;
+.sidebar:hover .menu a span {
+  opacity: 1;
+  width: auto;
+}
+/* line kelola */
+.group-menu,
+.group-menu-kelola {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.group-menu-kelola {
+  padding-top: 40px;
+  position: relative;
+}
+.group-menu-kelola::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 10px;
+  /* line */
+  width: 35px;
+  height: 2px;
+  background: #ececec;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+.sidebar:hover .group-menu-kelola::before {
+  opacity: 0;
+}
+.group-menu-kelola p {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 0;
+  transition: 0.3s;
+}
+.sidebar:hover .group-menu-kelola p {
+  opacity: 1;
+}
+/* logout */
+.group-menu::before {
+  content: "";
+  width: 35px;
+  height: 2px;
+  background: #ececec;
+  border-radius: 20px;
+  margin: 15px auto 5px;
+  transition: 0.3s;
+}
+.sidebar:hover .group-menu::before {
+  width: 100%;
+}
+.menu:last-child {
+  margin-top: auto;
 }
 .container-ua {
   display: flex;
   min-height: 100vh;
   background: #f5f6fa;
+}
+.halaman {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .user-name {
   display: flex;
@@ -1255,7 +1345,7 @@ section#deskripsi-prestasi {
   align-items: end;
 }
 .user-title {
-  height: 80px;
+  min-height: 80px;
   background: white;
   border-bottom: 1px solid #e5e7eb;
   padding: 0 35px;
@@ -1269,6 +1359,7 @@ section#deskripsi-prestasi {
   grid-template-columns: 2fr 1fr;
   gap: 20px;
   align-items: start;
+  width: 100%;
 }
 .user-title h3 {
   font-size: 1.17rem;
@@ -1292,7 +1383,7 @@ p.user {
   margin-bottom: 14px;
 }
 .alur-card p {
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 }
 .step {
   display: flex;
@@ -1310,7 +1401,7 @@ p.user {
 .dot::after {
   content: "";
   width: 2px;
-  height: 65px;
+  height: 55px;
   background: #d1d5db;
   position: absolute;
   top: 14px;
@@ -1328,6 +1419,8 @@ p.user {
 }
 .step h3 {
   margin-bottom: 5px;
+  font-size: 1.17rem;
+  font-weight: bold;
 }
 .step p {
   font-size: 1rem;
@@ -1346,10 +1439,11 @@ p.user {
 }
 .bantuan-card h2 {
   margin-bottom: 12px;
-  font-size: 28px;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 .bantuan-card p {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: white;
   font-size: 1rem;
 }
@@ -1367,10 +1461,6 @@ p.user {
 }
 
 /* user pendaftaran */
-.halaman {
-  flex: 1;
-  width: 100%;
-}
 .pendaftaran-page {
   grid-template-columns: 1fr;
 }
@@ -1493,34 +1583,13 @@ p.user {
   justify-content: center;
   font-size: 50px;
 }
-
-/* lulus */
-.diterima .icon-status {
-  background: #e8fff1;
-  color: #1ea75d;
+.t-m .icon-status {
+  background: #fff6e6;
+  color: #ff6a00;
 }
-.diterima h1 {
-  color: #1ea75d;
+.t-m h1 {
+  color: #ff6a00;
 }
-
-/* menunggu */
-.menunggu .icon-status {
-  background: #fff8e7;
-  color: #f4a100;
-}
-.menunggu h1 {
-  color: #f4a100;
-}
-
-/* ditolak */
-.ditolak .icon-status {
-  background: #ffecec;
-  color: #e53935;
-}
-.ditolak h1 {
-  color: #e53935;
-}
-
 .pengumuman-card h1 {
   font-size: 2rem;
   margin-bottom: 15px;
@@ -1530,7 +1599,7 @@ p.user {
   margin: 0 auto;
 }
 .btn-biaya {
-  color: #1ea75d;
+  color: #ff6a00;
 }
 .btn-biaya:hover {
   text-decoration: underline;
@@ -1559,7 +1628,7 @@ p.user {
 /* rekening */
 .pembayaran-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 25px;
   margin-top: 40px;
   align-items: stretch;
@@ -1635,6 +1704,148 @@ p.user {
   transform: translateY(-2px);
 }
 
+/* admin beranda */
+.admin-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+.admin-welcome {
+  background: white;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+.admin-welcome h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.admin-welcome p {
+  margin-bottom: 30px;
+}
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+.admin-total-card {
+  background: white;
+  border-radius: 20px;
+  border: 2px solid #ffeadc;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(109, 71, 23, 0.05);
+  transition: 0.3s;
+  gap: 20px;
+}
+.admin-total-card:hover {
+  transform: translateY(-2px);
+}
+.admin-total-card p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+.admin-total-card h2 {
+  margin: 0;
+}
+.admin-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.green {
+  background: #e9fff1;
+  color: #1ea75d;
+}
+.blue {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+.red {
+  background: #ffecec;
+  color: #e53935;
+}
+.orange {
+  background: #fff4e6;
+  color: #ff6a00;
+}
+.purple {
+  background: #f5ecff;
+  color: #9333ea;
+}
+.yellow {
+  background: #fff8db;
+  color: #ca8a04;
+}
+.admin-table-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+.admin-table-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.admin-card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.admin-card-title h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.admin-card-title a {
+  color: #ff6a00;
+  transition: 0.3s;
+}
+.admin-card-title a:hover {
+  text-decoration: underline;
+}
+.admin-table {
+  margin: 0;
+}
+.admin-table td {
+  padding: 16px !important;
+  vertical-align: middle;
+}
+.admin-table td i {
+  color: #ff6a00;
+  transition: 0.3s;
+  text-align: end;
+  width: 100%;
+}
+.admin-table td i:hover {
+  transform: scale(1.1);
+}
+.admin-table td p {
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+.pp-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pp-info p {
+  margin: 2px 0 0;
+  font-size: 0.95rem;
+}
+
 /* responsive */
 /* handphone */
 @media (max-width: 600px) {
@@ -1658,15 +1869,18 @@ p.user {
   .icon-nav {
     display: block;
   }
+  .icon-nav.user {
+    display: block;
+  }
 
   .middle-nav {
     position: absolute;
     flex-direction: column;
+    align-items: start;
     gap: 0px;
     top: 80px;
     left: auto;
     right: 0;
-    text-align: center;
     background-color: white;
     border-radius: 30px;
     overflow: hidden;
@@ -1674,7 +1888,7 @@ p.user {
     box-shadow:
       0 4px 8px 0 rgba(0, 0, 0, 0.1),
       0 6px 20px 0 rgba(0, 0, 0, 0.18);
-    width: 50%;
+    width: 55%;
   }
   .link:hover,
   .link.active {
@@ -1689,9 +1903,8 @@ p.user {
   .fa-bars.active {
     color: #ff6a00 !important;
   }
-
   .link {
-    padding: 20px;
+    padding: 20px 30px;
     border-bottom: none;
   }
   .right-nav {
@@ -1992,45 +2205,130 @@ p.user {
     max-width: 400px;
     padding: 30px;
   }
+
   /* sidebar */
   .sidebar {
-    width: 80px;
-    height: 100vh;
-    padding: 15px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    transition: all 0.5s linear;
-    background: white;
-    box-shadow:
-      0 4px 8px 0 rgba(0, 0, 0, 0.05),
-      0 6px 20px 0 rgba(0, 0, 0, 0.1);
-    display: flex;
+    position: absolute;
     flex-direction: column;
-    gap: 30px;
+    gap: 0px;
+    top: 100px;
+    left: 35px;
+    right: auto;
+    background-color: white;
+    border-radius: 30px;
+    overflow: hidden;
+    transition: 0.4s ease-in-out;
+    box-shadow:
+      0 4px 8px 0 rgba(0, 0, 0, 0.1),
+      0 6px 20px 0 rgba(0, 0, 0, 0.18);
+    width: 55% !important;
+    height: auto !important;
+    padding: 0px !important;
+    z-index: 99999;
   }
   .sidebar:hover {
-    width: 80px;
+    width: 55% !important;
   }
-  .sidebar:hover .logo-bar h1 {
+  .sidebar .container-menu {
+    gap: 10px;
+    padding: 15px 10px;
+  }
+  .sidebar .menu {
+    gap: 5px;
+  }
+  .sidebar .menu a {
+    padding: 10px 15px;
+    justify-content: flex-start;
+  }
+  .sidebar .menu a span,
+  .sidebar .logo-bar h1 {
+    opacity: 1 !important;
+    width: auto !important;
+    display: inline-block !important;
+  }
+  .group-menu::before,
+  .group-menu-kelola::before {
+    display: none !important;
+  }
+  .logo-bar {
+    display: none;
+  }
+  .user-title > h3 {
+    display: none;
+  }
+  .user-title {
+    justify-content: flex-start;
+  }
+  .user-name {
+    align-items: start;
+  }
+  .sidebar:hover .group-menu-kelola p {
     opacity: 0;
   }
-  .logo-bar img {
-    width: 35px;
-    height: 35px;
+  .sidebar:hover .group-menu-kelola::before {
+    opacity: 1;
   }
-  .user-title h3 {
-    font-size: 1rem;
-    font-weight: bold;
-    margin: 0;
+  .icon-nav.user {
+    margin-right: 30px;
   }
-
+  .icon-nav.user i {
+    font-size: 20px;
+  }
   /* user beranda */
+  .container-ua {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+  }
   .content-ua {
     padding: 15px;
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
     align-items: start;
+    width: 100% !important;
+  }
+
+  /* user biaya */
+  .biaya-card {
+    padding: 20px 15px !important;
+    width: 100% !important;
+  }
+  .biaya-table th,
+  .biaya-table td {
+    padding: 10px 8px !important;
+    font-size: 0.85rem;
+  }
+
+  .pembayaran-wrapper {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+  }
+
+  /* admin beranda */
+  .admin-page {
+    padding: 15px;
+  }
+  .admin-welcome {
+    padding: 25px;
+  }
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-total-card {
+    padding: 20px;
+  }
+  .admin-table-card {
+    padding: 20px;
+  }
+  .admin-table td {
+    padding: 12px !important;
+    font-size: 0.9rem;
+  }
+  .admin-table-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -2348,6 +2646,14 @@ p.user {
   }
   /* user-admin */
   .content-ua {
+    grid-template-columns: 1fr;
+  }
+
+  /* admin beranda */
+  .admin-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .admin-table-grid {
     grid-template-columns: 1fr;
   }
 }

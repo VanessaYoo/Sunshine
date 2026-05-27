@@ -201,6 +201,7 @@ if (!isset($_SESSION["login"])) {
         </div>
     </div>
     </div>
+    <script src="../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

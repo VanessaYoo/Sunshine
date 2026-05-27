@@ -16,20 +16,46 @@ navToggleLink.forEach((navToggleLink) => {
   });
 });
 
-//membuka toggle dan menampilkan link
+//membuka toggle dan menampilkan link (index.html)
 let navToggle = document.getElementById("toggle");
-navToggle.style.maxHeight = "0px";
+if (navToggle) {
+  navToggle.style.maxHeight = "0px";
+}
 function toggleNav() {
   if (navToggle.style.maxHeight == "0px") {
-    navToggle.style.maxHeight = "300px";
+    navToggle.style.maxHeight = "320px";
   } else {
     navToggle.style.maxHeight = "0px";
   }
 }
+
 //menutup toggle jika link telah diclick
 navLink.forEach((link) => {
   link.addEventListener("click", () => {
     navToggle.style.maxHeight = "0px";
+  });
+});
+
+// untuk (user-sidebar.html)
+let sidebarToggle = document.getElementById("toggle-sidebar");
+if (sidebarToggle && window.innerWidth <= 600) {
+  sidebarToggle.style.maxHeight = "0px";
+}
+function toggleSidebar() {
+  if (sidebarToggle && window.innerWidth <= 600) {
+    if (sidebarToggle.style.maxHeight == "0px" || sidebarToggle.style.maxHeight == "") {
+      sidebarToggle.style.maxHeight = "320px";
+    } else {
+      sidebarToggle.style.maxHeight = "0px";
+    }
+  }
+}
+const sidebarLinks = document.querySelectorAll(".sidebar .menu a");
+sidebarLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    if (sidebarToggle && window.innerWidth <= 600) {
+      sidebarToggle.style.maxHeight = "0px";
+    }
   });
 });
 
