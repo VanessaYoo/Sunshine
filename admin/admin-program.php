@@ -40,7 +40,25 @@ if (!isset($_SESSION["login"])) {
 
         <!-- isi-halaman -->
         <div class="content-ua admin-page">
-            <div class="admin-table-card">
+           <form action="" method="POST" class="form-card">
+                <div class="form-title">
+                    <h1>Program Sunshine</h1>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Deskripsi <span class="required">*</span></label>
+                            <textarea class="form-control" name="desk-program" required autocomplete="off" placeholder="Masukkan deskripsi program"></textarea>
+                        </div>
+                    </div>
+                </div>
+                    <button type="submit" name="deskripsi-program" class="btn-form">
+                        Simpan Perubahan
+                    </button>
+            </form>
+
+            <div class="admin-table-card mt-4">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Program</h1>
                     <a href="a-tambah-program.php">Tambah Program</a>
@@ -51,8 +69,8 @@ if (!isset($_SESSION["login"])) {
                             <tr>
                                 <th>#</th>
                                 <th>Program</th>
-                                <th>Foto</th>
                                 <th>Deskripsi</th>
+                                <th>Foto</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>

@@ -40,7 +40,26 @@ if (!isset($_SESSION["login"])) {
 
         <!-- isi-halaman -->
         <div class="content-ua admin-page">
-            <div class="admin-table-card">
+              <form action="" method="POST" class="form-card">
+                <div class="form-title">
+                    <h1>Prestasi Sunshine</h1>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Deskripsi <span class="required">*</span></label>
+                            <textarea class="form-control" name="desk-prestasi" required autocomplete="off" placeholder="Masukkan deskripsi prestasi"></textarea>
+                        </div>
+                    </div>
+                </div>
+                    <button type="submit" name="deskripsi-prestasi" class="btn-form">
+                        Simpan Perubahan
+                    </button>
+            </form>
+
+            <div class="admin-table-card mt-4">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Prestasi</h1>
                     <a href="a-tambah-prestasi.php">Tambah Prestasi</a>

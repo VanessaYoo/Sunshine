@@ -110,8 +110,8 @@ if (!isset($_SESSION["login"])) {
 
                 <div class="metode-pembayaran-wrapper">
                     <div class="metode-pembayaran">
-                        <button type="button" class="btn tunai" onclick="pilihMetode('tunai')">Tunai</button>
-                        <button type="button" class="btn transfer" onclick="pilihMetode('transfer')">Transfer</button>
+                        <button type="button" class="btn tunai" name="tunai"  onclick="pilihMetode('tunai')">Tunai</button>
+                        <button type="button" class="btn transfer" name="transfer"  onclick="pilihMetode('transfer')">Transfer</button>
                     </div>
                 </div>
 
@@ -150,7 +150,7 @@ if (!isset($_SESSION["login"])) {
                             <p>Upload bukti transfer Anda di sini.</p>
                             <input type="file" name="bukti" id="input-bukti" class="form-control">
 
-                            <button type="submit" class="btn-konfirmasi" style="margin-top: 20px;">
+                            <button type="submit" name="bukti" class="btn-konfirmasi" style="margin-top: 20px;">
                                 Upload Bukti & Konfirmasi
                             </button>
                         </div>

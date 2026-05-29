@@ -40,9 +40,26 @@ if (!isset($_SESSION["login"])) {
 
         <!-- isi-halaman -->
         <div class="content-ua admin-page">
-            <div class="admin-table-card">
+            <form action="" method="POST" class="form-card">
+                <div class="form-title">
+                    <h1>Lokasi Sunshine</h1>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Alamat <span class="required">*</span></label>
+                            <textarea class="form-control" name="desk-lokasi" required autocomplete="off" placeholder="Masukkan alamat Sunshine"></textarea>
+                        </div>
+                    </div>
+                </div> <button type="submit" name="lokasi" class="btn-form">
+                    Simpan Perubahan
+                </button>
+            </form>
+
+            <div class="admin-table-card mt-4">
                 <div class="admin-card-title tambah">
-                    <h1>Kelola Lokasi dan Kontak</h1>
+                    <h1>Kelola Kontak</h1>
                     <a href="a-tambah-kontak.php">Tambah Kontak</a>
                 </div>
                 <div class="table-responsive">
@@ -57,7 +74,7 @@ if (!isset($_SESSION["login"])) {
 
                         <tbody>
 
-                                 <tr>
+                            <tr>
                                 <td>1</td>
                                 <td class="text-wrap">Johan MISISIIS mIS</td>
                                 <td>
@@ -77,7 +94,7 @@ if (!isset($_SESSION["login"])) {
                 </div>
             </div>
 
-            
+
         </div>
 
 

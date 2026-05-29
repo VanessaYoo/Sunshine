@@ -40,7 +40,26 @@ if (!isset($_SESSION["login"])) {
 
         <!-- isi-halaman -->
         <div class="content-ua admin-page">
-            <div class="admin-table-card">
+             <form action="" method="POST" class="form-card">
+                <div class="form-title">
+                    <h1>Ekstrakurikuler Sunshine</h1>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Deskripsi <span class="required">*</span></label>
+                            <textarea class="form-control" name="desk-ekskul" required autocomplete="off" placeholder="Masukkan deskripsi ekstrakurikuler"></textarea>
+                        </div>
+                    </div>
+                </div>
+                    <button type="submit" name="deskripsi-ekskul" class="btn-form">
+                        Simpan Perubahan
+                    </button>
+            </form>
+
+            <div class="admin-table-card mt-4">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Ekstrakurikuler</h1>
                     <a href="a-tambah-ekskul.php">Tambah Ekstrakurikuler</a>

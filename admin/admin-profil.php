@@ -40,7 +40,50 @@ if (!isset($_SESSION["login"])) {
 
         <!-- isi-halaman -->
         <div class="content-ua admin-page">
-       
+            <form action="" method="POST" class="form-card">
+                <div class="form-title">
+                    <h1>Profil Sunshine</h1>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Tentang <span class="required">*</span></label>
+                            <textarea class="form-control" name="desk-tentang" required autocomplete="off" placeholder="Masukkan deskripsi tentang"></textarea>
+                        </div>
+                    </div>
+
+                       <div class="col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Lingkungan dan Pembelajaran <span class="required">*</span></label>
+                            <textarea class="form-control" name="desk-lingkungan" required autocomplete="off" placeholder="Masukkan deskripsi lingkungan dan pembelajaran"></textarea>
+                        </div>
+                    </div>
+
+                       <div class="col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Pengembangan <span class="required">*</span></label>
+                            <textarea class="form-control" name="desk-pengembangan" required autocomplete="off" placeholder="Masukkan deskripsi pengembangan"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Gedung Sunshine <span class="required">*</span></label>
+                            <input class="form-control"
+                                type="file"
+                                name="gedung" required>
+                        </div>
+                    </div>
+
+
+
+                    <button type="submit" name="profil"  class="btn-form">
+                        Simpan Perubahan
+                    </button>
+            </form>
+
+            
         </div>
 
 

@@ -6,8 +6,6 @@ if (!isset($_SESSION["login"])) {
     header("Location: login.php");
     exit;
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,19 +13,12 @@ if (!isset($_SESSION["login"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendaftaran</title>
+    <title>Update Pendaftaran</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css" type="text/css" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playpen+Sans:wght@100..800&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playpen+Sans:wght@100..800&display=swap" rel="stylesheet" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -35,18 +26,22 @@ if (!isset($_SESSION["login"])) {
 
         <?php
         $page = "pendaftaran";
-        include "user-sidebar.php";
+        include "admin-sidebar.php";
         ?>
 
-        <!-- isi-halaman -->
-        <div class="content-ua pendaftaran-page">
+        <div class="content-ua admin-page">
 
             <form action="" method="POST" class="form-card">
+
+                <div class="back kembali mt-2">
+                    <button onclick="history.back()" class="back-arrow">
+                        <i class="fas fa-angle-left"></i>
+                        <p class="orange bold">Kembali</p>
+                    </button>
+                </div>
+
                 <div class="form-title">
-                    <h1>Formulir Pendaftaran Siswa Baru</h1>
-                    <p>
-                        Lengkapi data calon siswa di bawah ini
-                    </p>
+                    <h1>Update Formulir Pendaftaran Siswa Baru</h1>
                 </div>
 
                 <div class="row g-4">
@@ -87,7 +82,7 @@ if (!isset($_SESSION["login"])) {
                                     </label>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
 
@@ -101,7 +96,7 @@ if (!isset($_SESSION["login"])) {
                     <div class="col-md-6">
                         <div class="form-input">
                             <label class="form-label">Tanggal Lahir <span class="required">*</span></label>
-                            <input type="date" class="form-control"name="tanggal_lahir" required autocomplete="off" placeholder="Masukkan tanggal lahir">
+                            <input type="date" class="form-control" name="tanggal_lahir" required autocomplete="off" placeholder="Masukkan tanggal lahir">
                         </div>
                     </div>
 
@@ -193,13 +188,13 @@ if (!isset($_SESSION["login"])) {
 
                 </div>
 
-                <button type="submit" name="daftar"  class="btn-form">
-                    Kirim Pendaftaran
+                <button type="submit" name="update-daftar" class="btn-form">
+                    Simpan Perubahan
                 </button>
             </form>
 
         </div>
-    </div>
+
     </div>
     <script src="../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

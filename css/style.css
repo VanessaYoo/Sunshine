@@ -70,7 +70,6 @@ p.box {
   padding: 0;
   line-height: 2.2;
 }
-
 p.justify {
   text-align: justify;
 }
@@ -1005,6 +1004,15 @@ iframe {
   gap: 30px;
   align-items: center;
 }
+.back button i {
+  margin-top: 4px;
+}
+.back.kembali button p {
+  font-size: 1rem;
+}
+.back.kembali button i {
+  font-size: 1rem;
+}
 .back .back-arrow {
   display: flex;
   gap: 20px;
@@ -1307,8 +1315,8 @@ section#deskripsi-prestasi {
   position: absolute;
   top: 8px;
   left: 10px;
-  font-size: 0.95rem;
-  font-weight: bold;
+  font-size: 0.9rem;
+  font-weight: 600;
   white-space: nowrap;
   opacity: 0;
   transition: 0.3s;
@@ -1467,7 +1475,7 @@ p.user {
 .pendaftaran-page {
   grid-template-columns: 1fr;
 }
-.pendaftaran-card {
+.form-card {
   background: white;
   padding: 35px;
   border-radius: 18px;
@@ -1495,8 +1503,8 @@ p.user {
   background: white;
   transition: 0.3s;
 }
-.form-control textarea {
-  min-height: 130px;
+textarea.form-control {
+  min-height: 120px;
 }
 .form-control:focus,
 .form-input input[type="file"]:focus,
@@ -1531,7 +1539,7 @@ p.user {
   border-color: #ff6a00;
   box-shadow: 0 0 0 0.3rem rgba(243, 109, 13, 0.1);
 }
-.btn-daftar {
+.btn-form {
   width: 100%;
   height: 58px;
   margin-top: 35px;
@@ -1542,7 +1550,7 @@ p.user {
   font-weight: bold;
   transition: 0.3s;
 }
-.btn-daftar:hover {
+.btn-form:hover {
   background: #ff2f00;
   transform: translateY(-2px);
 }
@@ -1629,7 +1637,7 @@ p.user {
   color: #ff6a00;
 }
 /* pembayaran */
-.metode-pembayaran-wrapper{
+.metode-pembayaran-wrapper {
   margin: 30px 0;
   width: 100%;
   display: flex;
@@ -1761,7 +1769,7 @@ p.user {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
   padding: 20px;
 }
 .admin-welcome {
@@ -1787,12 +1795,12 @@ p.user {
 .admin-total-card {
   background: white;
   border-radius: 20px;
-  border: 2px solid #ffeadc;
   padding: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(109, 71, 23, 0.05);
+  border: 1px solid #eee;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   transition: 0.3s;
   gap: 20px;
 }
@@ -1828,7 +1836,6 @@ p.user {
   color: #e53935;
 }
 .orange {
-  background: #fff4e6;
   color: #ff6a00;
 }
 .purple {
@@ -1884,10 +1891,10 @@ p.user {
   margin: 0;
 }
 .text-wrap {
-    max-width: 400px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  max-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .admin-table td {
   padding: 16px !important;
@@ -1942,19 +1949,19 @@ p.user {
   font-size: 2rem;
   margin-bottom: 10px;
 }
-.status-confirm{
+.status-confirm {
   display: flex;
   gap: 10px;
 }
 .status {
   padding: 7px 14px;
   border-radius: 30px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: bold;
 }
 .status.menunggu {
-  color: white;
-  background: #e19b00;
+  background: #fff7e4;
+  color: #e29a00;
 }
 .status.diterima,
 .status.lunas {
@@ -2004,8 +2011,28 @@ p.user {
   flex-direction: column;
   gap: 10px;
 }
-.td-group p{
+.td-group p {
   color: black;
+}
+/* view pendaftaran */
+.view-data {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+.view-data p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+.view-data p.black {
+  color: black;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.view-data img {
+  width: 300px;
+  object-fit: contain;
 }
 
 /* responsive */

@@ -40,7 +40,36 @@ if (!isset($_SESSION["login"])) {
 
         <!-- isi-halaman -->
         <div class="content-ua admin-page">
-            <div class="admin-table-card">
+            <form action="" method="POST" class="form-card">
+                <div class="form-title">
+                    <h1>Visi dan Misi Sunshine</h1>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Deskripsi <span class="required">*</span></label>
+                            <textarea class="form-control" name="desk-vm" required autocomplete="off" placeholder="Masukkan deskripsi visi dan misi"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label class="form-label">Visi <span class="required">*</span></label>
+                            <textarea class="form-control" name="visi" required autocomplete="off" placeholder="Masukkan visi"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" name="deskripsi-vm" class="btn-form">
+                    Simpan Perubahan
+                </button>
+            </form>
+
+            <div class="admin-table-card mt-4">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Misi</h1>
                     <a href="a-tambah-misi.php">Tambah Misi</a>
@@ -59,10 +88,10 @@ if (!isset($_SESSION["login"])) {
 
                         <tbody>
 
-                                 <tr>
+                            <tr>
                                 <td>1</td>
                                 <td class="text-wrap">Johan MISISIIS mIS mIS msi ism</td>
-                                <td class="text-wrap">lalalalall lalala la alal al ala la la la la a la la al alal ala al al ala al ala a  ala a lala</td>
+                                <td class="text-wrap">lalalalall lalala la alal al ala la la la la a la la al alal ala al al ala al ala a ala a lala</td>
                                 <td class="text-wrap">jo_ren11@gmail.com</td>
                                 <td>
                                     <div class="aksi-btn">
@@ -81,7 +110,7 @@ if (!isset($_SESSION["login"])) {
                 </div>
             </div>
 
-                 <div class="admin-table-card">
+            <div class="admin-table-card mt-4">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Janji</h1>
                     <a href="a-tambah-janji.php">Tambah Janji</a>
@@ -98,7 +127,7 @@ if (!isset($_SESSION["login"])) {
 
                         <tbody>
 
-                                 <tr>
+                            <tr>
                                 <td>1</td>
                                 <td class="text-wrap">Johan MISISIIS mIS mIS msi is mIS msi is mIS msi is mIS msi is mIS msi is mIS msi is mIS msi is mIS msi is mIS msi is mIS msi is mIS msi is mIS msi is mIS msi is mIS msi ism</td>
                                 <td>
@@ -118,7 +147,7 @@ if (!isset($_SESSION["login"])) {
                 </div>
             </div>
 
-                   <div class="admin-table-card">
+            <div class="admin-table-card mt-4">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Pilar Janji</h1>
                 </div>
@@ -135,7 +164,7 @@ if (!isset($_SESSION["login"])) {
 
                         <tbody>
 
-                                 <tr>
+                            <tr>
                                 <td>1</td>
                                 <td class="text-wrap">Johan MISISIIS mIS mIS msi ism</td>
                                 <td class="text-wrap">jo_ren11@gmail.com</td>
