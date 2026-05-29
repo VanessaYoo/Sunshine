@@ -1,4 +1,4 @@
-  <div class="sidebar" id="toggle-sidebar">
+  <div class="sidebar user" id="toggle-sidebar">
       <div class="container-menu user">
           <div class="logo-bar">
               <img src="../img/aset/logo.png" alt="">

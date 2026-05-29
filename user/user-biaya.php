@@ -100,47 +100,63 @@ if (!isset($_SESSION["login"])) {
                     </table>
                 </div>
 
-               <div class="pembayaran-wrapper">
-                 <div class="rekening-box">
-                    <h3>Pembayaran Transfer</h3>
+            </div>
 
-                    <div class="rekening-item">
-                        <p>Bank</p>
-                        <p class="bold">BCA</p>
-                    </div>
+            <div class="biaya-card">
+                <div class="form-title">
+                    <h1>Konfirmasi Metode Pembayaran</h1>
+                    <p>Berikut beberapa metode yang dapat dipilih untuk memproses pembayaran</p>
+                </div>
 
-                    <div class="rekening-item">
-                        <p>Nomor Rekening</p>
-                        <p class="bold">1234567890</p>
-                    </div>
-
-                    <div class="rekening-item">
-                        <p>Atas Nama</p>
-                        <p class="bold">TK Sunshine Pontianak</p>
-                    </div>
-
-                    <div class="rekening-note">
-                        <i class="fa-solid fa-circle-info"></i>
-                        <span>
-                            Setelah melakukan pembayaran, silakan upload bukti transfer
-                            pada konfirmasi pembayaran.
-                        </span>
+                <div class="metode-pembayaran-wrapper">
+                    <div class="metode-pembayaran">
+                        <button type="button" class="btn tunai" onclick="pilihMetode('tunai')">Tunai</button>
+                        <button type="button" class="btn transfer" onclick="pilihMetode('transfer')">Transfer</button>
                     </div>
                 </div>
 
-                <div class="konfirmasi-card">
-                    <h2>Konfirmasi Pembayaran</h2>
-                    <p>Upload bukti transfer Anda di sini.</p>
-
-                    <form action="" method="POST">
-                        <input type="file" name="bukti" class="form-control" required>
-                        <button type="submit" class="btn-konfirmasi">
-                            Upload Bukti
-                        </button>
-                    </form>
+                <div id="isi-tunai" class="pembayaran-tunai" style="display: none;">
+                    <h3>Pembayaran Tunai</h3>
+                    <p>Bagi yang ingin melakukan pembayaran secara tunai, silakan datang langsung ke bagian administrasi Sunshine.</p>
                 </div>
-               </div>
 
+                <form action="update_pembayaran.php" method="POST" enctype="multipart/form-data">
+
+                    <input type="hidden" name="metode_pembayaran" value="transfer">
+
+                    <div id="isi-transfer" class="pembayaran-wrapper" style="display: none;">
+                        <div class="rekening-box">
+                            <h3>Pembayaran Transfer</h3>
+                            <div class="rekening-item">
+                                <p>Bank</p>
+                                <p class="bold">BCA</p>
+                            </div>
+                            <div class="rekening-item">
+                                <p>Nomor Rekening</p>
+                                <p class="bold">1234567890</p>
+                            </div>
+                            <div class="rekening-item">
+                                <p>Atas Nama</p>
+                                <p class="bold">TK Sunshine Pontianak</p>
+                            </div>
+                            <div class="rekening-note">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span>Setelah melakukan pembayaran, silakan upload bukti transfer.</span>
+                            </div>
+                        </div>
+
+                        <div class="konfirmasi-card">
+                            <h2>Konfirmasi Pembayaran</h2>
+                            <p>Upload bukti transfer Anda di sini.</p>
+                            <input type="file" name="bukti" id="input-bukti" class="form-control">
+
+                            <button type="submit" class="btn-konfirmasi" style="margin-top: 20px;">
+                                Upload Bukti & Konfirmasi
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
             </div>
 
         </div>

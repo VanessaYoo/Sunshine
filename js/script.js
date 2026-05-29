@@ -16,7 +16,7 @@ navToggleLink.forEach((navToggleLink) => {
   });
 });
 
-//membuka toggle dan menampilkan link (index.html)
+//membuka toggle dan menampilkan link (index.php)
 let navToggle = document.getElementById("toggle");
 if (navToggle) {
   navToggle.style.maxHeight = "0px";
@@ -36,18 +36,19 @@ navLink.forEach((link) => {
   });
 });
 
-// untuk (user-sidebar.html)
+// untuk (user-sidebar.php)
 let sidebarToggle = document.getElementById("toggle-sidebar");
+let iconBars = document.querySelector(".icon-nav.user i");
 if (sidebarToggle && window.innerWidth <= 600) {
   sidebarToggle.style.maxHeight = "0px";
 }
 function toggleSidebar() {
   if (sidebarToggle && window.innerWidth <= 600) {
-    if (sidebarToggle.style.maxHeight == "0px" || sidebarToggle.style.maxHeight == "") {
-      sidebarToggle.style.maxHeight = "320px";
-    } else {
-      sidebarToggle.style.maxHeight = "0px";
-    }
+     let tutupDropDown = sidebarToggle.style.maxHeight === "0px";
+    sidebarToggle.style.maxHeight = tutupDropDown ? "320px" : "0px";
+    
+    // terbuka jadi oren, ditutup jadi hitam
+    iconBars.style.setProperty("color", tutupDropDown ? "#ff6a00" : "black", "important");
   }
 }
 const sidebarLinks = document.querySelectorAll(".sidebar .menu a");
@@ -55,9 +56,41 @@ sidebarLinks.forEach((link) => {
   link.addEventListener("click", () => {
     if (sidebarToggle && window.innerWidth <= 600) {
       sidebarToggle.style.maxHeight = "0px";
+            if(iconBars) iconBars.style.color = "black";
     }
   });
 });
+
+// untuk (admin-sidebar.php)
+  const sidebarAdmin = document.querySelector(".sidebar.admin");
+  const barAdmin = document.querySelector(".icon-nav.admin");
+  const iconAdmin = document.querySelector(".icon-nav.admin i");
+function toggleSidebarAdmin() {
+
+  if (sidebarAdmin && window.innerWidth <= 600) {
+    sidebarAdmin.classList.toggle("buka-admin");
+    barAdmin.classList.toggle("geser-kanan");
+    
+    if (barAdmin.classList.contains("geser-kanan")) {
+      iconAdmin.classList.replace("fa-bars", "fa-xmark");
+    } else {
+      iconAdmin.classList.replace("fa-xmark", "fa-bars");
+    }
+    
+  }
+}
+document.querySelectorAll(".sidebar.admin .menu a").forEach(link => {
+  link.addEventListener("click", () => {
+    
+    if (sidebarAdmin && window.innerWidth <= 600) {
+      sidebarAdmin.classList.remove("buka-admin");
+      if (barAdmin) barAdmin.classList.remove("geser-kanan");
+      if (iconAdmin) iconAdmin.classList.replace("fa-xmark", "fa-bars"); 
+    }
+  });
+});
+
+
 
 //scroll section halaman = nav active
 let sections = document.querySelectorAll("section[data-group]"); //ambil section yang memiliki data-group
@@ -167,3 +200,31 @@ misiBox.addEventListener("mousedown", dragStart);
 misiBox.addEventListener("mousemove", dragActive);
 misiBox.addEventListener("mouseup", dragStop);
 misiBox.addEventListener("mouseleave", dragStop);
+
+//pilih metode pembayaran
+function pilihMetode(metode) {
+    const btnTunai = document.querySelector('.btn.tunai');
+    const btnTransfer = document.querySelector('.btn.transfer');
+    const isiTunai = document.getElementById('isi-tunai');
+    const isiTransfer = document.getElementById('isi-transfer');
+    const inputBukti = document.getElementById('input-bukti');
+
+    if (metode === 'tunai') {
+        btnTunai.classList.add('active');
+        btnTransfer.classList.remove('active');
+        
+        isiTunai.style.display = 'block';
+        isiTransfer.style.display = 'none';
+        
+        if(inputBukti) inputBukti.required = false;
+        
+    } else if (metode === 'transfer') {
+        btnTransfer.classList.add('active');
+        btnTunai.classList.remove('active');
+        
+        isiTunai.style.display = 'none';
+        isiTransfer.style.display = 'grid'; 
+        
+        if(inputBukti) inputBukti.required = true;
+    }
+}

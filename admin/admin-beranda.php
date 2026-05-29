@@ -49,7 +49,7 @@ if (!isset($_SESSION["login"])) {
                 </p>
 
                 <div class="admin-grid">
-                    <a href="admin-pendaftaran" class="admin-total-card">
+                    <div class="admin-total-card">
                         <div>
                             <p>Pendaftar</p>
                             <h2>128</h2>
@@ -57,9 +57,9 @@ if (!isset($_SESSION["login"])) {
                         <div class="admin-icon green">
                             <i class="fa-solid fa-users"></i>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="admin-pendaftaran" class="admin-total-card">
+                    <div class="admin-total-card">
                         <div>
                             <p>Disetujui</p>
                             <h2>90</h2>
@@ -67,9 +67,9 @@ if (!isset($_SESSION["login"])) {
                         <div class="admin-icon blue">
                             <i class="fa-solid fa-circle-check"></i>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="admin-pendaftaran.php" class="admin-total-card">
+                    <div class="admin-total-card">
                         <div>
                             <p>Ditolak</p>
                             <h2>38</h2>
@@ -77,9 +77,9 @@ if (!isset($_SESSION["login"])) {
                         <div class="admin-icon red">
                             <i class="fa-solid fa-circle-xmark"></i>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="admin-jenjang.php" class="admin-total-card">
+                    <div class="admin-total-card">
                         <div>
                             <p>Jenjang</p>
                             <h2>2</h2>
@@ -87,9 +87,9 @@ if (!isset($_SESSION["login"])) {
                         <div class="admin-icon orange">
                             <i class="fa-solid fa-school"></i>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="admin-ekskul.php" class="admin-total-card">
+                    <div class="admin-total-card">
                         <div>
                             <p>Ekstrakurikuler</p>
                             <h2>12</h2>
@@ -97,9 +97,9 @@ if (!isset($_SESSION["login"])) {
                         <div class="admin-icon purple">
                             <i class="fa-solid fa-futbol"></i>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="admin-program.php" class="admin-total-card">
+                    <div class="admin-total-card">
                         <div>
                             <p>Program</p>
                             <h2>5</h2>
@@ -107,129 +107,129 @@ if (!isset($_SESSION["login"])) {
                         <div class="admin-icon yellow">
                             <i class="fa-solid fa-book-open"></i>
                         </div>
-                    </a>
-
-                </div>
-            </div>
-
-            <div class="admin-table-grid">
-
-                <div class="admin-table-card">
-                    <div class="admin-card-title">
-                        <h3>Prestasi Terbaru</h3>
-                        <a href="admin-prestasi.php">Lihat Semua</a>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table class="table admin-table align-middle">
-
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="pp-info">
-                                            <span>Juara 1 Olimpiade Matematika</span>
-                                            <p>27 Mei 2026</p>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <a href="a-update-prestasi.php">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <div class="pp-info">
-                                            <span>Juara 1 Olimpiade Matematika</span>
-                                            <p>27 Mei 2026</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="a-update-prestasi.php">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <div class="pp-info">
-                                            <span>Juara 1 Olimpiade Matematika</span>
-                                            <p>27 Mei 2026</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="a-update-prestasi.php">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="admin-table-card">
-                    <div class="admin-card-title">
-                        <h3>Pendaftar Terbaru</h3>
-                        <a href="admin-pendaftaran.php">Lihat Semua</a>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table class="table admin-table align-middle">
-
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="pp-info">
-                                            <span>Juara 1 Olimpiade Matematika</span>
-                                            <p>27 Mei 2026</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="a-view-pendaftaran.php">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <div class="pp-info">
-                                            <span>Juara 1 Olimpiade Matematika</span>
-                                            <p>27 Mei 2026</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="a-view-pendaftaran.php">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <div class="pp-info">
-                                            <span>Juara 1 Olimpiade Matematika</span>
-                                            <p>27 Mei 2026</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="a-view-pendaftaran.php">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
 
             </div>
         </div>
+
+        <div class="admin-table-grid">
+
+            <div class="admin-table-card">
+                <div class="admin-card-title">
+                    <h3>Prestasi Terbaru</h3>
+                    <a href="admin-prestasi.php">Lihat Semua</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table admin-table align-middle">
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="pp-info">
+                                        <span class="text-wrap">Juara 1 Olimpiade Matematika</span>
+                                        <p>27 Mei 2026</p>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <a href="a-update-prestasi.php">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="pp-info">
+                                        <span class="text-wrap">Juara 1 Olimpiade Matematika e af w fs f sf cder fed rrfvg dfv e gv df gvd f gd rg df  wfcsd edsf</span>
+                                        <p>27 Mei 2026</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="a-update-prestasi.php">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="pp-info">
+                                        <span class="text-wrap">Juara 1 Olimpiade Matematika</span>
+                                        <p>27 Mei 2026</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="a-update-prestasi.php">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="admin-table-card">
+                <div class="admin-card-title">
+                    <h3>Pendaftar Terbaru</h3>
+                    <a href="admin-pendaftaran.php">Lihat Semua</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table admin-table align-middle">
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="pp-info">
+                                        <span>Juara 1 Olimpiade Matematika</span>
+                                        <p>27 Mei 2026</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="a-view-pendaftaran.php">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="pp-info">
+                                        <span>Juara 1 Olimpiade Matematika</span>
+                                        <p>27 Mei 2026</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="a-view-pendaftaran.php">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="pp-info">
+                                        <span>Juara 1 Olimpiade Matematika</span>
+                                        <p>27 Mei 2026</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="a-view-pendaftaran.php">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 
     </div>
