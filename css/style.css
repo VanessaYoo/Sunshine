@@ -1485,6 +1485,10 @@ p.user {
 .form-title {
   margin-bottom: 35px;
 }
+.form-title.extra {
+  margin-bottom: 0;
+  margin-top: 50px;
+}
 .form-title h1 {
   font-size: 2rem;
   margin-bottom: 10px;
@@ -1823,26 +1827,27 @@ textarea.form-control {
   justify-content: center;
   font-size: 24px;
 }
-.green {
+.admin-icon.green {
   background: #e9fff1;
   color: #1ea75d;
 }
-.blue {
+.admin-icon.blue {
   background: #eef2ff;
   color: #4f46e5;
 }
-.red {
+.admin-icon.red {
   background: #ffecec;
   color: #e53935;
 }
-.orange {
+.admin-icon.orange {
+   background: #fff7ec;
   color: #ff6a00;
 }
-.purple {
+.admin-icon.purple {
   background: #f5ecff;
   color: #9333ea;
 }
-.yellow {
+.admin-icon.yellow {
   background: #fff8db;
   color: #ca8a04;
 }
@@ -1899,6 +1904,13 @@ textarea.form-control {
 .admin-table td {
   padding: 16px !important;
   vertical-align: middle;
+}
+.admin-table td {
+  padding: 16px !important;
+  vertical-align: middle;
+}
+.admin-table td.space {
+  padding: 22px 16px !important;
 }
 .admin-table td i {
   color: #ff6a00;
