@@ -177,19 +177,19 @@ nav {
   scale: calc(1.03);
   color: #ff6a00;
 }
-.text-login {
+.text-hubungi {
   padding: 10px 15px;
   transition: 0.4s;
 }
-.text-login:hover {
+.text-hubungi:hover {
   color: #ff6a00;
 }
-.icon-login {
+.icon-hubungi {
   padding: 10px 15px;
   background-color: #ff6a00;
   border-radius: 50px;
 }
-.icon-login img {
+.icon-hubungi img {
   width: 10px;
 }
 .icon-nav {
@@ -3039,13 +3039,13 @@ textarea.form-control {
   .right-nav a {
     font-size: 1.8rem;
   }
-  .text-login {
+  .text-hubungi {
     padding: 18px 27px;
   }
-  .icon-login {
+  .icon-hubungi {
     padding: 18px 27px;
   }
-  .icon-login img {
+  .icon-hubungi img {
     width: 18px;
   }
 
