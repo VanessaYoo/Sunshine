@@ -56,7 +56,12 @@ if (isset($_POST["login"])) {
 
 
                     <input name="email" type="text" required autocomplete="off" placeholder="Email" class="input-lr" />
-                    <input name="pass" type="password" required autocomplete="off" placeholder="Kata Sandi" class="input-lr" />
+
+                    <div class="password-container">
+                        <input name="pass" type="password" required autocomplete="off" placeholder="Kata Sandi" class="input-lr toggle-password" />
+                        <i class="fas fa-eye eye-icon"></i>
+                    </div>
+
                     <input name="login" type="submit" value="Login" class="submit-lr" />
 
                     <!-- <div class="l-register">
@@ -68,10 +73,12 @@ if (isset($_POST["login"])) {
             </div>
         </div>
     </div>
+      <script src="js/pass.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
+  
 </body>
 
 </html>

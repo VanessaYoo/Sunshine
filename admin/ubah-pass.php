@@ -70,16 +70,24 @@ if (isset($_POST["ubah-pass"])) {
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
-                    <input name="pass" type="password" required autocomplete="off" placeholder="Kata Sandi" class="input-lr" />
-                    <input name="pass2" type="password" required autocomplete="off" placeholder="Konfirmasi Kata Sandi" class="input-lr" />
+                    <div class="password-container">
+                        <input name="pass" type="password" required autocomplete="off" placeholder="Kata Sandi" class="input-lr toggle-password" />
+                        <i class="fas fa-eye eye-icon"></i>
+                    </div>
+                    
+                    <div class="password-container">
+                        <input name="pass2" type="password" required autocomplete="off" placeholder="Konfirmasi Kata Sandi" class="input-lr toggle-password" />
+                        <i class="fas fa-eye eye-icon"></i>
+                    </div>
+                  
                     <input name="ubah-pass" type="submit" value="Ubah Kata Sandi" class="submit-lr" />
-                    <div class="l-register">
                 </form>
 
             </div>
         </div>
     </div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+     <script src="/Sunshine/js/pass.js"></script>
     <script>
         AOS.init();
     </script>

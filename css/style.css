@@ -1181,7 +1181,28 @@ section#deskripsi-prestasi {
 .btn-l-register:hover {
   text-decoration: underline;
 }
-
+.password-container {
+    position: relative;
+    width: 100%;
+    display: block; 
+}
+.password-container .input-lr{
+  width: 100%;
+    padding-right: 45px; 
+    box-sizing: border-box;
+}
+.password-container .eye-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
+    transition: 0.3s;
+}
+.password-container .eye-icon:hover {
+    color: #ff6a00;
+}
 /* user admin sidebar */
 .sidebar {
   position: sticky;
