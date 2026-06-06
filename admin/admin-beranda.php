@@ -42,7 +42,7 @@ if (!isset($_SESSION["login"])) {
         <div class="content-ua admin-page">
 
             <div class="admin-welcome">
-                <h1>Selamat Datang, Admin!</h1>
+                <h1>Selamat Datang, Admin Sunshine!</h1>
                 <p>
                     Aktivitas pengelolaan data dan informasi Sunshine
                 </p>

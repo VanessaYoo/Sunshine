@@ -1,23 +1,23 @@
 <?php
 session_start();
-require "function.php";
+require "../function.php";
 
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
 
-if (isset($_POST["register"])) {
-    if (register($_POST) > 0) {
+if (isset($_POST["ubah-pass"])) {
+    if (ubahPass($_POST) > 0) {
         echo "
         <script>
-        alert('Registrasi akun berhasil! Silahkan login dengan akun yang telah dibuat.');
-        document.location.href = 'login.php';
+        alert('Ubah kata sandi Anda berhasil!');
+        document.location.href = 'admin-beranda.php';
         </script>
         ";
     } else {
         echo "
         <script>
-        alert('Registrasi akun gagal');
-        document.location.href = 'register.php';
+        alert('Ubah kata sandi Anda gagal!');
+        document.location.href = 'ubah-pass.php';
         </script>
         ";
     }
@@ -29,8 +29,8 @@ if (isset($_POST["register"])) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register Akun</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <title>Perbaharui Kata Sandi</title>
+    <link rel="stylesheet" href="../css/style.css" type="text/css" />
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playpen+Sans:wght@100..800&display=swap"
         rel="stylesheet" />
@@ -46,13 +46,19 @@ if (isset($_POST["register"])) {
 <body>
     <div class="container-lr">
         <div class="left-lr" data-aos="fade-right" data-aos-duration="1000">
-            <img src="img/aset/foto-bersama-2.png" alt="">
+            <img src="/Sunshine/img/aset/foto-bersama-2.png" alt="">
         </div>
         <div class="lr">
             <div class="login-register">
+                <div class="back kembali mt-2" data-aos="fade-left" data-aos-duration="1000">
+                    <button onclick="history.back()" class="back-arrow">
+                        <i class="fas fa-angle-left"></i>
+                        <p class="orange bold">Kembali</p>
+                    </button>
+                </div>
                 <div class="title-lr" data-aos="fade-down" data-aos-duration="1000">
-                    <h1>Register Sunshine</h1>
-                    <p>Silahkan masukkan email dan password</p>
+                    <h1>Atur Kata Sandi</h1>
+                    <p>Silahkan masukkan password baru</p>
                 </div>
 
                 <form action="" method="post" class="form-lr" data-aos="fade-up" data-aos-duration="1000">
@@ -64,14 +70,10 @@ if (isset($_POST["register"])) {
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
-                    <input name="email" type="text" required autocomplete="off" placeholder="Email" class="input-lr" />
                     <input name="pass" type="password" required autocomplete="off" placeholder="Kata Sandi" class="input-lr" />
                     <input name="pass2" type="password" required autocomplete="off" placeholder="Konfirmasi Kata Sandi" class="input-lr" />
-                    <input name="register" type="submit" value="Register" class="submit-lr" />
+                    <input name="ubah-pass" type="submit" value="Ubah Kata Sandi" class="submit-lr" />
                     <div class="l-register">
-                        <div>Anda sudah memiliki akun?</div>
-                        <a class="btn-l-register" href="login.php">Login</a>
-                    </div>
                 </form>
 
             </div>

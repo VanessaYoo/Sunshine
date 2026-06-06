@@ -80,6 +80,12 @@
 
           <ul class="menu admin">
               <div class="group-menu">
+                 <li>
+                      <a href="/Sunshine/admin/ubah-pass.php">
+                          <i class="fa-solid fa-lock"></i>
+                          <span>Ubah Kata Sandi</span>
+                      </a>
+                  </li>
                   <li class="logout-bar admin">
                       <a href="/Sunshine/logout.php" onclick="return confirm('Apakah Anda yakin untuk logout dari Sunshine?');">
                           <i class="fa-solid fa-right-from-bracket"></i>

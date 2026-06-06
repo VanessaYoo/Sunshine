@@ -56,12 +56,13 @@ if (isset($_POST["login"])) {
 
 
                     <input name="email" type="text" required autocomplete="off" placeholder="Email" class="input-lr" />
-                    <input name="pass" type="password" required autocomplete="off" placeholder="Password" class="input-lr" />
+                    <input name="pass" type="password" required autocomplete="off" placeholder="Kata Sandi" class="input-lr" />
                     <input name="login" type="submit" value="Login" class="submit-lr" />
-                    <div class="l-register">
+
+                    <!-- <div class="l-register">
                         <div>Anda belum memiliki akun?</div>
                         <a class="btn-l-register" href="register.php">Register</a>
-                    </div>
+                    </div> -->
                 </form>
 
             </div>
