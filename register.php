@@ -65,8 +65,8 @@ if (isset($_POST["register"])) {
                         </div>
                     <?php endif; ?>
                     <input name="email" type="text" required autocomplete="off" placeholder="Email" class="input-lr" />
-                    <input name="pass" type="password" required autocomplete="off" placeholder="Password" class="input-lr" />
-                    <input name="pass2" type="password" required autocomplete="off" placeholder="Konfirmasi Password" class="input-lr" />
+                    <input name="pass" type="password" required autocomplete="off" placeholder="Kata Sandi" class="input-lr" />
+                    <input name="pass2" type="password" required autocomplete="off" placeholder="Konfirmasi Kata Sandi" class="input-lr" />
                     <input name="register" type="submit" value="Register" class="submit-lr" />
                     <div class="l-register">
                         <div>Anda sudah memiliki akun?</div>

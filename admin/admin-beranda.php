@@ -42,14 +42,13 @@ if (!isset($_SESSION["login"])) {
         <div class="content-ua admin-page">
 
             <div class="admin-welcome">
-                <h1>Selamat Datang, Admin.</h1>
+                <h1>Selamat Datang, Admin Sunshine!</h1>
                 <p>
-                    Kelola seluruh data PPDB Sunshine dengan mudah
-                    melalui dashboard admin.
+                    Aktivitas pengelolaan data dan informasi Sunshine
                 </p>
 
                 <div class="admin-grid">
-                    <div class="admin-total-card">
+                    <!-- <div class="admin-total-card">
                         <div>
                             <p>Pendaftar</p>
                             <h2>128</h2>
@@ -77,29 +76,39 @@ if (!isset($_SESSION["login"])) {
                         <div class="admin-icon red">
                             <i class="fa-solid fa-circle-xmark"></i>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="admin-total-card">
+                    <a href="jenjang/admin-jenjang.php" class="admin-total-card">
                         <div>
-                            <p>Jenjang</p>
+                            <p>Kelompok</p>
                             <h2>2</h2>
                         </div>
                         <div class="admin-icon orange">
                             <i class="fa-solid fa-school"></i>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="admin-total-card">
+                    <a href="jenjang/admin-jenjang.php" class="admin-total-card">
                         <div>
-                            <p>Ekstrakurikuler</p>
-                            <h2>12</h2>
+                            <p>Sub Kelompok</p>
+                            <h2>4</h2>
                         </div>
-                        <div class="admin-icon purple">
-                            <i class="fa-solid fa-futbol"></i>
+                        <div class="admin-icon red">
+                            <i class="fa-solid fa-user-friends"></i>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="admin-total-card">
+                    <a href="informasi/admin-informasi.php" class="admin-total-card">
+                        <div>
+                            <p>Kontak</p>
+                            <h2>5</h2>
+                        </div>
+                        <div class="admin-icon green">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                    </a>
+
+                    <a href="program/admin-program.php" class="admin-total-card">
                         <div>
                             <p>Program</p>
                             <h2>5</h2>
@@ -107,7 +116,27 @@ if (!isset($_SESSION["login"])) {
                         <div class="admin-icon yellow">
                             <i class="fa-solid fa-book-open"></i>
                         </div>
-                    </div>
+                    </a>
+
+                    <a href="ekskul/admin-ekskul.php" class="admin-total-card">
+                        <div>
+                            <p>Ekstrakurikuler</p>
+                            <h2>12</h2>
+                        </div>
+                        <div class="admin-icon purple">
+                            <i class="fa-solid fa-futbol"></i>
+                        </div>
+                    </a>
+
+                    <a href="prestasi/admin-prestasi.php" class="admin-total-card">
+                        <div>
+                            <p>Prestasi</p>
+                            <h2>5</h2>
+                        </div>
+                        <div class="admin-icon blue">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                    </a>
 
                 </div>
             </div>
@@ -117,7 +146,7 @@ if (!isset($_SESSION["login"])) {
                 <div class="admin-table-card">
                     <div class="admin-card-title">
                         <h3>Prestasi Terbaru</h3>
-                        <a href="admin-prestasi.php">Lihat Semua</a>
+                        <a href="prestasi/admin-prestasi.php">Lihat Semua</a>
                     </div>
 
                     <div class="table-responsive">
@@ -133,7 +162,7 @@ if (!isset($_SESSION["login"])) {
                                     </td>
 
                                     <td>
-                                        <a href="a-update-prestasi.php">
+                                        <a href="prestasi/a-update-prestasi.php">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </td>
@@ -147,7 +176,7 @@ if (!isset($_SESSION["login"])) {
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="a-update-prestasi.php">
+                                        <a href="prestasi/a-update-prestasi.php">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </td>
@@ -161,7 +190,7 @@ if (!isset($_SESSION["login"])) {
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="a-update-prestasi.php">
+                                        <a href="prestasi/a-update-prestasi.php">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </td>
@@ -173,8 +202,8 @@ if (!isset($_SESSION["login"])) {
 
                 <div class="admin-table-card">
                     <div class="admin-card-title">
-                        <h3>Pendaftar Terbaru</h3>
-                        <a href="admin-pendaftaran.php">Lihat Semua</a>
+                        <h3>Program Sunshine</h3>
+                        <a href="program/admin-program.php">Lihat Semua</a>
                     </div>
 
                     <div class="table-responsive">
@@ -182,43 +211,53 @@ if (!isset($_SESSION["login"])) {
 
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td  class="space">
                                         <div class="pp-info">
                                             <span>Juara 1 Olimpiade Matematika</span>
-                                            <p>27 Mei 2026</p>
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="a-view-pendaftaran.php">
-                                            <i class="fa-solid fa-eye"></i>
+                                        <a href="program/a-update-program.php">
+                                            <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <td>
+                                    <td  class="space">
                                         <div class="pp-info">
                                             <span>Juara 1 Olimpiade Matematika</span>
-                                            <p>27 Mei 2026</p>
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="a-view-pendaftaran.php">
-                                            <i class="fa-solid fa-eye"></i>
+                                        <a href="program/a-update-program.php">
+                                            <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <td>
+                                    <td  class="space">
                                         <div class="pp-info">
                                             <span>Juara 1 Olimpiade Matematika</span>
-                                            <p>27 Mei 2026</p>
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="a-view-pendaftaran.php">
-                                            <i class="fa-solid fa-eye"></i>
+                                        <a href="program/a-update-program.php">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td  class="space">
+                                        <div class="pp-info">
+                                            <span>Juara 1 Olimpiade Matematika</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="program/a-update-program.php">
+                                            <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </td>
                                 </tr>

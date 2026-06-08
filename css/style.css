@@ -177,19 +177,19 @@ nav {
   scale: calc(1.03);
   color: #ff6a00;
 }
-.text-login {
+.text-hubungi {
   padding: 10px 15px;
   transition: 0.4s;
 }
-.text-login:hover {
+.text-hubungi:hover {
   color: #ff6a00;
 }
-.icon-login {
+.icon-hubungi {
   padding: 10px 15px;
   background-color: #ff6a00;
   border-radius: 50px;
 }
-.icon-login img {
+.icon-hubungi img {
   width: 10px;
 }
 .icon-nav {
@@ -1181,7 +1181,28 @@ section#deskripsi-prestasi {
 .btn-l-register:hover {
   text-decoration: underline;
 }
-
+.password-container {
+    position: relative;
+    width: 100%;
+    display: block; 
+}
+.password-container .input-lr{
+  width: 100%;
+    padding-right: 45px; 
+    box-sizing: border-box;
+}
+.password-container .eye-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
+    transition: 0.3s;
+}
+.password-container .eye-icon:hover {
+    color: #ff6a00;
+}
 /* user admin sidebar */
 .sidebar {
   position: sticky;
@@ -1484,6 +1505,10 @@ p.user {
 }
 .form-title {
   margin-bottom: 35px;
+}
+.form-title.extra {
+  margin-bottom: 0;
+  margin-top: 50px;
 }
 .form-title h1 {
   font-size: 2rem;
@@ -1823,26 +1848,27 @@ textarea.form-control {
   justify-content: center;
   font-size: 24px;
 }
-.green {
+.admin-icon.green {
   background: #e9fff1;
   color: #1ea75d;
 }
-.blue {
+.admin-icon.blue {
   background: #eef2ff;
   color: #4f46e5;
 }
-.red {
+.admin-icon.red {
   background: #ffecec;
   color: #e53935;
 }
-.orange {
+.admin-icon.orange {
+   background: #fff7ec;
   color: #ff6a00;
 }
-.purple {
+.admin-icon.purple {
   background: #f5ecff;
   color: #9333ea;
 }
-.yellow {
+.admin-icon.yellow {
   background: #fff8db;
   color: #ca8a04;
 }
@@ -1899,6 +1925,13 @@ textarea.form-control {
 .admin-table td {
   padding: 16px !important;
   vertical-align: middle;
+}
+.admin-table td {
+  padding: 16px !important;
+  vertical-align: middle;
+}
+.admin-table td.space {
+  padding: 22px 16px !important;
 }
 .admin-table td i {
   color: #ff6a00;
@@ -3027,13 +3060,13 @@ textarea.form-control {
   .right-nav a {
     font-size: 1.8rem;
   }
-  .text-login {
+  .text-hubungi {
     padding: 18px 27px;
   }
-  .icon-login {
+  .icon-hubungi {
     padding: 18px 27px;
   }
-  .icon-login img {
+  .icon-hubungi img {
     width: 18px;
   }
 
