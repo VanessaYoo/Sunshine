@@ -41,7 +41,7 @@
      
       <div class="right-nav">
           <a href="https://wa.me/6282119228799" class="btn-hubungi right-nav" target="_blank">
-            <div class="text-hubungi">Hubungi</div>
+            <div class="text-hubungi">Hubungi Kami</div>
             <div class="icon-hubungi">
               <img src="img/icon/contact.png" alt=""></div></a>
         </div>
