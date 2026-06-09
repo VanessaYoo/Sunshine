@@ -234,7 +234,7 @@ if (!isset($_SESSION["login"])) {
                             <tr>
                                 <th>#</th>
                                 <th>Link Media Sosial</th>
-                                <th>Icon</th>
+                                <th>Ikon</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>

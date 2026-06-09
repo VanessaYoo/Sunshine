@@ -81,7 +81,7 @@ if (!isset($_SESSION["login"])) {
                                 <th>#</th>
                                 <th>Misi</th>
                                 <th>Deskripsi</th>
-                                <th>Icon</th>
+                                <th>Ikon</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -157,7 +157,7 @@ if (!isset($_SESSION["login"])) {
                             <tr>
                                 <th>#</th>
                                 <th>Pilar</th>
-                                <th>Icon</th>
+                                <th>Ikon</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>

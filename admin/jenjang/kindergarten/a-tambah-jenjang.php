@@ -63,10 +63,10 @@ if (!isset($_SESSION["login"])) {
 
                     <div class="col-md-4">
                         <div class="mb-3">
-                            <label class="form-label">Icon <span class="required">*</span></label>
+                            <label class="form-label">Ikon <span class="required">*</span></label>
                             <input class="form-control"
                                 type="file"
-                                name="icon" required>
+                                name="ikon" required>
                         </div>
                     </div>
 

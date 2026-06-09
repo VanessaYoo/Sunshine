@@ -95,7 +95,7 @@ if (!isset($_SESSION["login"])) {
                                 <th>#</th>
                                 <th>Sub Kelompok</th>
                                 <th>Jenjang</th>
-                                <th>Icon</th>
+                                <th>Ikon</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -133,7 +133,7 @@ if (!isset($_SESSION["login"])) {
                                 <th>#</th>
                                 <th>Sub Kelompok</th>
                                 <th>Jenjang</th>
-                                <th>Icon</th>
+                                <th>Ikon</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
