@@ -1,5 +1,5 @@
 <?php
-include "../security.php";
+require "../security.php";
 require '../../function.php';
 
 if (!isset($_SESSION["login"])) {
@@ -40,25 +40,8 @@ if (!isset($_SESSION["login"])) {
 
         <!-- isi-halaman -->
         <div class="content-ua admin-page">
-           <form action="" method="POST" class="form-card">
-                <div class="form-title">
-                    <h1>Program Sunshine</h1>
-                </div>
 
-                <div class="row g-4">
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <label class="form-label">Deskripsi <span class="required">*</span></label>
-                            <textarea class="form-control" name="penjelasan" required autocomplete="off" placeholder="Masukkan deskripsi program"></textarea>
-                        </div>
-                    </div>
-                </div>
-                    <button type="submit" name="penjelasan-program" class="btn-form">
-                        Simpan Perubahan
-                    </button>
-            </form>
-
-            <div class="admin-table-card mt-4">
+            <div class="admin-table-card">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Program</h1>
                     <a href="a-tambah-program.php">Tambah Program</a>
@@ -71,35 +54,55 @@ if (!isset($_SESSION["login"])) {
                                 <th>Program</th>
                                 <th>Deskripsi</th>
                                 <th>Foto</th>
+                                <th>Data Diisi</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
 
                         <tbody>
-
-                                 <tr>
-                                <td>1</td>
-                                <td class="text-wrap">Johan MISISIIS mIS</td>
-                                <td class="text-wrap">jo_ren11@gmail.com</td>
-                                <td class="text-wrap">jo_ren1 1@gma il.com an MISISIIS mIS an MISISIIS mISan MISISIIS mIS an MISISIIS mISan MISISIIS mISan MISISIIS mISan MISISIIS mIS</td>
-                                <td>
-                                    <div class="aksi-btn">
-                                        <a href="a-update-program.php" class="edit">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </a>
-                                        <a href="a-delete-program.php" class="delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-
+                            <?php
+                            $programs = query("SELECT * FROM program JOIN user ON program.id_user = user.id_user");
+                            if (empty($programs)) :
+                            ?>
+                                <tr>
+                                    <td colspan="6" class="text-center">Tidak Memiliki Data</td>
+                                </tr>
+                                <?php else :
+                                $i = 1;
+                                foreach ($programs as $program) :
+                                ?>
+                                    <tr>
+                                        <td><?= $i; ?></td>
+                                        <td class="text-wrap"><?= $program["program"]; ?></td>
+                                        <td class="text-wrap"><?= $program["deskripsi"]; ?></td>
+                                        <td class="text-wrap"><?= $program["foto"]; ?></td>
+                                        <td class="text-wrap">
+                                            <div class="pp-info">
+                                                <span class="text-wrap"><?= $program["nama"]; ?></span>
+                                                <p><?= $program['created_at']; ?></p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="aksi-btn">
+                                                <a href="a-update-program.php?id=<?= $program['id_program']; ?>" class="edit">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </a>
+                                                <a href="a-delete-program.php?id=<?= $program['id_program']; ?>" class="delete">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                            <?php $i++;
+                                endforeach;
+                            endif;
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            
+
         </div>
 
 

@@ -49,12 +49,12 @@
                           <span>Jenjang</span>
                       </a>
                   </li>
-                  <li class="<?= ($page == 'visi-misi') ? 'active' : ''; ?>">
+                  <!-- <li class="<?= ($page == 'visi-misi') ? 'active' : ''; ?>">
                       <a href="/Sunshine/admin/vm/admin-vm.php">
                           <i class="fa-solid fa-bullseye"></i>
                           <span>Visi dan Misi</span>
                       </a>
-                  </li>
+                  </li> -->
                   <li class="<?= ($page == 'program') ? 'active' : ''; ?>">
                       <a href="/Sunshine/admin/program/admin-program.php">
                           <i class="fa-solid fa-book-open"></i>

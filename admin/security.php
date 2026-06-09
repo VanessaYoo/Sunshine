@@ -1,8 +1,8 @@
 <?php
 session_start();
-$email = $_SESSION['email'];
+$nama = $_SESSION['nama'];
 
-if ($email == "") {
+if ($nama == "") {
     header("Location: /Sunshine/login.php");
     exit;
 }

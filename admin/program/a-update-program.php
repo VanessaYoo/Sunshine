@@ -1,11 +1,25 @@
 <?php
-include "../security.php";
+require "../security.php";
 require '../../function.php';
 
 if (!isset($_SESSION["login"])) {
     header("Location: ../login.php");
     exit;
 }
+
+  $id = $_GET['id'] ?? '';
+
+  if ($id == '') {
+    header("Location: index.php");
+    exit;
+  }
+  $jumlah = query("SELECT * FROM program WHERE id_program='$id'");
+
+  if (empty($jumlah)) {
+    header("Location: admin-program.php");
+    exit;
+}
+$program = $jumlah[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +48,7 @@ if (!isset($_SESSION["login"])) {
             <form action="" method="POST" class="form-card">
                 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow">
+                    <button onclick="history.back()" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -47,32 +61,36 @@ if (!isset($_SESSION["login"])) {
                 <div class="row g-4">
 
 
-                    <div class="col-md-6">
+                    <div>
                         <div class="mb-3">
                             <label class="form-label">Program <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="program" required autocomplete="off" placeholder="Masukkan program">
+                            <input class="form-control" type="text" name="program" required autocomplete="off" placeholder="Masukkan program" value="<?= $program['program'] ?? ''; ?>">
+                        </div>
+                    </div>
+                     
+
+                    <div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label">Deskripsi <span class="required">*</span></label>
+                                <textarea class="form-control" name="deskripsi" required autocomplete="off" placeholder="Masukkan deskripsi program"><?= $program['deskripsi'] ?? ''; ?></textarea>
+                            </div>
                         </div>
                     </div>
 
-                      <div class="col-md-4">
+                   <div class="col-md-4">
                         <div class="mb-3">
                             <label class="form-label">Foto <span class="required">*</span></label>
+                            <div class="mb-2">
+                                <img src="../../img/program/<?= $program['foto'] ?? ''; ?>" class="img-thumbnail">
+                                <p class="mt-2" style="font-size: 1rem;">File : <?= $program['foto'] ?? ''; ?></p>
+                            </div>
+                            <input type="hidden" name="foto_lama" value="<?= $program['foto'] ?? ''; ?>">
                             <input class="form-control"
                                 type="file"
                                 name="foto" required>
                         </div>
                     </div>
-
-                    <div class="row g-4">
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Deskripsi <span class="required">*</span></label>
-                                <textarea class="form-control" name="deskripsi" required autocomplete="off" placeholder="Masukkan deskripsi program"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                  
 
                 </div>
 

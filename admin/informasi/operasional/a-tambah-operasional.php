@@ -1,5 +1,5 @@
 <?php
-include "../../security.php";
+require "../../security.php";
 require '../../../function.php';
 
 if (!isset($_SESSION["login"])) {
@@ -34,7 +34,7 @@ if (!isset($_SESSION["login"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow">
+                    <button type="button" onclick="history.back()" class="back-arrow">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -56,7 +56,7 @@ if (!isset($_SESSION["login"])) {
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Jam Buka <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="jam_buka" required autocomplete="off" placeholder="Masukkan jam buka">
+                            <input class="form-control" type="time" name="jam_buka" required autocomplete="off">
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@ if (!isset($_SESSION["login"])) {
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Jam Tutup <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="jam_tutup" required autocomplete="off" placeholder="Masukkan jam tutup">
+                            <input class="form-control" type="time" name="jam_tutup" required autocomplete="off">
                         </div>
                     </div>
 

@@ -1,13 +1,7 @@
 <?php
-include "security.php";
+require "security.php";
 require '../function.php';
-
-if (!isset($_SESSION["login"])) {
-    header("Location: login.php");
-    exit;
-}
-
-
+$nama = $nama ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +36,8 @@ if (!isset($_SESSION["login"])) {
         <div class="content-ua admin-page">
 
             <div class="admin-welcome">
-                <h1>Selamat Datang, Admin Sunshine!</h1>
+
+                <h1>Selamat Datang, <?php echo $nama; ?>!</h1>
                 <p>
                     Aktivitas pengelolaan data dan informasi Sunshine
                 </p>
@@ -79,9 +74,12 @@ if (!isset($_SESSION["login"])) {
                     </div> -->
 
                     <a href="jenjang/admin-jenjang.php" class="admin-total-card">
+                        <?php
+                        $total_kelompok = query("SELECT COUNT(*) as total FROM kelompok")[0];
+                        ?>
                         <div>
                             <p>Kelompok</p>
-                            <h2>2</h2>
+                            <h2><?= $total_kelompok["total"] ?></h2>
                         </div>
                         <div class="admin-icon orange">
                             <i class="fa-solid fa-school"></i>
@@ -89,9 +87,12 @@ if (!isset($_SESSION["login"])) {
                     </a>
 
                     <a href="jenjang/admin-jenjang.php" class="admin-total-card">
+                        <?php
+                        $total_subkelompok = query("SELECT COUNT(*) as total FROM sub_kelompok")[0];
+                        ?>
                         <div>
                             <p>Sub Kelompok</p>
-                            <h2>4</h2>
+                            <h2><?= $total_subkelompok["total"] ?></h2>
                         </div>
                         <div class="admin-icon red">
                             <i class="fa-solid fa-user-friends"></i>
@@ -99,9 +100,12 @@ if (!isset($_SESSION["login"])) {
                     </a>
 
                     <a href="informasi/admin-informasi.php" class="admin-total-card">
+                        <?php
+                        $total_kontak = query("SELECT COUNT(*) as total FROM kontak")[0];
+                        ?>
                         <div>
                             <p>Kontak</p>
-                            <h2>5</h2>
+                            <h2><?= $total_kontak["total"] ?></h2>
                         </div>
                         <div class="admin-icon green">
                             <i class="fa-solid fa-phone"></i>
@@ -109,9 +113,12 @@ if (!isset($_SESSION["login"])) {
                     </a>
 
                     <a href="program/admin-program.php" class="admin-total-card">
+                        <?php
+                        $total_program = query("SELECT COUNT(*) as total FROM program")[0];
+                        ?>
                         <div>
                             <p>Program</p>
-                            <h2>5</h2>
+                            <h2><?= $total_program["total"] ?></h2>
                         </div>
                         <div class="admin-icon yellow">
                             <i class="fa-solid fa-book-open"></i>
@@ -119,9 +126,12 @@ if (!isset($_SESSION["login"])) {
                     </a>
 
                     <a href="ekskul/admin-ekskul.php" class="admin-total-card">
+                        <?php
+                        $total_ekskul = query("SELECT COUNT(*) as total FROM ekskul")[0];
+                        ?>
                         <div>
                             <p>Ekstrakurikuler</p>
-                            <h2>12</h2>
+                            <h2><?= $total_ekskul["total"] ?></h2>
                         </div>
                         <div class="admin-icon purple">
                             <i class="fa-solid fa-futbol"></i>
@@ -129,9 +139,12 @@ if (!isset($_SESSION["login"])) {
                     </a>
 
                     <a href="prestasi/admin-prestasi.php" class="admin-total-card">
+                        <?php
+                        $total_prestasi = query("SELECT COUNT(*) as total FROM prestasi")[0];
+                        ?>
                         <div>
                             <p>Prestasi</p>
-                            <h2>5</h2>
+                            <h2><?= $total_prestasi["total"] ?></h2>
                         </div>
                         <div class="admin-icon blue">
                             <i class="fas fa-trophy"></i>
@@ -153,48 +166,30 @@ if (!isset($_SESSION["login"])) {
                         <table class="table admin-table align-middle">
 
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="pp-info">
-                                            <span class="text-wrap">Juara 1 Olimpiade Matematika</span>
-                                            <p>27 Mei 2026</p>
-                                        </div>
-                                    </td>
+                                <?php
+                                $winners = query("SELECT * FROM prestasi ORDER BY id_prestasi DESC LIMIT 3");
+                                $i = 1;
+                                foreach ($winners as $winner) :
+                                ?>
+                                    <tr>
+                                        <td>
+                                            <div class="pp-info">
+                                                <span class="text-wrap"><?= $winner['prestasi']; ?></span>
+                                                <p><?= date('d F Y', strtotime($winner['tanggal'])); ?></p>
+                                            </div>
+                                        </td>
 
-                                    <td>
-                                        <a href="prestasi/a-update-prestasi.php">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                        <td>
+                                            <a href="prestasi/a-update-prestasi.php?id=<?= $winner['id_prestasi']; ?>">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
 
-                                <tr>
-                                    <td>
-                                        <div class="pp-info">
-                                            <span class="text-wrap">Juara 1 Olimpiade Matematika e af w fs f sf cder fed rrfvg dfv e gv df gvd f gd rg df wfcsd edsf</span>
-                                            <p>27 Mei 2026</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="prestasi/a-update-prestasi.php">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                <?php $i++;
+                                endforeach;
+                                ?>
 
-                                <tr>
-                                    <td>
-                                        <div class="pp-info">
-                                            <span class="text-wrap">Juara 1 Olimpiade Matematika</span>
-                                            <p>27 Mei 2026</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="prestasi/a-update-prestasi.php">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -202,7 +197,7 @@ if (!isset($_SESSION["login"])) {
 
                 <div class="admin-table-card">
                     <div class="admin-card-title">
-                        <h3>Program Sunshine</h3>
+                        <h3>Program Terbaru</h3>
                         <a href="program/admin-program.php">Lihat Semua</a>
                     </div>
 
@@ -210,66 +205,37 @@ if (!isset($_SESSION["login"])) {
                         <table class="table admin-table align-middle">
 
                             <tbody>
-                                <tr>
-                                    <td  class="space">
-                                        <div class="pp-info">
-                                            <span>Juara 1 Olimpiade Matematika</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="program/a-update-program.php">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                    </td>
-                                </tr>
 
-                                <tr>
-                                    <td  class="space">
-                                        <div class="pp-info">
-                                            <span>Juara 1 Olimpiade Matematika</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="program/a-update-program.php">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                <?php
+                                $programs = query("SELECT * FROM program ORDER BY id_program DESC LIMIT 3");
+                                $i = 1;
+                                foreach ($programs as $program) :
+                                ?>
 
-                                <tr>
-                                    <td  class="space">
-                                        <div class="pp-info">
-                                            <span>Juara 1 Olimpiade Matematika</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="program/a-update-program.php">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="pp-info">
+                                                <span><?= $program['program']; ?></span>
+                                                <p><?= date('d F Y', strtotime($program['created_at'])); ?></p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="program/a-update-program.php?id=<?= $program['id_program']; ?>">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
 
-                                <tr>
-                                    <td  class="space">
-                                        <div class="pp-info">
-                                            <span>Juara 1 Olimpiade Matematika</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="program/a-update-program.php">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                <?php $i++;
+                                endforeach;
+                                ?>
 
                             </tbody>
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
-
 
     </div>
     </div>

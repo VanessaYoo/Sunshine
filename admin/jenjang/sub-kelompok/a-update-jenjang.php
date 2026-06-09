@@ -6,6 +6,22 @@ if (!isset($_SESSION["login"])) {
     header("Location: ../../login.php");
     exit;
 }
+ $id = $_GET['id'] ?? '';
+
+  if ($id == '') {
+    header("Location: index.php");
+    exit;
+  }
+  $jumlah = query("SELECT sub_kelompok.*, kelompok.kelompok 
+                 FROM sub_kelompok 
+                 JOIN kelompok ON sub_kelompok.id_kelompok = kelompok.id_kelompok 
+                 WHERE sub_kelompok.id_sub_kelompok='$id'");
+
+  if (empty($jumlah)) {
+    header("Location: ../admin-jenjang.php");
+    exit;
+}
+$sub_kelompok = $jumlah[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +29,7 @@ if (!isset($_SESSION["login"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Jenjang Playground</title>
+    <title>Update Jenjang</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playpen+Sans:wght@100..800&display=swap" rel="stylesheet" />
@@ -34,47 +50,43 @@ if (!isset($_SESSION["login"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow">
+                    <button onclick="history.back()" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
                 </div>
 
-
                 <div class="form-title">
-                    <h1>Tambah Jenjang Playground</h1>
+                    <h1>Update Jenjang <?= $sub_kelompok['kelompok'] ?? ''; ?></h1>
                 </div>
 
                 <div class="row g-4">
 
-                   <div class="col-md-6">
+                 <div class="col-md-6">
                         <div class="form-input">
                             <label class="form-label">Sub Kelompok <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="sub_kelompok" required autocomplete="off" placeholder="Masukkan nama kelompok">
+                            <input class="form-control" type="text" name="sub_kelompok" required autocomplete="off" value="<?= $sub_kelompok['sub_kelompok'] ?? ''; ?>" placeholder="Masukkan nama kelompok">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-input">
                             <label class="form-label">Jenjang Tahun <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="tahun" required autocomplete="off" placeholder="Masukkan jenjang tahun">
+                            <input class="form-control" type="text" name="tahun" required autocomplete="off" value="<?= $sub_kelompok['tahun'] ?? ''; ?>"  placeholder="Masukkan jenjang tahun">
                         </div>
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="mb-3">
+                    <div class="col-md-6">
+                        <div class="form-input">
                             <label class="form-label">Ikon <span class="required">*</span></label>
-                            <input class="form-control"
-                                type="file"
-                                name="ikon" required>
+                            <input class="form-control" type="text" name="ikon" required autocomplete="off" value="<?= $sub_kelompok['ikon'] ?? ''; ?>" placeholder="Masukkan ikon sub kelompok">
                         </div>
                     </div>
-
                 </div>
 
 
-                <button type="submit" name="tambah-jenjang-playground" class="btn-form">
-                    Simpan
+                <button type="submit" name="update-jenjang-playground" class="btn-form">
+                    Simpan Perubahan
                 </button>
             </form>
 

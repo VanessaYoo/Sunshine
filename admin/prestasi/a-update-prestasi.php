@@ -1,11 +1,26 @@
 <?php
-include "../security.php";
+require "../security.php";
 require '../../function.php';
 
 if (!isset($_SESSION["login"])) {
     header("Location: ../login.php");
     exit;
 }
+
+
+$id = $_GET['id'] ?? '';
+
+if ($id == '') {
+    header("Location: index.php");
+    exit;
+}
+$jumlah = query("SELECT * FROM prestasi WHERE id_prestasi='$id'");
+
+if (empty($jumlah)) {
+    header("Location: admin-prestasi.php");
+    exit;
+}
+$prestasi = $jumlah[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +49,7 @@ if (!isset($_SESSION["login"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow">
+                    <button onclick="history.back()" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -49,14 +64,14 @@ if (!isset($_SESSION["login"])) {
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Prestasi <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="prestasi" required autocomplete="off" placeholder="Masukkan judul prestasi">
+                            <input class="form-control" type="text" name="prestasi" required autocomplete="off" placeholder="Masukkan judul prestasi" value="<?= $prestasi['prestasi'] ?? ''; ?>">
                         </div>
                     </div>
 
                     <div class="col-md-5">
                         <div class="form-input">
                             <label class="form-label">Tanggal <span class="required">*</span></label>
-                            <input type="date" class="form-control" name="tanggal" required autocomplete="off">
+                            <input type="date" class="form-control" name="tanggal" required autocomplete="off" value="<?= $prestasi['tanggal'] ?? ''; ?>">
                         </div>
                     </div>
 
@@ -64,7 +79,7 @@ if (!isset($_SESSION["login"])) {
                         <div class="col-12">
                             <div class="mb-3">
                                 <label class="form-label">Deskripsi <span class="required">*</span></label>
-                                <textarea class="form-control" name="deskripsi" required autocomplete="off" placeholder="Masukkan deskripsi prestasi"></textarea>
+                                <textarea class="form-control" name="deskripsi" required autocomplete="off" placeholder="Masukkan deskripsi prestasi"><?= $prestasi['deskripsi'] ?? ''; ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -72,6 +87,11 @@ if (!isset($_SESSION["login"])) {
                     <div class="col-md-4">
                         <div class="mb-3">
                             <label class="form-label">Foto <span class="required">*</span></label>
+                             <div class="mb-2">
+                                <img src="../../img/prestasi/<?= $prestasi['foto'] ?? ''; ?>" class="img-thumbnail">
+                                <p class="mt-2" style="font-size: 1rem;">File : <?= $prestasi['foto'] ?? ''; ?></p>
+                            </div>
+                             <input type="hidden" name="foto_lama" value="<?= $prestasi['foto'] ?? ''; ?>">
                             <input class="form-control"
                                 type="file"
                                 name="foto" required>

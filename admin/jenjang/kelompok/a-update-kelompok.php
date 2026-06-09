@@ -1,11 +1,25 @@
 <?php
-include "../../security.php";
+require "../../security.php";
 require '../../../function.php';
 
 if (!isset($_SESSION["login"])) {
     header("Location: ../../login.php");
     exit;
 }
+
+  $id = $_GET['id'] ?? '';
+
+  if ($id == '') {
+    header("Location: index.php");
+    exit;
+  }
+  $jumlah = query("SELECT * FROM kelompok WHERE id_kelompok='$id'");
+
+  if (empty($jumlah)) {
+    header("Location: ../admin-jenjang.php");
+    exit;
+}
+$kelompok = $jumlah[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +48,7 @@ if (!isset($_SESSION["login"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow">
+                    <button onclick="history.back()" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -49,7 +63,7 @@ if (!isset($_SESSION["login"])) {
                    <div>
                         <div class="form-input">
                             <label class="form-label">Kelompok <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="kelompok" required autocomplete="off" placeholder="Masukkan nama kelompok">
+                            <input class="form-control" type="text" name="kelompok" required autocomplete="off" value="<?= $kelompok['kelompok'] ?? ''; ?>" placeholder="Masukkan nama kelompok">
                         </div>
                     </div>
 

@@ -64,10 +64,10 @@ if (isset($_POST["login"])) {
 
                     <input name="login" type="submit" value="Login" class="submit-lr" />
 
-                    <!-- <div class="l-register">
+                    <div class="l-register">
                         <div>Anda belum memiliki akun?</div>
                         <a class="btn-l-register" href="register.php">Register</a>
-                    </div> -->
+                    </div>
                 </form>
 
             </div>

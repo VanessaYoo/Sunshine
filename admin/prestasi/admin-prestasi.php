@@ -1,5 +1,5 @@
 <?php
-include "../security.php";
+require "../security.php";
 require '../../function.php';
 
 if (!isset($_SESSION["login"])) {
@@ -40,26 +40,7 @@ if (!isset($_SESSION["login"])) {
 
         <!-- isi-halaman -->
         <div class="content-ua admin-page">
-              <form action="" method="POST" class="form-card">
-                <div class="form-title">
-                    <h1>Prestasi Sunshine</h1>
-                </div>
-
-                <div class="row g-4">
-
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <label class="form-label">Deskripsi <span class="required">*</span></label>
-                            <textarea class="form-control" name="penjelasan" required autocomplete="off" placeholder="Masukkan deskripsi prestasi"></textarea>
-                        </div>
-                    </div>
-                </div>
-                    <button type="submit" name="penjelasan-prestasi" class="btn-form">
-                        Simpan Perubahan
-                    </button>
-            </form>
-
-            <div class="admin-table-card mt-4">
+            <div class="admin-table-card">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Prestasi</h1>
                     <a href="a-tambah-prestasi.php">Tambah Prestasi</a>
@@ -73,36 +54,60 @@ if (!isset($_SESSION["login"])) {
                                 <th>Tanggal</th>
                                 <th>Deskripsi</th>
                                 <th>Foto</th>
+                                <th>Data Diisi</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
 
                         <tbody>
-
-                                 <tr>
-                                <td>1</td>
-                                <td class="text-wrap">Johan MISISIIS mIS</td>
-                                <td class="text-wrap">25 Juli 2026</td>
-                                <td class="text-wrap">jo_ren1 1@gma il.com an MISISIIS mIS an MISISIIS mISan MISISIIS mIS an MISISIIS mISan MISISIIS mISan MISISIIS mISan MISISIIS mIS</td>
-                                <td class="text-wrap">2sd.png</td>
-                                <td>
-                                    <div class="aksi-btn">
-                                        <a href="a-update-prestasi.php" class="edit">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </a>
-                                        <a href="a-delete-prestasi.php" class="delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-
+                            <?php
+                            $winners = query("SELECT * FROM prestasi JOIN user ON prestasi.id_user = user.id_user");
+                            if (empty($winners)) :
+                            ?>
+                                <tr>
+                                    <td colspan="7" class="text-center">Tidak Memiliki Data</td>
+                                </tr>
+                                <?php else :
+                                $i = 1;
+                                foreach ($winners as $winner) :
+                                ?>
+                                    <tr>
+                                        <td><?= $i; ?></td>
+                                        <td class="text-wrap"><?= $winner['prestasi']; ?></td>
+                                        <td class="text-wrap"><?= date('d F Y', strtotime($winner['tanggal'])); ?></td>
+                                        <td class="text-wrap">
+                                            <p class="info detail">
+                                                <?= $winner['deskripsi']; ?>
+                                            </p>
+                                        </td>
+                                        <td class="text-wrap"><?= $winner['foto']; ?></td>
+                                        <td class="text-wrap">
+                                            <div class="pp-info">
+                                                <span class="text-wrap"><?= $winner["nama"]; ?></span>
+                                                <p><?= $winner['created_at']; ?></p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="aksi-btn">
+                                                <a href="a-update-prestasi.php?id=<?= $winner['id_prestasi']; ?>" class="edit">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </a>
+                                                <a href="a-delete-prestasi.php?id=<?= $winner['id_prestasi']; ?>" class="delete">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                            <?php $i++;
+                                endforeach;
+                            endif;
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            
+
         </div>
 
 

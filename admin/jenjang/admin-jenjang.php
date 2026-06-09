@@ -1,5 +1,5 @@
 <?php
-include "../security.php";
+require "../security.php";
 require '../../function.php';
 
 if (!isset($_SESSION["login"])) {
@@ -31,24 +31,8 @@ if (!isset($_SESSION["login"])) {
 
         <div class="content-ua admin-page">
 
-            <form action="" method="POST" class="form-card">
-                <div class="form-title">
-                    <h1>Jenjang Sunshine</h1>
-                </div>
 
-                <div class="row g-4">
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <label class="form-label">Deskripsi <span class="required">*</span></label>
-                            <textarea class="form-control" name="penjelasan" required autocomplete="off" placeholder="Masukkan deskripsi jenjang"></textarea>
-                        </div>
-                    </div>
-                </div> <button type="submit" name="penjelasan-jenjang" class="btn-form">
-                    Simpan Perubahan
-                </button>
-            </form>
-
-                <div class="admin-table-card mt-4">
+            <div class="admin-table-card">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Kelompok</h1>
                     <a href="kelompok/a-tambah-kelompok.php">Tambah Kelompok</a>
@@ -63,101 +47,103 @@ if (!isset($_SESSION["login"])) {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td class="text-wrap">Playground</td>
-                                <td>
-                                    <div class="aksi-btn">
-                                        <a href="kelompok/a-update-kelompok.php" class="edit">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </a>
-                                        <a href="kelompok/a-delete-kelompok.php" class="delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                            <?php
+                            $kelompok = query("SELECT * FROM kelompok");
+                            if (empty($kelompok)) :
+                            ?>
+                                <tr>
+                                    <td colspan="3" class="text-center">Tidak Memiliki Data</td>
+                                </tr>
+                                <?php else :
+                                $i = 1;
+                                foreach ($kelompok as $kel) :
+                                ?>
+                                    <tr>
+                                        <td><?= $i; ?></td>
+                                        <td class="text-wrap"><?= $kel["kelompok"]; ?></td>
+                                        <td>
+                                            <div class="aksi-btn">
+                                                <a href="kelompok/a-update-kelompok.php?id=<?= $kel['id_kelompok']; ?>" class="edit">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </a>
+                                                <a href="kelompok/a-delete-kelompok.php?id=<?= $kel['id_kelompok']; ?>" class="delete">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                            <?php $i++;
+                                endforeach;
+                            endif;
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>
 
 
-            <div class="admin-table-card mt-4">
-                <div class="admin-card-title tambah">
-                    <h1>Kelola Playground</h1>
-                    <a href="playground/a-tambah-jenjang.php">Tambah Jenjang</a>
+            <?php
+            $bagi_kelompok = query("SELECT * FROM kelompok");
+            $i = 1;
+            foreach ($bagi_kelompok as $bagi_kel) :
+                $id_kelompok = $bagi_kel["id_kelompok"];
+            ?>
+                <div class="admin-table-card mt-4">
+                    <div class="admin-card-title tambah">
+                        <h1>Kelola <?= $bagi_kel["kelompok"] ?></h1>
+                        <a href="sub-kelompok/a-tambah-jenjang.php?id=<?= $bagi_kel['id_kelompok']; ?>">Tambah Jenjang</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table admin-table kelola-table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Sub Kelompok</th>
+                                    <th>Jenjang</th>
+                                    <th>Ikon</th>
+                                    <th class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $sub_kelompok = query("SELECT * FROM sub_kelompok WHERE id_kelompok=$id_kelompok");
+                                if (empty($sub_kelompok)) :
+                                ?>
+                                    <tr>
+                                        <td colspan="5" class="text-center">Tidak Memiliki Data</td>
+                                    </tr>
+                                    <?php else :
+                                    $i = 1;
+                                    foreach ($sub_kelompok as $subkel) :
+                                    ?>
+                                        <tr>
+                                            <td><?= $i; ?></td>
+                                            <td><?= $subkel["sub_kelompok"]; ?></td>
+                                            <td><?= $subkel["tahun"]; ?> Tahun</td>
+                                            <td><?= $subkel["ikon"]; ?></td>
+                                            <td>
+                                                <div class="aksi-btn">
+                                                    <a href="sub-kelompok/a-update-jenjang.php?id=<?= $subkel['id_sub_kelompok']; ?>" class="edit">
+                                                        <i class="fa-solid fa-pen"></i>
+                                                    </a>
+                                                    <a href="sub-kelompok/a-delete-jenjang.php?id=<?= $subkel['id_sub_kelompok']; ?>" class="delete">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                <?php $i++;
+                                    endforeach;
+                                endif;
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table admin-table kelola-table align-middle">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Sub Kelompok</th>
-                                <th>Jenjang</th>
-                                <th>Ikon</th>
-                                <th class="text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>nursery 1</td>
-                                <td>2-3 tahun</td>
-                                <td>lala.png</td>
-                                <td>
-                                    <div class="aksi-btn">
-                                        <a href="playground/a-update-jenjang.php" class="edit">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </a>
-                                        <a href="playground/a-delete-jenjang.php" class="delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <?php $i++;
+            endforeach;
+            ?>
 
-            <div class="admin-table-card mt-4">
-                <div class="admin-card-title tambah">
-                    <h1>Kelola Kindergarten</h1>
-                    <a href="kindergarten/a-tambah-jenjang.php">Tambah Jenjang</a>
-                </div>
-                <div class="table-responsive">
-                    <table class="table admin-table kelola-table align-middle">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Sub Kelompok</th>
-                                <th>Jenjang</th>
-                                <th>Ikon</th>
-                                <th class="text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td class="text-wrap">nursert 1</td>
-                                <td class="text-wrap">2-3 tahun</td>
-                                <td class="text-wrap">lala.png</td>
-                                <td>
-                                    <div class="aksi-btn">
-                                        <a href="kindergarten/a-update-jenjang.php" class="edit">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </a>
-                                        <a href="kindergarten/a-delete-jenjang.php" class="delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
         </div>
 

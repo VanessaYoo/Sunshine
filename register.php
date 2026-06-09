@@ -52,7 +52,7 @@ if (isset($_POST["register"])) {
             <div class="login-register">
                 <div class="title-lr" data-aos="fade-down" data-aos-duration="1000">
                     <h1>Register Sunshine</h1>
-                    <p>Silahkan masukkan email dan password</p>
+                    <p>Silahkan masukkan nama, email, dan password</p>
                 </div>
 
                 <form action="" method="post" class="form-lr" data-aos="fade-up" data-aos-duration="1000">
@@ -64,10 +64,18 @@ if (isset($_POST["register"])) {
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
+                    <input name="nama" type="text" required autocomplete="off" placeholder="Nama Lengkap" class="input-lr" />
                     <input name="email" type="text" required autocomplete="off" placeholder="Email" class="input-lr" />
-                    <input name="pass" type="password" required autocomplete="off" placeholder="Kata Sandi" class="input-lr" />
-                    <input name="pass2" type="password" required autocomplete="off" placeholder="Konfirmasi Kata Sandi" class="input-lr" />
-                    <input name="register" type="submit" value="Register" class="submit-lr" />
+                    <div class="password-container">
+                        <input name="pass" type="password" required autocomplete="off" placeholder="Kata Sandi" class="input-lr toggle-password" />
+                        <i class="fas fa-eye eye-icon"></i>
+                    </div>
+                    <div class="password-container">
+                        <input name="pass2" type="password" required autocomplete="off" placeholder="Konfirmasi Kata Sandi" class="input-lr toggle-password" />
+                        <i class="fas fa-eye eye-icon"></i>
+                    </div>
+
+                      <input name="register" type="submit" value="Register" class="submit-lr" />
                     <div class="l-register">
                         <div>Anda sudah memiliki akun?</div>
                         <a class="btn-l-register" href="login.php">Login</a>
@@ -77,6 +85,8 @@ if (isset($_POST["register"])) {
             </div>
         </div>
     </div>
+    
+    <script src="js/pass.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();

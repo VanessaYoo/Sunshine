@@ -1,5 +1,5 @@
 <?php
-include "security.php";
+require "security.php";
 require "../function.php";
 
 $errors = $_SESSION['errors'] ?? [];
@@ -51,7 +51,7 @@ if (isset($_POST["ubah-pass"])) {
         <div class="lr">
             <div class="login-register">
                 <div class="back kembali mt-2" data-aos="fade-left" data-aos-duration="1000">
-                    <button onclick="history.back()" class="back-arrow">
+                    <button onclick="history.back()" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>

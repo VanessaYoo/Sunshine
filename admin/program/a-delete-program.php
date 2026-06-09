@@ -1,3 +1,3 @@
 <?php
-include "../security.php";
+require "../security.php";
 ?>

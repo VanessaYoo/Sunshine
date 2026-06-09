@@ -1,5 +1,5 @@
 <?php
-include "../../security.php";
+require "../../security.php";
 require '../../../function.php';
 
 if (!isset($_SESSION["login"])) {
@@ -34,7 +34,7 @@ if (!isset($_SESSION["login"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow">
+                    <button onclick="history.back()" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>

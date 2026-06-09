@@ -1,5 +1,5 @@
 <?php
-include "../../security.php";
+require "../../security.php";
 require '../../../function.php';
 
 if (!isset($_SESSION["login"])) {
@@ -34,7 +34,7 @@ if (!isset($_SESSION["login"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow">
+                    <button type="button" onclick="history.back()" class="back-arrow">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -46,12 +46,19 @@ if (!isset($_SESSION["login"])) {
 
                 <div class="row g-4">
 
-                    <div>
+                    <div class="col-md-5">
                         <div class="mb-3">
                             <label class="form-label">Kontak <span class="required">*</span></label>
                             <input class="form-control" type="text" name="kontak" required autocomplete="off" placeholder="Masukkan kontak WhatsApp">
                         </div>
                     </div>
+                     <div class="col-md-7"> 
+                        <div class="mb-3">
+                            <label class="form-label">Link WhatsApp <span class="required">*</span></label>
+                            <input class="form-control" type="text" name="link" required autocomplete="off" placeholder="Masukkan link WhatsApp">
+                        </div>
+                    </div>
+                    
 
                 </div>
 

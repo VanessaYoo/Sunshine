@@ -1,11 +1,26 @@
 <?php
-include "../../security.php";
+require "../../security.php";
 require '../../../function.php';
 
 if (!isset($_SESSION["login"])) {
     header("Location: ../../login.php");
     exit;
 }
+
+
+  $id = $_GET['id'] ?? '';
+
+  if ($id == '') {
+    header("Location: index.php");
+    exit;
+  }
+  $jumlah = query("SELECT * FROM medsos WHERE id_medsos='$id'");
+
+  if (empty($jumlah)) {
+    header("Location: ../admin-informasi.php");
+    exit;
+}
+$medsos = $jumlah[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +49,7 @@ if (!isset($_SESSION["login"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow">
+                    <button type="button" onclick="history.back()" class="back-arrow">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -49,18 +64,18 @@ if (!isset($_SESSION["login"])) {
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Link Media Sosial <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="link" required autocomplete="off" placeholder="Masukkan link media sosial">
+                            <input class="form-control" type="text" name="link" required autocomplete="off" value="<?= $medsos['link'] ?? ''; ?>" placeholder="Masukkan link media sosial">
                         </div>
                     </div>
 
-                     <div class="col-md-4">
+                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Ikon <span class="required">*</span></label>
-                            <input class="form-control"
-                                type="file"
-                                name="ikon" required>
+                            <input class="form-control" type="text" name="ikon" required autocomplete="off" value="<?= $medsos['ikon'] ?? ''; ?>" placeholder="Masukkan ikon media sosial">
                         </div>
                     </div>
+
+                    
 
                 </div>
 

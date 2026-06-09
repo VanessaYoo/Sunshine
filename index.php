@@ -1,3 +1,6 @@
+<?php
+require 'function.php';
+?>
 <!doctype html>
 <html lang="en">
 
@@ -38,13 +41,18 @@
         <a href="#ekskul" class="link">Ekstrakurikuler</a>
         <a href="#prestasi" class="link">Prestasi</a>
       </div>
-     
+
+      <?php
+      $kontak = query("SELECT * FROM kontak WHERE id_kontak=1")[0];
+      ?>
       <div class="right-nav">
-          <a href="https://wa.me/6282119228799" class="btn-hubungi right-nav" target="_blank">
-            <div class="text-hubungi">Hubungi Kami</div>
-            <div class="icon-hubungi">
-              <img src="img/icon/contact.png" alt=""></div></a>
-        </div>
+        <a href="<?= $kontak['link']; ?>" class="btn-hubungi right-nav" target="_blank">
+          <div class="text-hubungi">Hubungi Kami</div>
+          <div class="icon-hubungi">
+            <img src="img/icon/contact.png" alt="">
+          </div>
+        </a>
+      </div>
       <div class="icon-nav">
         <i
           onclick="toggleNav()"
@@ -54,64 +62,81 @@
     </nav>
   </header>
 
+
   <!-- top -->
-  <section id="top">
+  <section id="top" style="background-image: url('img/aset/foto-bersama-1.png');">
     <div class="text-top">
+
       <div
         class="text-line-top"
         data-aos="fade-right"
         data-aos-duration="1000">
         <div class="line"></div>
-        <p class="p-top head white">Awal Kecil untuk Mimpi yang Besar</p>
+        <?php
+        $subjudul = query("SELECT * FROM informasi WHERE id=8")[0];
+        ?>
+        <p class="p-top head white"><?= $subjudul['isi_field']; ?></p>
       </div>
+      <?php
+      $judul = query("SELECT * FROM informasi WHERE id=7")[0];
+      ?>
       <h1 class="h1-top" data-aos="fade-right" data-aos-duration="1000">
-        Tumbuh Ceria, Berkembang Hebat
+        <?= $judul['isi_field']; ?>
       </h1>
+      <?php
+      $deskripsi_judul = query("SELECT * FROM informasi WHERE id=9")[0];
+      ?>
       <p class="p-top white" data-aos="fade-right" data-aos-duration="1000">
-        Tempat belajar yang mendukung tumbuh kembang anak dalam suasana yang
-        menyenangkan
+        <?= $deskripsi_judul['isi_field']; ?>
       </p>
-      
+
     </div>
   </section>
 
   <!-- tentang -->
   <section id="tentang" data-group="tentang">
     <div class="left-tentang" data-aos="fade-right" data-aos-duration="1000">
-      <img src="img/aset/sekolah.jpeg" alt="" />
+      <?php
+      $gedung = query("SELECT * FROM informasi WHERE id=2")[0];
+      ?>
+      <img src="img/aset/<?= $gedung['isi_field']; ?>" alt="" />
     </div>
     <div class="right-tentang">
       <div class="text-tentang">
         <div class="head-tentang">
           <h1>Selamat Datang di <span>Sunshine</span></h1>
+          <?php
+          $deskripsi_profil = query("SELECT * FROM informasi WHERE id=1")[0];
+          ?>
           <p class="justify">
-            KB-TK Cahaya Mentari atau biasa dikenal dengan sebutan Sunshine
-            didirikan sejak tahun 2006. Sunshine menciptakan pengalaman belajar yang menyenangkan
-            melalui metode interaktif dengan suasana belajar yang mendukung,
-            dan menyenangkan, sehingga memberikan perasaan positif dalam
-            proses belajar. Sunshine mendukung perkembangan anak dari akademik, kesehatan,
-            karakter, hingga keterampilan sosial supaya potensi, minat, dan
-            bakat dapat tumbuh secara optimal dan percaya diri
+            <?= $deskripsi_profil['isi_field']; ?>
           </p>
         </div>
         <div class="isi-tentang">
           <div class="first-text-tentang">
             <p class="bold">Lokasi Sunshine</p>
+            <?php
+            $lokasi_tertulis = query("SELECT * FROM informasi WHERE id=3")[0];
+            ?>
             <p class="justify">
-              Jalan Merdeka No.
-              603-601, Mariana, Kecamatan Pontianak Kota, Kota Pontianak,
-              Kalimantan Barat 78244.
+              <?= $lokasi_tertulis['isi_field']; ?>
             </p>
           </div>
           <div class="first-text-tentang">
             <p class="bold">Jam Operasional</p>
-            <p class="justify">
-              Senin - Jumat: 7.00 AM - 4.50 PM
+            <?php
+            $operasional = query("SELECT * FROM operasional");
+            ?>
+            <?php $i = 1;
+            foreach ($operasional as $waktu) :
+            ?>
+              <p class="justify">
+                <?= $waktu["hari"]; ?> : <?= date('G:i A', strtotime($waktu["jam_buka"])); ?> - <?= date('G:i A', strtotime($waktu["jam_tutup"])) ?>
+              </p>
+            <?php $i++;
+            endforeach;
+            ?>
 
-            </p>
-            <p class="justify">
-              Sabtu: 8.00 AM - 1.00 PM
-            </p>
           </div>
 
         </div>
@@ -132,59 +157,28 @@
     </div>
     <div class="container-jenjang">
       <div class="jenjang-tahun">
-        <div
-          class="isi-jenjang-tahun"
-          data-aos="fade-right"
-          data-aos-duration="1000">
-          <div class="icon">
-            <i class="fa-solid fa-car-side" style="color: #ff6a00"></i>
-          </div>
-          <div class="info-pg-kg">
-            <p class="bold box">2 Tahun</p>
-            <p class="detail">Nursery 1</p>
-          </div>
-        </div>
 
-        <div
-          class="isi-jenjang-tahun"
-          data-aos="fade-right"
-          data-aos-duration="1000">
-          <div class="icon">
-            <i class="fa-solid fa-cake-candles" style="color: #ff6a00"></i>
+        <?php
+        $jenjang = query("SELECT * FROM sub_kelompok");
+        $i = 1;
+        foreach ($jenjang as $sub_kelompok) :
+        ?>
+          <div
+            class="isi-jenjang-tahun"
+            data-aos="fade-right"
+            data-aos-duration="1000">
+            <div class="icon">
+              <i class="<?= $sub_kelompok['ikon']; ?>" style="color: #ff6a00"></i>
+            </div>
+            <div class="info-pg-kg">
+              <p class="bold box"><?= $sub_kelompok["tahun"]; ?> Tahun</p>
+              <p class="detail"><?= $sub_kelompok["sub_kelompok"]; ?></p>
+            </div>
           </div>
-          <div class="info-pg-kg">
-            <p class="bold box">3 Tahun</p>
-            <p class="detail">Nursery 2</p>
-          </div>
-        </div>
+        <?php $i++;
+        endforeach;
+        ?>
 
-        <div class="line-pg-kg"></div>
-
-        <div
-          class="isi-jenjang-tahun"
-          data-aos="fade-left"
-          data-aos-duration="1000">
-          <div class="icon">
-            <i class="fa-solid fa-book" style="color: #ff6a00"></i>
-          </div>
-          <div class="info-pg-kg">
-            <p class="bold box">4 Tahun</p>
-            <p class="detail">Kindergarten 1</p>
-          </div>
-        </div>
-
-        <div
-          class="isi-jenjang-tahun"
-          data-aos="fade-left"
-          data-aos-duration="1000">
-          <div class="icon">
-            <i class="fa-solid fa-graduation-cap" style="color: #ff6a00"></i>
-          </div>
-          <div class="info-pg-kg">
-            <p class="bold box">5 Tahun</p>
-            <p class="detail">Kindergarten 2</p>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -384,103 +378,27 @@
 
       <div class="wrap-program swiper">
         <div class="program-box swiper-wrapper">
-          <div class="program swiper-slide">
-            <div class="img-program">
-              <img src="img/program/sensory-play.jpeg" alt="" />
-            </div>
-            <div class="name-program">
-              <p class="box bold">Sensory play</p>
-              <p>Kegiatan yang merangsang seluruh indera tubuh anak</p>
-            </div>
-          </div>
 
-          <div class="program swiper-slide">
-            <div class="img-program">
-              <img src="img/program/hanyu.jpeg" alt="" />
-            </div>
-            <div class="name-program">
-              <p class="box bold">Han Yu Le Yuan</p>
-              <p>
-                Pembelajaran Bahasa Mandarin yang disusun untuk anak usia dini
-              </p>
-            </div>
-          </div>
+          <?php
+          $programs = query("SELECT * FROM program");
+          $i = 1;
+          foreach ($programs as $program) :
+          ?>
 
-          <div class="program swiper-slide">
-            <div class="img-program">
-              <img src="img/program/outdoor-activity.jpeg" alt="" />
+            <div class="program swiper-slide">
+              <div class="img-program">
+                <img src="img/program/<?= $program["foto"]; ?>" alt="" />
+              </div>
+              <div class="name-program">
+                <p class="box bold"><?= $program["program"]; ?></p>
+                <p><?= $program["deskripsi"]; ?></p>
+              </div>
             </div>
-            <div class="name-program">
-              <p class="box bold">Outdoor Activity</p>
-              <p>Aktivitas menguatkan otot melalui kegiatan fisik</p>
-            </div>
-          </div>
 
-          <div class="program swiper-slide">
-            <div class="img-program">
-              <img src="img/program/life-skill.jpeg" alt="" />
-            </div>
-            <div class="name-program">
-              <p class="box bold">Life Skill</p>
-              <p>Pengembangan keterampilan motorik halus dan kasar</p>
-            </div>
-          </div>
+          <?php $i++;
+          endforeach;
+          ?>
 
-          <div class="program swiper-slide">
-            <div class="img-program">
-              <img src="img/program/fun-math.jpeg" alt="" />
-            </div>
-            <div class="name-program">
-              <p class="box bold">Fun Math</p>
-              <p>
-                Bermain sambil belajar matematika dengan cara yang
-                menyenangkan
-              </p>
-            </div>
-          </div>
-
-          <div class="program swiper-slide">
-            <div class="img-program">
-              <img src="img/program/letterland.png" alt="" />
-            </div>
-            <div class="name-program">
-              <p class="box bold">Letterland</p>
-              <p>
-                Program berbasis fonik atau phonics yang menggunakan karakter
-                unik
-              </p>
-            </div>
-          </div>
-
-          <div class="program swiper-slide">
-            <div class="img-program">
-              <img src="img/program/bahasa-indonesia.jpeg" alt="" />
-            </div>
-            <div class="name-program">
-              <p class="box bold">Bahasa Indonesia</p>
-              <p>Meningkatkan kemampuan bahasa Indonesia dengan baik</p>
-            </div>
-          </div>
-
-          <div class="program swiper-slide">
-            <div class="img-program">
-              <img src="img/program/story-telling.jpeg" alt="" />
-            </div>
-            <div class="name-program">
-              <p class="box bold">Story Telling</p>
-              <p>Kegiatan sosial dan budaya dalam berbagi cerita</p>
-            </div>
-          </div>
-
-          <div class="program swiper-slide">
-            <div class="img-program">
-              <img src="img/program/english.jpeg" alt="" />
-            </div>
-            <div class="name-program">
-              <p class="box bold">I Love English</p>
-              <p>Membantu anak mengenali kosakata dengan mudah</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -489,42 +407,24 @@
   <!-- Ekstrakurikuler -->
   <section id="ekskul" data-group="ekskul">
     <div class="left-ekskul">
-      <div class="ekskul" data-aos="fade-right" data-aos-duration="1000">
-        <div class="img-ekskul">
-          <img src="img/ekskul/dance.png" alt="" />
+
+      <?php
+      $ekskuls = query("SELECT * FROM ekskul");
+      $i = 1;
+      foreach ($ekskuls as $ekskul) :
+      ?>
+
+        <div class="ekskul" data-aos="fade-right" data-aos-duration="1000">
+          <div class="img-ekskul">
+            <img src="img/ekskul/<?= $ekskul["foto"]; ?>" alt="" />
+          </div>
+          <h3><?= $ekskul["ekskul"]; ?></h3>
         </div>
-        <h3>Dance</h3>
-      </div>
-      <div class="ekskul" data-aos="fade-right" data-aos-duration="1000">
-        <div class="img-ekskul">
-          <img src="img/ekskul/wushu.png" alt="" />
-        </div>
-        <h3>Wushu</h3>
-      </div>
-      <div class="ekskul" data-aos="fade-right" data-aos-duration="1000">
-        <div class="img-ekskul">
-          <img src="img/ekskul/literasi.png" alt="" />
-        </div>
-        <h3>Literasi</h3>
-      </div>
-      <div class="ekskul" data-aos="fade-left" data-aos-duration="1000">
-        <div class="img-ekskul">
-          <img src="img/ekskul/band.png" alt="" />
-        </div>
-        <h3>Marching Band</h3>
-      </div>
-      <div class="ekskul" data-aos="fade-left" data-aos-duration="1000">
-        <div class="img-ekskul">
-          <img src="img/ekskul/paint.png" alt="" />
-        </div>
-        <h3>Menggambar & Mewarnai</h3>
-      </div>
-      <div class="ekskul" data-aos="fade-left" data-aos-duration="1000">
-        <div class="img-ekskul">
-          <img src="img/ekskul/mic.png" alt="" />
-        </div>
-        <h3>Public Speaking</h3>
-      </div>
+
+      <?php $i++;
+      endforeach;
+      ?>
+
     </div>
     <div class="right-ekskul box-ekskul">
       <div class="text-ekskul">
@@ -540,15 +440,19 @@
   <!-- prestasi -->
   <section id="prestasi" data-group="prestasi">
     <div class="left-prestasi" data-aos="zoom-in" data-aos-duration="1000">
-      <a href="deskripsiPrestasi.php">
+
+      <?php
+      $prestasi_terbaru = query("SELECT * FROM prestasi ORDER BY id_prestasi DESC LIMIT 1")[0];
+      ?>
+      <a href="deskripsiPrestasi.php?id=<?= $prestasi_terbaru['id_prestasi']; ?>">
         <div class="content-prestasi">
-          <img src="img/prestasi/1.webp" alt="" />
+          <img src="img/prestasi/<?= $prestasi_terbaru['foto']; ?>" alt="" />
           <div class="text-timpa">
             <h2 data-aos="fade-up" data-aos-duration="1000">
-              Consolation Prize Lomba Mewarnai, Menggunting, dan Menempel
+              <?= $prestasi_terbaru['prestasi']; ?>
             </h2>
             <h4 class="tahun" data-aos="fade-up" data-aos-duration="1000">
-              28 Januari 2026
+              <?= date('d F Y', strtotime($prestasi_terbaru['tanggal'])) ?>
             </h4>
           </div>
         </div>
@@ -563,57 +467,34 @@
       </div>
 
       <div class="box-prestasi" data-aos="fade-up" data-aos-duration="1000">
-        <a href="deskripsiPrestasi.php" class="prestasi">
-          <div class="img-prestasi">
-            <img src="img/prestasi/2.webp" alt="" />
-          </div>
-          <div class="text-right-prestasi">
-            <div class="other-prestasi">
-              <h3 class="info">
-                Juara 5 Lomba Mewarnai, Menggunting, dan Menempel
-              </h3>
-              <p class="info">28 Januari 2026</p>
+
+        <?php
+        $winners = query("SELECT * FROM prestasi ORDER BY id_prestasi DESC LIMIT 3 OFFSET 1");
+        $i = 1;
+        foreach ($winners as $winner) :
+        ?>
+
+          <a href="deskripsiPrestasi.php?id=<?= $winner['id_prestasi']; ?>" class="prestasi">
+            <div class="img-prestasi">
+              <img src="img/prestasi/<?= $winner['foto']; ?>" alt="" />
             </div>
-            <p class="info detail">
-              Selamat kepada Crystabelle Queency Suninto atas pencapaian
-              prestasi pada lomba mewarnai, menggunting, dan menempel dalam
-              rangka IGTKI tingkat Kecamatan Pontianak Kota
-            </p>
-          </div>
-        </a>
-        <a href="deskripsiPrestasi.php" class="prestasi">
-          <div class="img-prestasi">
-            <img src="img/prestasi/3.webp" alt="" />
-          </div>
-          <div class="text-right-prestasi">
-            <div class="other-prestasi">
-              <h3 class="info">Juara 6 Jurus Dasar TK Putri (Group C)</h3>
-              <p class="info">15 November 2025</p>
+            <div class="text-right-prestasi">
+              <div class="other-prestasi">
+                <h3 class="info">
+                  <?= $winner['prestasi']; ?>
+                </h3>
+                <p class="info"><?= date('d F Y', strtotime($winner['tanggal'])); ?></p>
+              </div>
+              <p class="info detail">
+                <?= $winner['deskripsi']; ?>
+              </p>
             </div>
-            <p class="info detail">
-              Selamat kepada Aurora Brielle Indra atas pencapaian prestasi
-              pada lomba jurus dasar TK Putri (Grup C) dalam rangka Wushu Kubu
-              Raya Championship 2025 yang diselenggarakan di Gaia Mall
-            </p>
-          </div>
-        </a>
-        <a href="deskripsiPrestasi.php" class="prestasi">
-          <div class="img-prestasi">
-            <img src="img/prestasi/4.webp" alt="" />
-          </div>
-          <div class="text-right-prestasi">
-            <div class="other-prestasi">
-              <h3 class="info">Juara 3 Jurus Dasar TK Putri (Group B)</h3>
-              <p class="info">15 November 2025</p>
-            </div>
-            <p class="info detail">
-              Selamat kepada Jilian Alimwijaya atas pencapaian prestasi dalam
-              meraih Juara 3 pada lomba jurus dasar TK Putri (Grup B) dalam
-              rangka Wushu Kubu Raya Championship 2025 yang diselenggarakan di
-              Gaia Mall
-            </p>
-          </div>
-        </a>
+          </a>
+
+        <?php $i++;
+        endforeach;
+        ?>
+
       </div>
     </div>
   </section>
@@ -621,16 +502,19 @@
   <!-- why sunshine -->
   <section id="why" data-group="why">
     <div class="card" data-aos="zoom-in" data-aos-duration="1000">
+      <?php
+      $foto_keunggulan = query("SELECT * FROM informasi WHERE id=6")[0];
+      ?>
       <div class="left-card">
-        <img src="img/aset/foto-bersama-2.png" alt="" />
+        <img src="img/aset/<?= $foto_keunggulan['isi_field']; ?>" alt="" />
       </div>
       <div class="right-card">
         <h1 data-aos="fade-right" data-aos-duration="1000">Why Sunshine ?</h1>
+        <?php
+        $keunggulan = query("SELECT * FROM informasi WHERE id=5")[0];
+        ?>
         <p class="justify">
-          Sunshine mencetak generasi unggul yang sehat, cerdas, kreatif, dan
-          beraklakul karimah dengan upaya menjadi tempat terbaik bagi
-          anak-anak untuk tumbuh dan berkembang dalam suasana yang penuh kasih
-          sayang dan pendidikan berkualitas.
+          <?= $keunggulan['isi_field']; ?>
         </p>
       </div>
     </div>

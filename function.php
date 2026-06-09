@@ -22,6 +22,7 @@ function login($data)
 {
     global $conn;
     $errors = [];
+    $nama = htmlspecialchars(trim(stripslashes($data["nama"] ?? ''))); 
     $email = trim(strtolower(stripslashes($data["email"])) ?? '');
     $pass = md5(trim($data["pass"] ?? ''));
     
@@ -41,20 +42,16 @@ function login($data)
     if (mysqli_num_rows($result) === 1) { //ketemu 1
 
         $row = mysqli_fetch_assoc($result);
-        //cek password yang acak
+
+        //cek password
         if ($pass === $row['pass']) {
             $_SESSION['id_user'] = $row["id_user"];
-            $_SESSION['email'] = $row["email"];
+            $_SESSION['nama'] = $row["nama"];
+             $_SESSION['email'] = $row["email"];
             $_SESSION["login"] = true;
 
-            //cek admin
-            if ($row["email"] === "adminsunshine@gmail.com" && $row["pass"] === "$pass") {
-                $_SESSION["admin"] = true;
-                echo "<script>alert('Berhasil login sebagai Admin Sunshine!'); document.location.href = 'admin/admin-beranda.php';</script>";
-            } else {
-                // Jika bukan admin
-                echo "<script>alert('Berhasil login ke Sunshine!'); document.location.href = 'user/user-beranda.php';</script>";
-            }
+            echo "<script>alert('Berhasil login sebagai Admin Sunshine!'); document.location.href = 'admin/admin-beranda.php';</script>";
+
         } else {
             $errors[] = "Email atau passwordmu salah. ";
         }
@@ -66,48 +63,12 @@ function login($data)
     }
 }
 
-//ubah password admin
-function ubahPass($data)
-{
-    global $conn;
-    $errors = [];
-    $email = $_SESSION['email'];
-    $pass = trim($data["pass"] ?? '');
-    $pass2 = trim($data["pass2"] ?? '');
-
-    // cek jika belum diisi dan valid
-    if ($pass == '') {
-        $errors[] = "Password wajib diisi.";
-    }
-    if ($pass2 == '') {
-        $errors[] = "Konfirmasi password wajib diisi.";
-    }
-
-    //cek kesesuaian pass
-    if ($pass != $pass2) {
-        $errors[] = "Password tidak sama.";
-    }
-
-    if (!empty($errors)) { // (cek dulu) -> klo error
-        $_SESSION['errors'] = $errors;
-        header("Location: ubah-pass.php");
-        exit;
-    }
-
-    //enkripsi md5
-    $pass_final = md5($pass);
-
-    //tambahkan ke databes
-  mysqli_query($conn, "UPDATE user SET pass = '$pass_final' WHERE email = '$email'");
-    return mysqli_affected_rows($conn);
-}
-
-
 //register
 function register($data)
 {
     global $conn;
     $errors = [];
+    $nama = htmlspecialchars(trim(stripslashes($data["nama"] ?? ''))); 
     $email = trim(strtolower(stripslashes($data["email"])) ?? ''); //tidak ada kapital dan '\'
     $pass = trim($data["pass"] ?? '');
     $pass2 = trim($data["pass2"] ?? '');
@@ -144,6 +105,42 @@ function register($data)
     $pass_final = md5($pass);
 
     //tambahkan ke databes
-    mysqli_query($conn, "INSERT INTO user VALUES ('', '$email','$pass_final')");
+    mysqli_query($conn, "INSERT INTO user VALUES ('', '$email','$pass_final', '$nama')");
+    return mysqli_affected_rows($conn);
+}
+
+//ubah password admin
+function ubahPass($data)
+{
+    global $conn;
+    $errors = [];
+    $email = $_SESSION['email'];
+    $pass = trim($data["pass"] ?? '');
+    $pass2 = trim($data["pass2"] ?? '');
+
+    // cek jika belum diisi dan valid
+    if ($pass == '') {
+        $errors[] = "Password wajib diisi.";
+    }
+    if ($pass2 == '') {
+        $errors[] = "Konfirmasi password wajib diisi.";
+    }
+
+    //cek kesesuaian pass
+    if ($pass != $pass2) {
+        $errors[] = "Password tidak sama.";
+    }
+
+    if (!empty($errors)) { // (cek dulu) -> klo error
+        $_SESSION['errors'] = $errors;
+        header("Location: ubah-pass.php");
+        exit;
+    }
+
+    //enkripsi md5
+    $pass_final = md5($pass);
+
+    //tambahkan ke databes
+  mysqli_query($conn, "UPDATE user SET pass = '$pass_final' WHERE email = '$email'");
     return mysqli_affected_rows($conn);
 }

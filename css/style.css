@@ -345,12 +345,12 @@ section#pg-kg {
   text-align: end;
 }
 .icon {
-  padding: 15px;
-  background-color: #ffe8c3;
-  border-radius: 10px;
+  padding: 25px;
+  background-color: #fff0d7;
+  border-radius: 20px;
 }
 .icon i {
-  font-size: 20px;
+  font-size: 35px;
 }
 .jenjang-tahun {
   display: flex;
@@ -366,7 +366,8 @@ section#pg-kg {
   gap: 20px;
 }
 .info-pg-kg p.bold.box {
-  line-height: 1.6;
+  line-height: 1.8;
+  font-size: 1.5rem;
 }
 .line-pg-kg {
   width: 2px;
@@ -839,6 +840,9 @@ p.info.detail {
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+.text-wrap .info.detail{
+  color: black;
+}
 .text-right-prestasi {
   display: flex;
   flex-direction: column;
@@ -1133,7 +1137,7 @@ section#deskripsi-prestasi {
 }
 .input-lr {
   width: 100%;
-  height: 60px;
+  height: 55px;
   border: 1px solid #d7d7d7;
   border-radius: 30px;
   padding: 0 20px;
@@ -1529,7 +1533,7 @@ p.user {
   transition: 0.3s;
 }
 textarea.form-control {
-  min-height: 120px;
+  min-height: 150px;
 }
 .form-control:focus,
 .form-input input[type="file"]:focus,
@@ -1548,6 +1552,11 @@ textarea.form-control {
 .form-select:focus {
   border-color: #ff6a00;
   box-shadow: 0 0 0 0.3rem rgba(243, 109, 13, 0.1);
+}
+.img-thumbnail{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
 }
 .upload-section {
   margin-top: 40px;

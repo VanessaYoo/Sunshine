@@ -6,6 +6,20 @@ if (!isset($_SESSION["login"])) {
     header("Location: ../../login.php");
     exit;
 }
+
+ $id = $_GET['id'] ?? '';
+
+  if ($id == '') {
+    header("Location: index.php");
+    exit;
+  }
+  $jumlah = query("SELECT * FROM operasional WHERE id_operasional='$id'");
+
+  if (empty($jumlah)) {
+    header("Location: ../admin-informasi.php");
+    exit;
+}
+$operasional = $jumlah[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +48,7 @@ if (!isset($_SESSION["login"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow">
+                    <button type="button" onclick="history.back()" class="back-arrow">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -50,14 +64,14 @@ if (!isset($_SESSION["login"])) {
                        <div>
                         <div class="mb-3">
                             <label class="form-label">Hari <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="hari" required autocomplete="off" placeholder="Masukkan hari atau rentang hari">
+                            <input class="form-control" type="text" name="hari" required autocomplete="off" value="<?= $operasional['hari'] ?? ''; ?>"  placeholder="Masukkan hari atau rentang hari">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Jam Buka <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="jam_buka" required autocomplete="off" placeholder="Masukkan jam buka">
+                            <input class="form-control" type="time" name="jam_buka" required autocomplete="off" value="<?= $operasional['jam_buka'] ?? ''; ?>" >
                         </div>
                     </div>
 
@@ -65,7 +79,7 @@ if (!isset($_SESSION["login"])) {
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Jam Tutup <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="jam_tutup" required autocomplete="off" placeholder="Masukkan jam tutup">
+                            <input class="form-control" type="time" name="jam_tutup" required autocomplete="off" value="<?= $operasional['jam_tutup'] ?? ''; ?>" >
                         </div>
                     </div>
 

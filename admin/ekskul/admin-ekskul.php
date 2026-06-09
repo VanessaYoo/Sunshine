@@ -1,5 +1,5 @@
 <?php
-include "../security.php";
+require "../security.php";
 require '../../function.php';
 
 if (!isset($_SESSION["login"])) {
@@ -40,26 +40,8 @@ if (!isset($_SESSION["login"])) {
 
         <!-- isi-halaman -->
         <div class="content-ua admin-page">
-             <form action="" method="POST" class="form-card">
-                <div class="form-title">
-                    <h1>Ekstrakurikuler Sunshine</h1>
-                </div>
 
-                <div class="row g-4">
-
-                    <div class="col-12">
-                        <div class="mb-3">
-                            <label class="form-label">Deskripsi <span class="required">*</span></label>
-                            <textarea class="form-control" name="penjelasan" required autocomplete="off" placeholder="Masukkan deskripsi ekstrakurikuler"></textarea>
-                        </div>
-                    </div>
-                </div>
-                    <button type="submit" name="penjelasan-ekskul" class="btn-form">
-                        Simpan Perubahan
-                    </button>
-            </form>
-
-            <div class="admin-table-card mt-4">
+            <div class="admin-table-card">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Ekstrakurikuler</h1>
                     <a href="a-tambah-ekskul.php">Tambah Ekstrakurikuler</a>
@@ -71,34 +53,54 @@ if (!isset($_SESSION["login"])) {
                                 <th>#</th>
                                 <th>Ekstrakurikuler</th>
                                 <th>Foto</th>
+                                <th>Data Diisi</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
 
                         <tbody>
-
-                                 <tr>
-                                <td>1</td>
-                                <td class="text-wrap">Johan MISISIIS mIS </td>
-                                <td class="text-wrap">jo_ren11@gmail.com</td>
-                                <td>
-                                    <div class="aksi-btn">
-                                        <a href="a-update-ekskul.php" class="edit">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </a>
-                                        <a href="a-delete-ekskul.php" class="delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-
+                            <?php
+                            $ekskuls = query("SELECT * FROM ekskul JOIN user ON ekskul.id_user = user.id_user");
+                            if (empty($ekskuls)) :
+                            ?>
+                                <tr>
+                                    <td colspan="5" class="text-center">Tidak Memiliki Data</td>
+                                </tr>
+                                <?php else :
+                                $i = 1;
+                                foreach ($ekskuls as $ekskul) :
+                                ?>
+                                    <tr>
+                                        <td><?= $i; ?></td>
+                                        <td class="text-wrap"><?= $ekskul["ekskul"]; ?></td>
+                                        <td class="text-wrap"><?= $ekskul["foto"]; ?></td>
+                                         <td class="text-wrap">
+                                            <div class="pp-info">
+                                                <span class="text-wrap"><?= $ekskul["nama"]; ?></span>
+                                                <p><?= $ekskul['created_at']; ?></p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="aksi-btn">
+                                                <a href="a-update-ekskul.php?id=<?= $ekskul['id_ekskul']; ?>" class="edit">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </a>
+                                                <a href="a-delete-ekskul.php?id=<?= $ekskul['id_ekskul']; ?>" class="delete">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                            <?php $i++;
+                                endforeach;
+                            endif;
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            
+
         </div>
 
 
