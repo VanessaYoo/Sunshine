@@ -8,19 +8,38 @@ if (!isset($_SESSION["login"])) {
 }
 
 
-  $id = $_GET['id'] ?? '';
+$id = $_GET['id'] ?? '';
 
-  if ($id == '') {
+if ($id == '') {
     header("Location: index.php");
     exit;
-  }
-  $jumlah = query("SELECT * FROM medsos WHERE id_medsos='$id'");
+}
+$jumlah = query("SELECT * FROM medsos WHERE id_medsos='$id'");
 
-  if (empty($jumlah)) {
+if (empty($jumlah)) {
     header("Location: ../admin-informasi.php");
     exit;
 }
 $medsos = $jumlah[0];
+
+// update
+if (isset($_POST["update-medsos"])) {
+    if (update_medsos($_POST) > 0) {
+        echo "
+        <script>
+      alert('Data berhasil diubah');
+      document.location.href='../admin-informasi.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Data gagal diubah');
+        document.location.href='../admin-informasi.php';
+        </script>
+        ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,8 +78,8 @@ $medsos = $jumlah[0];
                     <h1>Update Media Sosial</h1>
                 </div>
 
-                  <div class="row g-4">
-
+                <div class="row g-4">
+                    <input type="hidden" name="id_medsos" value="<?= $medsos["id_medsos"] ?>">
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Link Media Sosial <span class="required">*</span></label>
@@ -68,14 +87,14 @@ $medsos = $jumlah[0];
                         </div>
                     </div>
 
-                     <div class="col-md-6">
+                    <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Ikon <span class="required">*</span></label>
                             <input class="form-control" type="text" name="ikon" required autocomplete="off" value="<?= $medsos['ikon'] ?? ''; ?>" placeholder="Masukkan ikon media sosial">
                         </div>
                     </div>
 
-                    
+
 
                 </div>
 

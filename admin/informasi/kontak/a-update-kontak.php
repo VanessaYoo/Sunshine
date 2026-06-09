@@ -20,6 +20,25 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 $kontak = $jumlah[0];
+
+// update
+if (isset($_POST["update-kontak"])) {
+    if (update_kontak($_POST) > 0) {
+        echo "
+        <script>
+      alert('Data berhasil diubah');
+      document.location.href='../admin-informasi.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Data gagal diubah');
+        document.location.href='../admin-informasi.php';
+        </script>
+        ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +78,7 @@ $kontak = $jumlah[0];
                 </div>
 
                 <div class="row g-4">
+                     <input type="hidden" name="id_kontak" value="<?= $kontak["id_kontak"] ?>">
                     <div class="col-md-5">
                         <div class="mb-3">
                             <label class="form-label">Kontak <span class="required">*</span></label>

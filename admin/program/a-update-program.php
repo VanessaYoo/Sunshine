@@ -20,6 +20,25 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 $program = $jumlah[0];
+
+// update
+if (isset($_POST["update-program"])) {
+    if (update_program($_POST) > 0) {
+        echo "
+        <script>
+      alert('Data berhasil diubah');
+      document.location.href='admin-program.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Data gagal diubah');
+        document.location.href='admin-program.php';
+        </script>
+        ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +79,7 @@ $program = $jumlah[0];
 
                 <div class="row g-4">
 
-
+ <input type="hidden" name="id_program" value="<?= $program["id_program"] ?>">
                     <div>
                         <div class="mb-3">
                             <label class="form-label">Program <span class="required">*</span></label>

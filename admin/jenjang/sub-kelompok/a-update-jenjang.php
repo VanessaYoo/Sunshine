@@ -22,6 +22,25 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 $sub_kelompok = $jumlah[0];
+
+// update
+if (isset($_POST["update-sub-kelompok"])) {
+    if (update_sub_kelompok($_POST) > 0) {
+        echo "
+        <script>
+      alert('Data berhasil diubah');
+      document.location.href='../admin-jenjang.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Data gagal diubah');
+        document.location.href='../admin-jenjang.php';
+        </script>
+        ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +80,7 @@ $sub_kelompok = $jumlah[0];
                 </div>
 
                 <div class="row g-4">
-
+ <input type="hidden" name="id_sub_kelompok" value="<?= $sub_kelompok["id_sub_kelompok"] ?>">
                  <div class="col-md-6">
                         <div class="form-input">
                             <label class="form-label">Sub Kelompok <span class="required">*</span></label>
@@ -85,7 +104,7 @@ $sub_kelompok = $jumlah[0];
                 </div>
 
 
-                <button type="submit" name="update-jenjang-playground" class="btn-form">
+                <button type="submit" name="update-sub-kelompok" class="btn-form">
                     Simpan Perubahan
                 </button>
             </form>

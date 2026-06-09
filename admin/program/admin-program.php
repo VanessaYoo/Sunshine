@@ -7,7 +7,16 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+    if (hapus_program($id) > 0) {
+        echo "<script>alert('Data berhasil dihapus'); 
+    document.location.href='admin-program.php';</script>";
+    } else {
+        echo "<script>alert('Data gagal dihapus');
+        document.location.href='admin-program.php'</script> ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,7 +96,7 @@ if (!isset($_SESSION["login"])) {
                                                 <a href="a-update-program.php?id=<?= $program['id_program']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a href="a-delete-program.php?id=<?= $program['id_program']; ?>" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $program['id_program']; ?>" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>

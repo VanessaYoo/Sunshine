@@ -6,6 +6,28 @@ if (!isset($_SESSION["login"])) {
     header("Location: ../login.php");
     exit;
 }
+
+if (isset($_GET["id"])  && isset($_GET["type"])) {
+
+    $id = $_GET["id"];
+    $type = $_GET["type"];
+
+    $hasil='';
+    
+    if ($type == 'kelompok') {
+        $hasil = hapus_kelompok($id);
+    } elseif ($type == 'sub_kelompok') {
+        $hasil = hapus_sub_kelompok($id);
+
+    if ($hasil > 0) {
+        echo "<script>alert('Data berhasil dihapus'); 
+        document.location.href='admin-jenjang.php';</script>";
+    } else {
+        echo "<script>alert('Data gagal dihapus');
+        document.location.href='admin-jenjang.php'</script>";
+    }
+}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +88,7 @@ if (!isset($_SESSION["login"])) {
                                                 <a href="kelompok/a-update-kelompok.php?id=<?= $kel['id_kelompok']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a href="kelompok/a-delete-kelompok.php?id=<?= $kel['id_kelompok']; ?>" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $kel['id_kelompok']; ?>&type=kelompok" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>
@@ -126,7 +148,7 @@ if (!isset($_SESSION["login"])) {
                                                     <a href="sub-kelompok/a-update-jenjang.php?id=<?= $subkel['id_sub_kelompok']; ?>" class="edit">
                                                         <i class="fa-solid fa-pen"></i>
                                                     </a>
-                                                    <a href="sub-kelompok/a-delete-jenjang.php?id=<?= $subkel['id_sub_kelompok']; ?>" class="delete">
+                                                    <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $subkel['id_sub_kelompok']; ?>&type=sub_kelompok" class="delete">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </a>
                                                 </div>

@@ -7,19 +7,38 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
- $id = $_GET['id'] ?? '';
+$id = $_GET['id'] ?? '';
 
-  if ($id == '') {
+if ($id == '') {
     header("Location: index.php");
     exit;
-  }
-  $jumlah = query("SELECT * FROM operasional WHERE id_operasional='$id'");
+}
+$jumlah = query("SELECT * FROM operasional WHERE id_operasional='$id'");
 
-  if (empty($jumlah)) {
+if (empty($jumlah)) {
     header("Location: ../admin-informasi.php");
     exit;
 }
 $operasional = $jumlah[0];
+
+// update
+if (isset($_POST["update-operasional"])) {
+    if (update_operasional($_POST) > 0) {
+        echo "
+        <script>
+      alert('Data berhasil diubah');
+      document.location.href='../admin-informasi.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Data gagal diubah');
+        document.location.href='../admin-informasi.php';
+        </script>
+        ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,18 +79,18 @@ $operasional = $jumlah[0];
 
                 <div class="row g-4">
 
-
-                       <div>
+                    <input type="hidden" name="id_operasional" value="<?= $operasional["id_operasional"] ?>">
+                    <div>
                         <div class="mb-3">
                             <label class="form-label">Hari <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="hari" required autocomplete="off" value="<?= $operasional['hari'] ?? ''; ?>"  placeholder="Masukkan hari atau rentang hari">
+                            <input class="form-control" type="text" name="hari" required autocomplete="off" value="<?= $operasional['hari'] ?? ''; ?>" placeholder="Masukkan hari atau rentang hari">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Jam Buka <span class="required">*</span></label>
-                            <input class="form-control" type="time" name="jam_buka" required autocomplete="off" value="<?= $operasional['jam_buka'] ?? ''; ?>" >
+                            <input class="form-control" type="time" name="jam_buka" required autocomplete="off" value="<?= $operasional['jam_buka'] ?? ''; ?>">
                         </div>
                     </div>
 
@@ -79,7 +98,7 @@ $operasional = $jumlah[0];
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Jam Tutup <span class="required">*</span></label>
-                            <input class="form-control" type="time" name="jam_tutup" required autocomplete="off" value="<?= $operasional['jam_tutup'] ?? ''; ?>" >
+                            <input class="form-control" type="time" name="jam_tutup" required autocomplete="off" value="<?= $operasional['jam_tutup'] ?? ''; ?>">
                         </div>
                     </div>
 

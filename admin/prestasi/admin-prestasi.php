@@ -7,7 +7,16 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+    if (hapus_prestasi($id) > 0) {
+        echo "<script>alert('Data berhasil dihapus'); 
+    document.location.href='admin-prestasi.php';</script>";
+    } else {
+        echo "<script>alert('Data gagal dihapus');
+        document.location.href='admin-prestasi.php'</script> ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,7 +101,7 @@ if (!isset($_SESSION["login"])) {
                                                 <a href="a-update-prestasi.php?id=<?= $winner['id_prestasi']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a href="a-delete-prestasi.php?id=<?= $winner['id_prestasi']; ?>" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')"  href="?id=<?= $winner['id_prestasi']; ?>" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>

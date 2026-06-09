@@ -21,6 +21,25 @@ if (empty($jumlah)) {
     exit;
 }
 $prestasi = $jumlah[0];
+
+// update
+if (isset($_POST["update-prestasi"])) {
+    if (update_prestasi($_POST) > 0) {
+        echo "
+        <script>
+      alert('Data berhasil diubah');
+      document.location.href='admin-prestasi.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Data gagal diubah');
+        document.location.href='admin-prestasi.php';
+        </script>
+        ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +79,7 @@ $prestasi = $jumlah[0];
                 </div>
 
                 <div class="row g-4">
-
+ <input type="hidden" name="id_prestasi" value="<?= $prestasi["id_prestasi"] ?>">
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Prestasi <span class="required">*</span></label>

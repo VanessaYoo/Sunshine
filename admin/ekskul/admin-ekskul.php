@@ -7,7 +7,16 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+    if (hapus_ekskul($id) > 0) {
+        echo "<script>alert('Data berhasil dihapus'); 
+    document.location.href='admin-ekskul.php';</script>";
+    } else {
+        echo "<script>alert('Data gagal dihapus');
+        document.location.href='admin-ekskul.php'</script> ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +94,7 @@ if (!isset($_SESSION["login"])) {
                                                 <a href="a-update-ekskul.php?id=<?= $ekskul['id_ekskul']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a href="a-delete-ekskul.php?id=<?= $ekskul['id_ekskul']; ?>" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $ekskul['id_ekskul']; ?>" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>

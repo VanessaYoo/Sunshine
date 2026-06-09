@@ -20,6 +20,25 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 $kelompok = $jumlah[0];
+
+// update
+if (isset($_POST["update-kelompok"])) {
+    if (update_kelompok($_POST) > 0) {
+        echo "
+        <script>
+      alert('Data berhasil diubah');
+      document.location.href='../admin-jenjang.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Data gagal diubah');
+        document.location.href='../admin-jenjang.php';
+        </script>
+        ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +78,7 @@ $kelompok = $jumlah[0];
                 </div>
 
                 <div class="row g-4">
-
+ <input type="hidden" name="id_kelompok" value="<?= $kelompok["id_kelompok"] ?>">
                    <div>
                         <div class="form-input">
                             <label class="form-label">Kelompok <span class="required">*</span></label>

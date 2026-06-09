@@ -6,6 +6,30 @@ if (!isset($_SESSION["login"])) {
     header("Location: ../login.php");
     exit;
 }
+
+if (isset($_GET["id"])  && isset($_GET["type"])) {
+
+    $id = $_GET["id"];
+    $type = $_GET["type"];
+
+    $hasil='';
+    
+    if ($type == 'operasional') {
+        $hasil = hapus_operasional($id);
+    } elseif ($type == 'kontak') {
+        $hasil = hapus_kontak($id);
+    } elseif ($type == 'medsos') {
+        $hasil = hapus_medsos($id);
+    }
+
+    if ($hasil > 0) {
+        echo "<script>alert('Data berhasil dihapus'); 
+        document.location.href='admin-informasi.php';</script>";
+    } else {
+        echo "<script>alert('Data gagal dihapus');
+        document.location.href='admin-informasi.php'</script>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -234,7 +258,7 @@ if (!isset($_SESSION["login"])) {
                                                 <a href="operasional/a-update-operasional.php?id=<?= $waktu['id_operasional']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a href="operasional/a-delete-operasional.php?id=<?= $waktu['id_operasional']; ?>" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $waktu['id_operasional']; ?>&type=operasional" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>
@@ -286,7 +310,7 @@ if (!isset($_SESSION["login"])) {
                                                 <a href="kontak/a-update-kontak.php?id=<?= $nomor['id_kontak']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a href="kontak/a-delete-kontak.php?id=<?= $nomor['id_kontak']; ?>" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $nomor['id_kontak']; ?>&type=kontak" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>
@@ -338,7 +362,7 @@ if (!isset($_SESSION["login"])) {
                                                 <a href="medsos/a-update-medsos.php?id=<?= $medsos['id_medsos']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a href="medsos/a-delete-medsos.php?id=<?= $medsos['id_medsos']; ?>" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $medsos['id_medsos']; ?>&type=medsos" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>
