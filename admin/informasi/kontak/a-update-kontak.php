@@ -1,5 +1,5 @@
 <?php
-include "../../../security.php";
+include "../../security.php";
 require '../../../function.php';
 
 if (!isset($_SESSION["login"])) {
