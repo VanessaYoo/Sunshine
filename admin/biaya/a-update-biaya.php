@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "../../security.php";
 require '../../function.php';
 
 if (!isset($_SESSION["login"])) {
@@ -97,7 +97,7 @@ if (!isset($_SESSION["login"])) {
                         </div>
                     </div>
 
-                      <div class="col-md-4">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label class="form-label">Bukti Pembayaran <span class="required">*</span></label>
                             <input class="form-control"

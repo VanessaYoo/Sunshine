@@ -24,6 +24,7 @@ function login($data)
     $errors = [];
     $email = trim(strtolower(stripslashes($data["email"])) ?? '');
     $pass = md5(trim($data["pass"] ?? ''));
+    
 
     // cek jika belum diisi dan valid
     if ($email == '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) { //harus menggunakan formal nama + @gmail.com
