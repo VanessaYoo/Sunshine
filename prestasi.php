@@ -42,7 +42,7 @@
     <section id="seluruh-prestasi">
       <div class="grid-prestasi">
         <?php
-        $winners = query("SELECT * FROM prestasi ORDER BY id_prestasi DESC");
+        $winners = query("SELECT * FROM prestasi ORDER BY tanggal DESC");
         $i = 1;
         foreach ($winners as $winner) :
         ?>
@@ -54,7 +54,7 @@
                   <?= $winner['prestasi']; ?>
                 </h2>
                 <h4 class="tahun" data-aos="fade-up" data-aos-duration="1000">
-                  <?= $winner['tanggal']; ?>
+                  <?= date('d F Y', strtotime($winner['tanggal'])); ?>
                 </h4>
               </div>
             </div>

@@ -46,7 +46,11 @@ if (isset($_POST["register"])) {
 <body>
     <div class="container-lr">
         <div class="left-lr" data-aos="fade-right" data-aos-duration="1000">
-            <img src="img/aset/foto-bersama-2.png" alt="">
+            <?php
+            $foto_hero = query("SELECT * FROM informasi WHERE id=10")[0] ?? [];
+            ?>
+
+            <img src="/Sunshine/img/aset/<?= $foto_hero['isi_field'] ?? ''; ?>" alt="">
         </div>
         <div class="lr">
             <div class="login-register">
@@ -75,7 +79,7 @@ if (isset($_POST["register"])) {
                         <i class="fas fa-eye eye-icon"></i>
                     </div>
 
-                      <input name="register" type="submit" value="Register" class="submit-lr" />
+                    <input name="register" type="submit" value="Register" class="submit-lr" />
                     <div class="l-register">
                         <div>Anda sudah memiliki akun?</div>
                         <a class="btn-l-register" href="login.php">Login</a>
@@ -85,7 +89,7 @@ if (isset($_POST["register"])) {
             </div>
         </div>
     </div>
-    
+
     <script src="js/pass.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

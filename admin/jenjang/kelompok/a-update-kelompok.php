@@ -7,34 +7,45 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-  $id = $_GET['id'] ?? '';
+$id = $_GET['id'] ?? '';
 
-  if ($id == '') {
-    header("Location: index.php");
+if ($id == '') {
+    header("Location: ../admin-jenjang.php");
     exit;
-  }
-  $jumlah = query("SELECT * FROM kelompok WHERE id_kelompok='$id'");
+}
+$jumlah = query("SELECT * FROM kelompok WHERE id_kelompok='$id'");
 
-  if (empty($jumlah)) {
+if (empty($jumlah)) {
     header("Location: ../admin-jenjang.php");
     exit;
 }
 $kelompok = $jumlah[0];
 
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
 // update
 if (isset($_POST["update-kelompok"])) {
-    if (update_kelompok($_POST) > 0) {
+    $hasil= update_kelompok($_POST);
+    if ($hasil > 0) {
         echo "
         <script>
       alert('Data berhasil diubah');
       document.location.href='../admin-jenjang.php';
         </script>
         ";
+    } elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada perubahan data');
+        document.location.href='a-update-kelompok.php?id=$id';
+        </script>
+        ";
     } else {
         echo "
         <script>
         alert('Data gagal diubah');
-        document.location.href='../admin-jenjang.php';
+        document.location.href='a-update-kelompok.php?id=$id';
         </script>
         ";
     }
@@ -78,8 +89,20 @@ if (isset($_POST["update-kelompok"])) {
                 </div>
 
                 <div class="row g-4">
- <input type="hidden" name="id_kelompok" value="<?= $kelompok["id_kelompok"] ?>">
-                   <div>
+
+                 <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <input type="hidden" name="id_kelompok" value="<?= $kelompok["id_kelompok"] ?>">
+                    <div>
                         <div class="form-input">
                             <label class="form-label">Kelompok <span class="required">*</span></label>
                             <input class="form-control" type="text" name="kelompok" required autocomplete="off" value="<?= $kelompok['kelompok'] ?? ''; ?>" placeholder="Masukkan nama kelompok">

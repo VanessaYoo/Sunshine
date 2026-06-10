@@ -11,7 +11,7 @@ if (!isset($_SESSION["login"])) {
 $id = $_GET['id'] ?? '';
 
 if ($id == '') {
-    header("Location: index.php");
+    header("Location: ../admin-informasi.php");
     exit;
 }
 $jumlah = query("SELECT * FROM medsos WHERE id_medsos='$id'");
@@ -22,20 +22,31 @@ if (empty($jumlah)) {
 }
 $medsos = $jumlah[0];
 
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
 // update
 if (isset($_POST["update-medsos"])) {
-    if (update_medsos($_POST) > 0) {
+    $hasil= update_medsos($_POST);
+    if ($hasil > 0) {
         echo "
         <script>
       alert('Data berhasil diubah');
       document.location.href='../admin-informasi.php';
         </script>
         ";
+    } elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada perubahan data');
+        document.location.href='a-update-medsos.php?id=$id';
+        </script>
+        ";
     } else {
         echo "
         <script>
         alert('Data gagal diubah');
-        document.location.href='../admin-informasi.php';
+       document.location.href='a-update-medsos.php?id=$id';
         </script>
         ";
     }
@@ -79,6 +90,18 @@ if (isset($_POST["update-medsos"])) {
                 </div>
 
                 <div class="row g-4">
+
+                   <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                    
                     <input type="hidden" name="id_medsos" value="<?= $medsos["id_medsos"] ?>">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -90,7 +113,7 @@ if (isset($_POST["update-medsos"])) {
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Ikon <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="ikon" required autocomplete="off" value="<?= $medsos['ikon'] ?? ''; ?>" placeholder="Masukkan ikon media sosial">
+                            <input class="form-control" type="text" name="ikon" required autocomplete="off" value="<?= $medsos['ikon'] ?? ''; ?>" placeholder="Masukkan ikon Font Awesome">
                         </div>
                     </div>
 

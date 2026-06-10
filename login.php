@@ -33,7 +33,11 @@ if (isset($_POST["login"])) {
 <body>
     <div class="container-lr">
         <div class="left-lr" data-aos="fade-right" data-aos-duration="1000">
-            <img src="img/aset/foto-bersama-2.png" alt="">
+             <?php
+            $foto_hero = query("SELECT * FROM informasi WHERE id=6")[0] ?? [];
+            ?>
+
+            <img src="/Sunshine/img/aset/<?= $foto_hero['isi_field'] ?? ''; ?>" alt="">
         </div>
         <div class="lr">
             <div class="login-register">
@@ -64,10 +68,10 @@ if (isset($_POST["login"])) {
 
                     <input name="login" type="submit" value="Login" class="submit-lr" />
 
-                    <div class="l-register">
+                    <!-- <div class="l-register">
                         <div>Anda belum memiliki akun?</div>
                         <a class="btn-l-register" href="register.php">Register</a>
-                    </div>
+                    </div> -->
                 </form>
 
             </div>

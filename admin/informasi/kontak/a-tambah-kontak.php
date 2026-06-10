@@ -6,6 +6,36 @@ if (!isset($_SESSION["login"])) {
     header("Location: ../../login.php");
     exit;
 }
+
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
+// tambah
+if (isset($_POST["tambah-kontak"])) {
+    $hasil= tambah_kontak($_POST);
+   if ($hasil > 0) {
+        echo "
+        <script>
+      alert('Data berhasil ditambah');
+      document.location.href='../admin-informasi.php';
+        </script>
+        ";
+    } elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada data yang ditambahkan');
+        document.location.href='a-tambah-kontak.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Data gagal ditambah');
+        document.location.href='a-tambah-kontak.php';
+        </script>
+        ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +74,20 @@ if (!isset($_SESSION["login"])) {
                     <h1>Tambah Kontak</h1>
                 </div>
 
+               
+
                 <div class="row g-4">
+
+                  <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
 
                     <div class="col-md-5">
                         <div class="mb-3">

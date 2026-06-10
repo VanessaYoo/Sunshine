@@ -17,6 +17,10 @@ if (isset($_GET["id"])) {
         document.location.href='admin-program.php'</script> ";
     }
 }
+
+$sortir = $_GET['sortir'] ?? 'terbaru'; //default terbaru
+$order  = ($sortir == 'terlama') ? 'ASC' : 'DESC';
+$programs = query("SELECT * FROM program JOIN user ON program.id_user = user.id_user ORDER BY created_at $order");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +57,15 @@ if (isset($_GET["id"])) {
             <div class="admin-table-card">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Program</h1>
-                    <a href="a-tambah-program.php">Tambah Program</a>
+                    <div class="d-flex gap-3 align-items-center">
+                        <form method="GET">
+                            <select name="sortir" class="form-select sortir" onchange="this.form.submit()">
+                                <option value="terbaru" <?= ($_GET['sortir'] ?? 'terbaru') == 'terbaru' ? 'selected' : '' ?>>Input Terbaru</option>
+                                <option value="terlama" <?= ($_GET['sortir'] ?? '') == 'terlama' ? 'selected' : '' ?>>Input Terlama</option>
+                            </select>
+                        </form>
+                        <a href="a-tambah-program.php">Tambah Program</a>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table admin-table kelola-table align-middle">
@@ -63,14 +75,13 @@ if (isset($_GET["id"])) {
                                 <th>Program</th>
                                 <th>Deskripsi</th>
                                 <th>Foto</th>
-                                <th>Data Diisi</th>
+                                <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <?php
-                            $programs = query("SELECT * FROM program JOIN user ON program.id_user = user.id_user");
                             if (empty($programs)) :
                             ?>
                                 <tr>

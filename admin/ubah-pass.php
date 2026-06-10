@@ -46,7 +46,11 @@ if (isset($_POST["ubah-pass"])) {
 <body>
     <div class="container-lr">
         <div class="left-lr" data-aos="fade-right" data-aos-duration="1000">
-            <img src="/Sunshine/img/aset/foto-bersama-2.png" alt="">
+            <?php
+            $foto_hero = query("SELECT * FROM informasi WHERE id=10")[0] ?? [];
+            ?>
+
+            <img src="/Sunshine/img/aset/<?= $foto_hero['isi_field'] ?? ''; ?>" alt="">
         </div>
         <div class="lr">
             <div class="login-register">

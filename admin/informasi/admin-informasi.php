@@ -7,6 +7,37 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
+//update
+if (isset($_POST["update-informasi"])) {
+    $hasil= update_informasi($_POST);
+    if ($hasil > 0) {
+        echo "
+        <script>
+      alert('Data berhasil diubah');
+      document.location.href='admin-informasi.php';
+        </script>
+        ";
+    }elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada perubahan data');
+        document.location.href='admin-informasi.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Data gagal diubah');
+        document.location.href='admin-informasi.php';
+        </script>
+        ";
+    }
+}
+
+//hapus
 if (isset($_GET["id"])  && isset($_GET["type"])) {
 
     $id = $_GET["id"];
@@ -62,12 +93,24 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
 
         <!-- isi-halaman -->
         <div class="content-ua admin-page">
-            <form action="" method="POST" class="form-card">
+            <form action="" method="POST" class="form-card" enctype="multipart/form-data">
                 <div class="form-title">
                     <h1>Profil Sunshine</h1>
                 </div>
 
                 <div class="row g-4">
+                    
+                     <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
                     <?php
                     $deskripsi_profil = query("SELECT * FROM informasi WHERE id=1")[0] ?? [];
                     ?>
@@ -168,7 +211,8 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
 
                             <input class="form-control"
                                 type="file"
-                                name="foto_gedung" required>
+                                name="foto_gedung">
+                                <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
                         </div>
                     </div>
 
@@ -188,7 +232,8 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
 
                             <input class="form-control"
                                 type="file"
-                                name="foto_keunggulan" required>
+                                name="foto_keunggulan">
+                                <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
                         </div>
                     </div>
 
@@ -208,13 +253,13 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
 
                             <input class="form-control"
                                 type="file"
-                                name="foto_hero" required>
+                                name="foto_hero">
+                                <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
                         </div>
                     </div>
                 </div>
 
-
-                <button type="submit" name="profil" class="btn-form">
+                <button type="submit" name="update-informasi" class="btn-form">
                     Simpan Perubahan
                 </button>
             </form>
@@ -304,7 +349,7 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                                     <tr>
                                         <td><?= $i; ?></td>
                                         <td class="text-wrap"><?= $nomor['kontak']; ?></td>
-                                        <td class="text-wrap"><?= $nomor['link']; ?></td>
+                                        <td class="text-wrap"><a href="<?= $nomor['link']; ?>" class="btn-l-register black" target="_blank"><?= $nomor['link']; ?></a></td>
                                         <td>
                                             <div class="aksi-btn">
                                                 <a href="kontak/a-update-kontak.php?id=<?= $nomor['id_kontak']; ?>" class="edit">
@@ -355,7 +400,7 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                                 ?>
                                     <tr>
                                         <td><?= $i; ?></td>
-                                        <td class="text-wrap"><?= $medsos['link']; ?></td>
+                                        <td class="text-wrap"><a href="<?= $medsos['link']; ?>" class="btn-l-register black" target="_blank"><?= $medsos['link']; ?></a></td>
                                         <td class="text-wrap"><?= $medsos['ikon']; ?></td>
                                         <td>
                                             <div class="aksi-btn">

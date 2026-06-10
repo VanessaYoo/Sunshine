@@ -17,6 +17,19 @@ if (isset($_GET["id"])) {
         document.location.href='admin-prestasi.php'</script> ";
     }
 }
+$sortir = $_GET['sortir'] ?? 'tanggal_terbaru';
+
+if ($sortir == 'tanggal_terbaru') {
+    $order = "ORDER BY tanggal DESC";
+} elseif ($sortir == 'tanggal_terlama') {
+    $order = "ORDER BY tanggal ASC";
+} elseif ($sortir == 'data_terbaru') {
+    $order = "ORDER BY created_at DESC";
+} else {
+    $order = "ORDER BY created_at ASC";
+}
+
+$winners = query("SELECT * FROM prestasi JOIN user ON prestasi.id_user = user.id_user $order");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +65,17 @@ if (isset($_GET["id"])) {
             <div class="admin-table-card">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Prestasi</h1>
-                    <a href="a-tambah-prestasi.php">Tambah Prestasi</a>
+                    <div class="d-flex gap-3 align-items-center">
+                        <form method="GET">
+                            <select name="sortir" class="form-select sortir" onchange="this.form.submit()">
+                                <option value="tanggal_terbaru" <?= ($_GET['sortir'] ?? 'tanggal_terbaru') == 'tanggal_terbaru' ? 'selected' : '' ?>>Prestasi Terbaru</option>
+                                <option value="tanggal_terlama" <?= ($_GET['sortir'] ?? '') == 'tanggal_terlama' ? 'selected' : '' ?>>Prestasi Terlama</option>
+                                <option value="data_terbaru" <?= ($_GET['sortir'] ?? '') == 'data_terbaru' ? 'selected' : '' ?>>Input Terbaru</option>
+                                <option value="data_terlama" <?= ($_GET['sortir'] ?? '') == 'data_terlama' ? 'selected' : '' ?>>Input Terlama</option>
+                            </select>
+                        </form>
+                        <a href="a-tambah-prestasi.php">Tambah Prestasi</a>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table admin-table kelola-table align-middle">
@@ -63,14 +86,13 @@ if (isset($_GET["id"])) {
                                 <th>Tanggal</th>
                                 <th>Deskripsi</th>
                                 <th>Foto</th>
-                                <th>Data Diisi</th>
+                                <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <?php
-                            $winners = query("SELECT * FROM prestasi JOIN user ON prestasi.id_user = user.id_user");
                             if (empty($winners)) :
                             ?>
                                 <tr>
@@ -101,7 +123,7 @@ if (isset($_GET["id"])) {
                                                 <a href="a-update-prestasi.php?id=<?= $winner['id_prestasi']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')"  href="?id=<?= $winner['id_prestasi']; ?>" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $winner['id_prestasi']; ?>" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>

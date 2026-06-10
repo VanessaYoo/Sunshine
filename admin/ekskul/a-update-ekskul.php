@@ -10,7 +10,7 @@ if (!isset($_SESSION["login"])) {
 $id = $_GET['id'] ?? '';
 
 if ($id == '') {
-    header("Location: index.php");
+    header("Location: admin-ekskul.php");
     exit;
 }
 $jumlah = query("SELECT * FROM ekskul WHERE id_ekskul='$id'");
@@ -21,20 +21,31 @@ if (empty($jumlah)) {
 }
 $ekskul = $jumlah[0];
 
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
 // update
 if (isset($_POST["update-ekskul"])) {
-    if (update_ekskul($_POST) > 0) {
+    $hasil = update_ekskul($_POST);
+    if ($hasil > 0) {
         echo "
         <script>
       alert('Data berhasil diubah');
       document.location.href='admin-ekskul.php';
         </script>
         ";
+    } elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada perubahan data');
+        document.location.href='a-update-ekskul.php?id=$id';
+        </script>
+        ";
     } else {
         echo "
         <script>
         alert('Data gagal diubah');
-        document.location.href='admin-ekskul.php';
+        document.location.href='a-update-ekskul.php?id=$id';
         </script>
         ";
     }
@@ -64,7 +75,7 @@ if (isset($_POST["update-ekskul"])) {
 
         <div class="content-ua admin-page">
 
-            <form action="" method="POST" class="form-card">
+            <form action="" method="POST" class="form-card" enctype="multipart/form-data">
 
                 <div class="back kembali mt-2">
                     <button onclick="history.back()" class="back-arrow" type="button">
@@ -78,7 +89,19 @@ if (isset($_POST["update-ekskul"])) {
                 </div>
 
                 <div class="row g-4">
- <input type="hidden" name="id_ekskul" value="<?= $ekskul["id_ekskul"] ?>">
+
+                    <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <input type="hidden" name="id_ekskul" value="<?= $ekskul["id_ekskul"] ?>">
 
                     <div>
                         <div class="mb-3">
@@ -94,10 +117,11 @@ if (isset($_POST["update-ekskul"])) {
                                 <img src="../../img/ekskul/<?= $ekskul['foto'] ?? ''; ?>" class="img-thumbnail">
                                 <p class="mt-2" style="font-size: 1rem;">File : <?= $ekskul['foto'] ?? ''; ?></p>
                             </div>
-                             <input type="hidden" name="foto_lama" value="<?= $ekskul['foto'] ?? ''; ?>">
+                            <input type="hidden" name="foto_lama" value="<?= $ekskul['foto'] ?? ''; ?>">
                             <input class="form-control"
                                 type="file"
-                                name="foto" required>
+                                name="foto">
+                                <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
                         </div>
                     </div>
 

@@ -7,34 +7,45 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-  $id = $_GET['id'] ?? '';
+$id = $_GET['id'] ?? '';
 
-  if ($id == '') {
-    header("Location: index.php");
+if ($id == '') {
+    header("Location: ../admin-informasi.php");
     exit;
-  }
-  $jumlah = query("SELECT * FROM kontak WHERE id_kontak='$id'");
+}
+$jumlah = query("SELECT * FROM kontak WHERE id_kontak='$id'");
 
-  if (empty($jumlah)) {
+if (empty($jumlah)) {
     header("Location: ../admin-informasi.php");
     exit;
 }
 $kontak = $jumlah[0];
 
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
 // update
 if (isset($_POST["update-kontak"])) {
-    if (update_kontak($_POST) > 0) {
+    $hasil = update_kontak($_POST);
+    if ($hasil > 0) {
         echo "
         <script>
       alert('Data berhasil diubah');
       document.location.href='../admin-informasi.php';
         </script>
         ";
+    } elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada perubahan data');
+        document.location.href='a-update-kontak.php?id=$id';
+        </script>
+        ";
     } else {
         echo "
         <script>
         alert('Data gagal diubah');
-        document.location.href='../admin-informasi.php';
+        document.location.href='a-update-kontak.php?id=$id';
         </script>
         ";
     }
@@ -77,8 +88,23 @@ if (isset($_POST["update-kontak"])) {
                     <h1>Update Kontak</h1>
                 </div>
 
+
                 <div class="row g-4">
-                     <input type="hidden" name="id_kontak" value="<?= $kontak["id_kontak"] ?>">
+
+
+                    <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+
+                    <input type="hidden" name="id_kontak" value="<?= $kontak["id_kontak"] ?>">
                     <div class="col-md-5">
                         <div class="mb-3">
                             <label class="form-label">Kontak <span class="required">*</span></label>
@@ -88,7 +114,7 @@ if (isset($_POST["update-kontak"])) {
                     <div class="col-md-7">
                         <div class="mb-3">
                             <label class="form-label">Link WhatsApp <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="link" required autocomplete="off" value="<?= $kontak['link'] ?? ''; ?>"  placeholder="Masukkan link WhatsApp">
+                            <input class="form-control" type="text" name="link" required autocomplete="off" value="<?= $kontak['link'] ?? ''; ?>" placeholder="Masukkan link WhatsApp">
                         </div>
                     </div>
 

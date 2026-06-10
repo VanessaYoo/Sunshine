@@ -6,37 +6,48 @@ if (!isset($_SESSION["login"])) {
     header("Location: ../../login.php");
     exit;
 }
- $id = $_GET['id'] ?? '';
+$id = $_GET['id'] ?? '';
 
-  if ($id == '') {
-    header("Location: index.php");
+if ($id == '') {
+    header("Location: ../admin-jenjang.php");
     exit;
-  }
-  $jumlah = query("SELECT sub_kelompok.*, kelompok.kelompok 
+}
+$jumlah = query("SELECT sub_kelompok.*, kelompok.kelompok 
                  FROM sub_kelompok 
                  JOIN kelompok ON sub_kelompok.id_kelompok = kelompok.id_kelompok 
                  WHERE sub_kelompok.id_sub_kelompok='$id'");
 
-  if (empty($jumlah)) {
+if (empty($jumlah)) {
     header("Location: ../admin-jenjang.php");
     exit;
 }
 $sub_kelompok = $jumlah[0];
 
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
 // update
 if (isset($_POST["update-sub-kelompok"])) {
-    if (update_sub_kelompok($_POST) > 0) {
+    $hasil = update_sub_kelompok($_POST);
+    if ($hasil > 0) {
         echo "
         <script>
       alert('Data berhasil diubah');
       document.location.href='../admin-jenjang.php';
         </script>
         ";
+    } elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada perubahan data');
+       document.location.href='a-update-jenjang.php?id=$id';
+        </script>
+        ";
     } else {
         echo "
         <script>
         alert('Data gagal diubah');
-        document.location.href='../admin-jenjang.php';
+       document.location.href='a-update-jenjang.php?id=$id';
         </script>
         ";
     }
@@ -80,8 +91,20 @@ if (isset($_POST["update-sub-kelompok"])) {
                 </div>
 
                 <div class="row g-4">
- <input type="hidden" name="id_sub_kelompok" value="<?= $sub_kelompok["id_sub_kelompok"] ?>">
-                 <div class="col-md-6">
+
+                    <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <input type="hidden" name="id_sub_kelompok" value="<?= $sub_kelompok["id_sub_kelompok"] ?>">
+                    <div class="col-md-6">
                         <div class="form-input">
                             <label class="form-label">Sub Kelompok <span class="required">*</span></label>
                             <input class="form-control" type="text" name="sub_kelompok" required autocomplete="off" value="<?= $sub_kelompok['sub_kelompok'] ?? ''; ?>" placeholder="Masukkan nama kelompok">
@@ -91,16 +114,19 @@ if (isset($_POST["update-sub-kelompok"])) {
                     <div class="col-md-6">
                         <div class="form-input">
                             <label class="form-label">Jenjang Tahun <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="tahun" required autocomplete="off" value="<?= $sub_kelompok['tahun'] ?? ''; ?>"  placeholder="Masukkan jenjang tahun">
+                            <input class="form-control" type="text" name="tahun" required autocomplete="off" value="<?= $sub_kelompok['tahun'] ?? ''; ?>" placeholder="Masukkan jenjang tahun">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-input">
                             <label class="form-label">Ikon <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="ikon" required autocomplete="off" value="<?= $sub_kelompok['ikon'] ?? ''; ?>" placeholder="Masukkan ikon sub kelompok">
+                            <input class="form-control" type="text" name="ikon" required autocomplete="off" value="<?= $sub_kelompok['ikon'] ?? ''; ?>" placeholder="Masukkan ikon Font Awesome">
                         </div>
                     </div>
+
+                    <input type="hidden" name="id_kelompok" value="<?= $sub_kelompok["id_kelompok"] ?>">
+
                 </div>
 
 

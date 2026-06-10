@@ -17,6 +17,9 @@ if (isset($_GET["id"])) {
         document.location.href='admin-ekskul.php'</script> ";
     }
 }
+$sortir = $_GET['sortir'] ?? 'terbaru'; //default terbaru
+$order  = ($sortir == 'terlama') ? 'ASC' : 'DESC';
+$ekskuls = query("SELECT * FROM ekskul JOIN user ON ekskul.id_user = user.id_user ORDER BY created_at $order");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +56,15 @@ if (isset($_GET["id"])) {
             <div class="admin-table-card">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Ekstrakurikuler</h1>
-                    <a href="a-tambah-ekskul.php">Tambah Ekstrakurikuler</a>
+                    <div class="d-flex gap-3 align-items-center">
+                        <form method="GET">
+                            <select name="sortir" class="form-select sortir" onchange="this.form.submit()">
+                                <option value="terbaru" <?= ($_GET['sortir'] ?? 'terbaru') == 'terbaru' ? 'selected' : '' ?>>Input Terbaru</option>
+                                <option value="terlama" <?= ($_GET['sortir'] ?? '') == 'terlama' ? 'selected' : '' ?>>Input Terlama</option>
+                            </select>
+                        </form>
+                        <a href="a-tambah-ekskul.php">Tambah Ekstrakurikuler</a>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table admin-table kelola-table align-middle">
@@ -62,14 +73,13 @@ if (isset($_GET["id"])) {
                                 <th>#</th>
                                 <th>Ekstrakurikuler</th>
                                 <th>Foto</th>
-                                <th>Data Diisi</th>
+                                <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <?php
-                            $ekskuls = query("SELECT * FROM ekskul JOIN user ON ekskul.id_user = user.id_user");
                             if (empty($ekskuls)) :
                             ?>
                                 <tr>

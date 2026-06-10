@@ -7,6 +7,7 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
+//hapus
 if (isset($_GET["id"])  && isset($_GET["type"])) {
 
     $id = $_GET["id"];

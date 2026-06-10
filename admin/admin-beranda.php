@@ -78,7 +78,7 @@ $nama = $nama ?? '';
                         $total_kelompok = query("SELECT COUNT(*) as total FROM kelompok")[0];
                         ?>
                         <div>
-                            <p>Kelompok</p>
+                            <p>Total Kelompok</p>
                             <h2><?= $total_kelompok["total"] ?></h2>
                         </div>
                         <div class="admin-icon orange">
@@ -91,7 +91,7 @@ $nama = $nama ?? '';
                         $total_subkelompok = query("SELECT COUNT(*) as total FROM sub_kelompok")[0];
                         ?>
                         <div>
-                            <p>Sub Kelompok</p>
+                            <p>Total Sub Kelompok</p>
                             <h2><?= $total_subkelompok["total"] ?></h2>
                         </div>
                         <div class="admin-icon red">
@@ -104,7 +104,7 @@ $nama = $nama ?? '';
                         $total_kontak = query("SELECT COUNT(*) as total FROM kontak")[0];
                         ?>
                         <div>
-                            <p>Kontak</p>
+                            <p>Total Kontak</p>
                             <h2><?= $total_kontak["total"] ?></h2>
                         </div>
                         <div class="admin-icon green">
@@ -117,7 +117,7 @@ $nama = $nama ?? '';
                         $total_program = query("SELECT COUNT(*) as total FROM program")[0];
                         ?>
                         <div>
-                            <p>Program</p>
+                            <p>Total Program</p>
                             <h2><?= $total_program["total"] ?></h2>
                         </div>
                         <div class="admin-icon yellow">
@@ -130,7 +130,7 @@ $nama = $nama ?? '';
                         $total_ekskul = query("SELECT COUNT(*) as total FROM ekskul")[0];
                         ?>
                         <div>
-                            <p>Ekstrakurikuler</p>
+                            <p>Total Ekstrakurikuler</p>
                             <h2><?= $total_ekskul["total"] ?></h2>
                         </div>
                         <div class="admin-icon purple">
@@ -143,7 +143,7 @@ $nama = $nama ?? '';
                         $total_prestasi = query("SELECT COUNT(*) as total FROM prestasi")[0];
                         ?>
                         <div>
-                            <p>Prestasi</p>
+                            <p>Total Prestasi</p>
                             <h2><?= $total_prestasi["total"] ?></h2>
                         </div>
                         <div class="admin-icon blue">

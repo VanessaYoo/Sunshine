@@ -1182,7 +1182,11 @@ section#deskripsi-prestasi {
   color: #ff2f00;
   transition: 0.3s;
 }
+.btn-l-register.black {
+  color: #000000;
+}
 .btn-l-register:hover {
+  color: #ff2f00;
   text-decoration: underline;
 }
 .password-container {
@@ -1502,7 +1506,7 @@ p.user {
 }
 .form-card {
   background: white;
-  padding: 35px;
+  padding: 50px;
   border-radius: 18px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   width: 100%;
@@ -1529,9 +1533,9 @@ p.user {
   border-radius: 14px;
   padding: 14px 18px;
   outline: none;
-  background: white;
   transition: 0.3s;
 }
+
 textarea.form-control {
   min-height: 150px;
 }
@@ -1808,7 +1812,7 @@ textarea.form-control {
 }
 .admin-welcome {
   background: white;
-  padding: 35px;
+  padding: 50px;
   border-radius: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   width: 100%;
@@ -1889,7 +1893,7 @@ textarea.form-control {
 }
 .admin-table-card {
   background: white;
-  padding: 30px;
+  padding: 50px;
   border-radius: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   width: 100%;
@@ -1904,16 +1908,19 @@ textarea.form-control {
   margin: 0;
   font-size: 1.2rem;
 }
-.admin-card-title a {
-  color: #ff6a00;
-  transition: 0.3s;
-}
 .admin-card-title.tambah a {
-  padding: 10px 20px;
+  padding: 15px 20px;
   background: #ffeda4;
   color: #ff6a00;
   border-radius: 50px;
   font-weight: bold;
+  transition: 0.3s;
+}
+.admin-card-title select.sortir {
+  padding: 15px 40px 15px 20px;
+  border-radius: 50px;
+  text-align-last: center;
+  transition: 0.3s;
 }
 .admin-card-title.tambah a:hover {
   text-decoration: none;
@@ -1926,7 +1933,7 @@ textarea.form-control {
   margin: 0;
 }
 .text-wrap {
-  max-width: 400px;
+  max-width: 300px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

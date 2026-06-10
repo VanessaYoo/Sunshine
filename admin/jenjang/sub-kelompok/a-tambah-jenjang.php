@@ -10,15 +10,39 @@ if (!isset($_SESSION["login"])) {
 $id = $_GET['id'] ?? '';
 
 if ($id == '') {
-    header("Location: index.php");
-    exit;
-}
-$jumlah = query("SELECT * FROM kelompok WHERE id_kelompok='$id'");
-if (empty($jumlah)) {
     header("Location: ../admin-jenjang.php");
     exit;
 }
-$kelompok = $jumlah[0];
+
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
+// tambah
+if (isset($_POST["tambah-sub-kelompok"])) {
+    $hasil= tambah_sub_kelompok($_POST);
+   if ($hasil > 0) {
+        echo "
+        <script>
+      alert('Data berhasil ditambah');
+      document.location.href='../admin-jenjang.php';
+        </script>
+        ";
+    } elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada data yang ditambahkan');
+        document.location.href='a-tambah-jenjang.php?id=$id';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Data gagal ditambah');
+        document.location.href='a-tambah-jenjang.php?id=$id';
+        </script>
+        ";
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -61,6 +85,17 @@ $kelompok = $jumlah[0];
 
                 <div class="row g-4">
 
+                 <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="col-md-6">
                         <div class="form-input">
                             <label class="form-label">Sub Kelompok <span class="required">*</span></label>
@@ -78,14 +113,16 @@ $kelompok = $jumlah[0];
                     <div class="col-md-6">
                         <div class="form-input">
                             <label class="form-label">Ikon <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="ikon" required autocomplete="off" placeholder="Masukkan ikon sub kelompok">
+                            <input class="form-control" type="text" name="ikon" required autocomplete="off" placeholder="Masukkan ikon Font Awesome">
                         </div>
                     </div>
+
+                    <input type="hidden" name="id_kelompok" value="<?= $id ?>">
 
                 </div>
 
 
-                <button type="submit" name="tambah-jenjang-playground" class="btn-form">
+                <button type="submit" name="tambah-sub-kelompok" class="btn-form">
                     Simpan
                 </button>
             </form>

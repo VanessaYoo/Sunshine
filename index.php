@@ -442,7 +442,7 @@ require 'function.php';
     <div class="left-prestasi" data-aos="zoom-in" data-aos-duration="1000">
 
       <?php
-      $prestasi_terbaru = query("SELECT * FROM prestasi ORDER BY id_prestasi DESC LIMIT 1")[0];
+      $prestasi_terbaru = query("SELECT * FROM prestasi ORDER BY tanggal DESC LIMIT 1")[0];
       ?>
       <a href="deskripsiPrestasi.php?id=<?= $prestasi_terbaru['id_prestasi']; ?>">
         <div class="content-prestasi">
@@ -469,7 +469,7 @@ require 'function.php';
       <div class="box-prestasi" data-aos="fade-up" data-aos-duration="1000">
 
         <?php
-        $winners = query("SELECT * FROM prestasi ORDER BY id_prestasi DESC LIMIT 3 OFFSET 1");
+        $winners = query("SELECT * FROM prestasi ORDER BY tanggal DESC LIMIT 3 OFFSET 1");
         $i = 1;
         foreach ($winners as $winner) :
         ?>

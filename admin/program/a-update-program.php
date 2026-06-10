@@ -7,34 +7,45 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-  $id = $_GET['id'] ?? '';
+$id = $_GET['id'] ?? '';
 
-  if ($id == '') {
-    header("Location: index.php");
+if ($id == '') {
+    header("Location: admin-program.php");
     exit;
-  }
-  $jumlah = query("SELECT * FROM program WHERE id_program='$id'");
+}
+$jumlah = query("SELECT * FROM program WHERE id_program='$id'");
 
-  if (empty($jumlah)) {
+if (empty($jumlah)) {
     header("Location: admin-program.php");
     exit;
 }
 $program = $jumlah[0];
 
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
 // update
 if (isset($_POST["update-program"])) {
-    if (update_program($_POST) > 0) {
+    $hasil = update_program($_POST);
+    if ($hasil > 0) {
         echo "
         <script>
       alert('Data berhasil diubah');
       document.location.href='admin-program.php';
         </script>
         ";
+    } elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada perubahan data');
+        document.location.href='a-update-program.php?id=$id';
+        </script>
+        ";
     } else {
         echo "
         <script>
         alert('Data gagal diubah');
-        document.location.href='admin-program.php';
+        document.location.href='a-update-program.php?id=$id';
         </script>
         ";
     }
@@ -64,8 +75,8 @@ if (isset($_POST["update-program"])) {
 
         <div class="content-ua admin-page">
 
-            <form action="" method="POST" class="form-card">
-                
+            <form action="" method="POST" class="form-card" enctype="multipart/form-data">
+
                 <div class="back kembali mt-2">
                     <button onclick="history.back()" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
@@ -79,14 +90,25 @@ if (isset($_POST["update-program"])) {
 
                 <div class="row g-4">
 
- <input type="hidden" name="id_program" value="<?= $program["id_program"] ?>">
+                    <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <input type="hidden" name="id_program" value="<?= $program["id_program"] ?>">
                     <div>
                         <div class="mb-3">
                             <label class="form-label">Program <span class="required">*</span></label>
                             <input class="form-control" type="text" name="program" required autocomplete="off" placeholder="Masukkan program" value="<?= $program['program'] ?? ''; ?>">
                         </div>
                     </div>
-                     
+
 
                     <div>
                         <div class="col-12">
@@ -97,7 +119,7 @@ if (isset($_POST["update-program"])) {
                         </div>
                     </div>
 
-                   <div class="col-md-4">
+                    <div class="col-md-4">
                         <div class="mb-3">
                             <label class="form-label">Foto <span class="required">*</span></label>
                             <div class="mb-2">
@@ -107,7 +129,8 @@ if (isset($_POST["update-program"])) {
                             <input type="hidden" name="foto_lama" value="<?= $program['foto'] ?? ''; ?>">
                             <input class="form-control"
                                 type="file"
-                                name="foto" required>
+                                name="foto">
+                                <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
                         </div>
                     </div>
 

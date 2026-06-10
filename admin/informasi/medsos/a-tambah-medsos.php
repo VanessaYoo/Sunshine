@@ -6,6 +6,36 @@ if (!isset($_SESSION["login"])) {
     header("Location: ../../login.php");
     exit;
 }
+
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
+// tambah
+if (isset($_POST["tambah-medsos"])) {
+    $hasil= tambah_medsos($_POST);
+   if ($hasil > 0) {
+        echo "
+        <script>
+      alert('Data berhasil ditambah');
+      document.location.href='../admin-informasi.php';
+        </script>
+        ";
+    } elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada data yang ditambahkan');
+        document.location.href='a-tambah-medsos.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('Data gagal ditambah');
+        document.location.href='a-tambah-medsos.php';
+        </script>
+        ";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +76,17 @@ if (!isset($_SESSION["login"])) {
 
                 <div class="row g-4">
 
+                  <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Link Media Sosial <span class="required">*</span></label>
@@ -56,7 +97,7 @@ if (!isset($_SESSION["login"])) {
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Ikon <span class="required">*</span></label>
-                            <input class="form-control" type="text" name="ikon" required autocomplete="off" placeholder="Masukkan ikon media sosial">
+                            <input class="form-control" type="text" name="ikon" required autocomplete="off" placeholder="Masukkan ikon Font Awesome">
                         </div>
                     </div>
 

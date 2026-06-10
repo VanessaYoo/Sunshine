@@ -11,7 +11,7 @@ if (!isset($_SESSION["login"])) {
 $id = $_GET['id'] ?? '';
 
 if ($id == '') {
-    header("Location: index.php");
+    header("Location: admin-prestasi.php");
     exit;
 }
 $jumlah = query("SELECT * FROM prestasi WHERE id_prestasi='$id'");
@@ -22,20 +22,31 @@ if (empty($jumlah)) {
 }
 $prestasi = $jumlah[0];
 
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
 // update
 if (isset($_POST["update-prestasi"])) {
-    if (update_prestasi($_POST) > 0) {
+    $hasil= update_prestasi($_POST);
+    if ($hasil > 0) {
         echo "
         <script>
       alert('Data berhasil diubah');
       document.location.href='admin-prestasi.php';
         </script>
         ";
+    } elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada perubahan data');
+        document.location.href='a-update-prestasi.php?id=$id';
+        </script>
+        ";
     } else {
         echo "
         <script>
         alert('Data gagal diubah');
-        document.location.href='admin-prestasi.php';
+        document.location.href='a-update-prestasi.php?id=$id';
         </script>
         ";
     }
@@ -65,7 +76,7 @@ if (isset($_POST["update-prestasi"])) {
 
         <div class="content-ua admin-page">
 
-            <form action="" method="POST" class="form-card">
+            <form action="" method="POST" class="form-card" enctype="multipart/form-data">
 
                 <div class="back kembali mt-2">
                     <button onclick="history.back()" class="back-arrow" type="button">
@@ -79,7 +90,20 @@ if (isset($_POST["update-prestasi"])) {
                 </div>
 
                 <div class="row g-4">
- <input type="hidden" name="id_prestasi" value="<?= $prestasi["id_prestasi"] ?>">
+
+                  <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    
+                    <input type="hidden" name="id_prestasi" value="<?= $prestasi["id_prestasi"] ?>">
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Prestasi <span class="required">*</span></label>
@@ -106,14 +130,15 @@ if (isset($_POST["update-prestasi"])) {
                     <div class="col-md-4">
                         <div class="mb-3">
                             <label class="form-label">Foto <span class="required">*</span></label>
-                             <div class="mb-2">
+                            <div class="mb-2">
                                 <img src="../../img/prestasi/<?= $prestasi['foto'] ?? ''; ?>" class="img-thumbnail">
                                 <p class="mt-2" style="font-size: 1rem;">File : <?= $prestasi['foto'] ?? ''; ?></p>
                             </div>
-                             <input type="hidden" name="foto_lama" value="<?= $prestasi['foto'] ?? ''; ?>">
+                            <input type="hidden" name="foto_lama" value="<?= $prestasi['foto'] ?? ''; ?>">
                             <input class="form-control"
                                 type="file"
-                                name="foto" required>
+                                name="foto">
+                                <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
                         </div>
                     </div>
 

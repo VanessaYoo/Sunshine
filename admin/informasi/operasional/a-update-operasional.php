@@ -10,7 +10,7 @@ if (!isset($_SESSION["login"])) {
 $id = $_GET['id'] ?? '';
 
 if ($id == '') {
-    header("Location: index.php");
+    header("Location: ../admin-informasi.php");
     exit;
 }
 $jumlah = query("SELECT * FROM operasional WHERE id_operasional='$id'");
@@ -21,20 +21,31 @@ if (empty($jumlah)) {
 }
 $operasional = $jumlah[0];
 
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+
 // update
 if (isset($_POST["update-operasional"])) {
-    if (update_operasional($_POST) > 0) {
+    $hasil= update_operasional($_POST) ;
+    if ($hasil > 0) {
         echo "
         <script>
       alert('Data berhasil diubah');
       document.location.href='../admin-informasi.php';
         </script>
         ";
+    } elseif ($hasil == 0) {
+        echo "
+        <script>
+        alert('Tidak ada perubahan data');
+        document.location.href='a-update-operasional.php?id=$id';
+        </script>
+        ";
     } else {
         echo "
         <script>
         alert('Data gagal diubah');
-        document.location.href='../admin-informasi.php';
+        document.location.href='../admin-operasional.php';
         </script>
         ";
     }
@@ -78,6 +89,17 @@ if (isset($_POST["update-operasional"])) {
                 </div>
 
                 <div class="row g-4">
+
+                   <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    ?>
+                        <div class="errors">
+                            <?php foreach ($errors as $error): ?>
+                                <div class="col-md-5">
+                                    <div class="error"><?= htmlspecialchars($error) ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
 
                     <input type="hidden" name="id_operasional" value="<?= $operasional["id_operasional"] ?>">
                     <div>
