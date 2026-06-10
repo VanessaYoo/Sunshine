@@ -64,7 +64,10 @@ require 'function.php';
 
 
   <!-- top -->
-  <section id="top" style="background-image: url('img/aset/foto-bersama-1.png');">
+  <?php
+  $foto_hero = query("SELECT * FROM informasi WHERE id=10")[0] ?? [];
+  ?>
+  <section id="top" style="background-image: url('img/aset/<?= $foto_hero['isi_field']; ?>');">
     <div class="text-top">
 
       <div
