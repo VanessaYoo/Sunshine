@@ -10,57 +10,6 @@ if (!isset($_SESSION["login"])) {
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
 
-//update
-if (isset($_POST["update-informasi"])) {
-    $hasil= update_informasi($_POST);
-    if ($hasil > 0) {
-        echo "
-        <script>
-      alert('Data berhasil diubah');
-      document.location.href='admin-informasi.php';
-        </script>
-        ";
-    }elseif ($hasil == 0) {
-        echo "
-        <script>
-        alert('Tidak ada perubahan data');
-        document.location.href='admin-informasi.php';
-        </script>
-        ";
-    } else {
-        echo "
-        <script>
-        alert('Data gagal diubah');
-        document.location.href='admin-informasi.php';
-        </script>
-        ";
-    }
-}
-
-//hapus
-if (isset($_GET["id"])  && isset($_GET["type"])) {
-
-    $id = $_GET["id"];
-    $type = $_GET["type"];
-
-    $hasil='';
-    
-    if ($type == 'operasional') {
-        $hasil = hapus_operasional($id);
-    } elseif ($type == 'kontak') {
-        $hasil = hapus_kontak($id);
-    } elseif ($type == 'medsos') {
-        $hasil = hapus_medsos($id);
-    }
-
-    if ($hasil > 0) {
-        echo "<script>alert('Data berhasil dihapus'); 
-        document.location.href='admin-informasi.php';</script>";
-    } else {
-        echo "<script>alert('Data gagal dihapus');
-        document.location.href='admin-informasi.php'</script>";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,14 +42,14 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
 
         <!-- isi-halaman -->
         <div class="content-ua admin-page">
-            <form action="" method="POST" class="form-card" enctype="multipart/form-data">
+            <form action="admin-ubah-informasi.php" method="POST" class="form-card" enctype="multipart/form-data">
                 <div class="form-title">
                     <h1>Profil Sunshine</h1>
                 </div>
 
                 <div class="row g-4">
-                    
-                     <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+
+                    <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
                     ?>
                         <div class="errors">
                             <?php foreach ($errors as $error): ?>
@@ -212,7 +161,7 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                             <input class="form-control"
                                 type="file"
                                 name="foto_gedung">
-                                <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
+                            <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
                         </div>
                     </div>
 
@@ -233,7 +182,7 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                             <input class="form-control"
                                 type="file"
                                 name="foto_keunggulan">
-                                <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
+                            <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
                         </div>
                     </div>
 
@@ -254,7 +203,7 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                             <input class="form-control"
                                 type="file"
                                 name="foto_hero">
-                                <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
+                            <p style="font-size:0.9rem;" class="mt-2">Format: .png, .jpg, .jpeg, .webp</p>
                         </div>
                     </div>
                 </div>
@@ -267,7 +216,16 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
             <div class="admin-table-card mt-4">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Operasional</h1>
+
+                    <div class="d-flex gap-3 align-items-center">
+                        <form method="GET">
+                            <select name="sortir-operasional" class="form-select sortir" onchange="this.form.submit()">
+                                <option value="terbaru" <?= ($_GET['sortir-operasional'] ?? 'terbaru') == 'terbaru' ? 'selected' : '' ?>>Input Terbaru</option>
+                                <option value="terlama" <?= ($_GET['sortir-operasional'] ?? '') == 'terlama' ? 'selected' : '' ?>>Input Terlama</option>
+                            </select>
+                        </form>
                     <a href="operasional/a-tambah-operasional.php">Tambah Waktu</a>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table admin-table kelola-table align-middle">
@@ -277,13 +235,16 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                                 <th>Hari</th>
                                 <th>Jam Buka</th>
                                 <th>Jam Tutup</th>
+                                <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <?php
-                            $operasional = query("SELECT * FROM operasional");
+                            $sortir_operasional = $_GET['sortir-operasional'] ?? 'terbaru'; //default terbaru
+                            $order  = ($sortir_operasional == 'terlama') ? 'ASC' : 'DESC';
+                            $operasional = query("SELECT * FROM operasional JOIN user ON operasional.id_user = user.id_user ORDER BY created_at $order");
                             if (empty($operasional)) :
                             ?>
                                 <tr>
@@ -299,11 +260,17 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                                         <td class="text-wrap"><?= date('G:i A', strtotime($waktu["jam_buka"])); ?></td>
                                         <td class="text-wrap"><?= date('G:i A', strtotime($waktu["jam_tutup"])); ?></td>
                                         <td>
+                                             <div class="pp-info">
+                                                <span class="text-wrap"><?= $waktu["nama"]; ?></span>
+                                                <p><?= $waktu['created_at']; ?></p>
+                                            </div>
+                                        </td>
+                                        <td>
                                             <div class="aksi-btn">
                                                 <a href="operasional/a-update-operasional.php?id=<?= $waktu['id_operasional']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $waktu['id_operasional']; ?>&type=operasional" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="operasional/a-hapus-operasional.php?id=<?= $waktu['id_operasional']; ?>&type=operasional" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>
@@ -321,7 +288,16 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
             <div class="admin-table-card mt-4">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Kontak</h1>
+
+                    <div class="d-flex gap-3 align-items-center">
+                        <form method="GET">
+                            <select name="sortir-kontak" class="form-select sortir" onchange="this.form.submit()">
+                                <option value="terbaru" <?= ($_GET['sortir-kontak'] ?? 'terbaru') == 'terbaru' ? 'selected' : '' ?>>Input Terbaru</option>
+                                <option value="terlama" <?= ($_GET['sortir-kontak'] ?? '') == 'terlama' ? 'selected' : '' ?>>Input Terlama</option>
+                            </select>
+                        </form>
                     <a href="kontak/a-tambah-kontak.php">Tambah Kontak</a>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table admin-table kelola-table align-middle">
@@ -330,13 +306,16 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                                 <th>#</th>
                                 <th>Kontak</th>
                                 <th>Link WhatsApp</th>
+                                <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <?php
-                            $kontak = query("SELECT * FROM kontak");
+                            $sortir_kontak = $_GET['sortir-kontak'] ?? 'terbaru'; //default terbaru
+                            $order  = ($sortir_kontak == 'terlama') ? 'ASC' : 'DESC';
+                            $kontak = query("SELECT * FROM kontak JOIN user ON kontak.id_user = user.id_user ORDER BY created_at $order");
                             if (empty($kontak)) :
                             ?>
                                 <tr>
@@ -351,11 +330,17 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                                         <td class="text-wrap"><?= $nomor['kontak']; ?></td>
                                         <td class="text-wrap"><a href="<?= $nomor['link']; ?>" class="btn-l-register black" target="_blank"><?= $nomor['link']; ?></a></td>
                                         <td>
+                                             <div class="pp-info">
+                                                <span class="text-wrap"><?= $nomor["nama"]; ?></span>
+                                                <p><?= $nomor['created_at']; ?></p>
+                                            </div>
+                                        </td>
+                                        <td>
                                             <div class="aksi-btn">
                                                 <a href="kontak/a-update-kontak.php?id=<?= $nomor['id_kontak']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $nomor['id_kontak']; ?>&type=kontak" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="kontak/a-hapus-kontak.php?id=<?= $nomor['id_kontak']; ?>" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>
@@ -373,7 +358,16 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
             <div class="admin-table-card mt-4">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Media Sosial</h1>
-                    <a href="medsos/a-tambah-medsos.php">Tambah Media Sosial</a>
+                    
+                    <div class="d-flex gap-3 align-items-center">
+                        <form method="GET">
+                            <select name="sortir-medsos" class="form-select sortir" onchange="this.form.submit()">
+                                <option value="terbaru" <?= ($_GET['sortir-medsos'] ?? 'terbaru') == 'terbaru' ? 'selected' : '' ?>>Input Terbaru</option>
+                                <option value="terlama" <?= ($_GET['sortir-medsos'] ?? '') == 'terlama' ? 'selected' : '' ?>>Input Terlama</option>
+                            </select>
+                        </form>
+                       <a href="medsos/a-tambah-medsos.php">Tambah Media Sosial</a>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table admin-table kelola-table align-middle">
@@ -382,13 +376,16 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                                 <th>#</th>
                                 <th>Link Media Sosial</th>
                                 <th>Ikon</th>
+                                <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <?php
-                            $media_sosial = query("SELECT * FROM medsos");
+                            $sortir_medsos = $_GET['sortir-medsos'] ?? 'terbaru'; //default terbaru
+                            $order  = ($sortir_medsos == 'terlama') ? 'ASC' : 'DESC';
+                            $media_sosial = query("SELECT * FROM medsos JOIN user ON medsos.id_user = user.id_user ORDER BY created_at $order");
                             if (empty($media_sosial)) :
                             ?>
                                 <tr>
@@ -403,11 +400,17 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                                         <td class="text-wrap"><a href="<?= $medsos['link']; ?>" class="btn-l-register black" target="_blank"><?= $medsos['link']; ?></a></td>
                                         <td class="text-wrap"><?= $medsos['ikon']; ?></td>
                                         <td>
+                                             <div class="pp-info">
+                                                <span class="text-wrap"><?= $medsos["nama"]; ?></span>
+                                                <p><?= $medsos['created_at']; ?></p>
+                                            </div>
+                                        </td>
+                                        <td>
                                             <div class="aksi-btn">
                                                 <a href="medsos/a-update-medsos.php?id=<?= $medsos['id_medsos']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $medsos['id_medsos']; ?>&type=medsos" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="medsos/a-hapus-medsos.php?id=<?= $medsos['id_medsos']; ?>&type=medsos" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>

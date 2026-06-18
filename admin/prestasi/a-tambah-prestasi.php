@@ -12,7 +12,39 @@ unset($_SESSION['errors']);
 
 // tambah
 if (isset($_POST["tambah-prestasi"])) {
-    $hasil= tambah_prestasi($_POST);
+    $errors = [];
+    $prestasi = htmlspecialchars(trim($_POST["prestasi"]));
+    $tanggal = trim($_POST["tanggal"]);
+    $deskripsi = htmlspecialchars(trim($_POST["deskripsi"]));
+    $foto = img('foto', 'prestasi');
+    $id_user = $_POST["id_user"];
+
+    // cek jika belum diisi dan valid
+    if (empty($foto)) {
+        $errors[] = "Foto wajib diisi.";
+    }
+    if ($prestasi == '') {
+        $errors[] = "Judul prestasi wajib diisi.";
+    }
+    if ($tanggal == '') {
+        $errors[] = "Tanggal prestasi wajib diisi.";
+    }
+    if ($deskripsi == '') {
+        $errors[] = "Deskripsi wajib diisi.";
+    }
+    if (!empty($errors)) { // (cek dulu) -> klo error
+        $_SESSION['errors'] = $errors;
+        header("Location: /sunshine/admin/prestasi/a-tambah-prestasi.php");
+        exit;
+    }
+
+    //query tambah data
+    $query = "INSERT INTO prestasi (prestasi, tanggal, deskripsi, foto, id_user) VALUES
+          ('$prestasi', '$tanggal','$deskripsi', '$foto', '$id_user')";
+
+    mysqli_query($conn, $query);
+    $hasil= mysqli_affected_rows($conn);
+
    if ($hasil > 0) {
         echo "
         <script>
@@ -64,7 +96,7 @@ if (isset($_POST["tambah-prestasi"])) {
             <form action="" method="POST" class="form-card" enctype="multipart/form-data">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow" type="button">
+                    <button onclick="window.location.href='admin-prestasi.php'" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>

@@ -10,9 +10,38 @@ if (!isset($_SESSION["login"])) {
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
 
+
 // tambah
 if (isset($_POST["tambah-kontak"])) {
-    $hasil= tambah_kontak($_POST);
+
+    $errors = [];
+    $kontak = htmlspecialchars(trim($_POST["kontak"]));
+    $link =  htmlspecialchars(trim($_POST["link"]));
+    $id_user = $_POST["id_user"];
+
+    // cek jika belum diisi dan valid
+    if ($kontak == '') {
+        $errors[] = "Nomor kontak  wajib diisi.";
+    }
+    if ($link == '') {
+        $errors[] = "Link WhatsApp wajib diisi.";
+    }
+    if (!filter_var($link, FILTER_VALIDATE_URL)) {
+        $errors[] = "Format link tidak valid.";
+    }
+    if (!empty($errors)) { // (cek dulu) -> klo error
+        $_SESSION['errors'] = $errors;
+        header("Location: /sunshine/admin/informasi/kontak/a-tambah-kontak.php");
+        exit;
+    }
+
+    //query tambah data
+    $query = "INSERT INTO kontak (kontak, link, id_user)  VALUES
+          ('$kontak', '$link', '$id_user')";
+
+    mysqli_query($conn, $query);
+    $hasil= mysqli_affected_rows($conn);
+
    if ($hasil > 0) {
         echo "
         <script>
@@ -35,6 +64,7 @@ if (isset($_POST["tambah-kontak"])) {
         </script>
         ";
     }
+
 }
 ?>
 <!DOCTYPE html>
@@ -64,7 +94,7 @@ if (isset($_POST["tambah-kontak"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button type="button" onclick="history.back()" class="back-arrow">
+                    <button type="button" onclick="window.location.href='../admin-informasi.php'" class="back-arrow">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -74,11 +104,11 @@ if (isset($_POST["tambah-kontak"])) {
                     <h1>Tambah Kontak</h1>
                 </div>
 
-               
+
 
                 <div class="row g-4">
 
-                  <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
                     ?>
                         <div class="errors">
                             <?php foreach ($errors as $error): ?>
@@ -95,13 +125,14 @@ if (isset($_POST["tambah-kontak"])) {
                             <input class="form-control" type="text" name="kontak" required autocomplete="off" placeholder="Masukkan kontak WhatsApp">
                         </div>
                     </div>
-                     <div class="col-md-7"> 
+                    <div class="col-md-7">
                         <div class="mb-3">
                             <label class="form-label">Link WhatsApp <span class="required">*</span></label>
                             <input class="form-control" type="text" name="link" required autocomplete="off" placeholder="Masukkan link WhatsApp">
+                            <input type="hidden" name="id_user" value="<?= $_SESSION['id_user'] ?>">
                         </div>
                     </div>
-                    
+
 
                 </div>
 

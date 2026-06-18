@@ -7,16 +7,7 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-    if (hapus_ekskul($id) > 0) {
-        echo "<script>alert('Data berhasil dihapus'); 
-    document.location.href='admin-ekskul.php';</script>";
-    } else {
-        echo "<script>alert('Data gagal dihapus');
-        document.location.href='admin-ekskul.php'</script> ";
-    }
-}
+
 $sortir = $_GET['sortir'] ?? 'terbaru'; //default terbaru
 $order  = ($sortir == 'terlama') ? 'ASC' : 'DESC';
 $ekskuls = query("SELECT * FROM ekskul JOIN user ON ekskul.id_user = user.id_user ORDER BY created_at $order");
@@ -71,8 +62,8 @@ $ekskuls = query("SELECT * FROM ekskul JOIN user ON ekskul.id_user = user.id_use
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Ekstrakurikuler</th>
                                 <th>Foto</th>
+                                <th>Ekstrakurikuler</th>
                                 <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -91,8 +82,8 @@ $ekskuls = query("SELECT * FROM ekskul JOIN user ON ekskul.id_user = user.id_use
                                 ?>
                                     <tr>
                                         <td><?= $i; ?></td>
+                                         <td class="text-wrap"><img src="../../img/ekskul/<?= $ekskul['foto']; ?>" width="90px" alt=""></td>
                                         <td class="text-wrap"><?= $ekskul["ekskul"]; ?></td>
-                                        <td class="text-wrap"><?= $ekskul["foto"]; ?></td>
                                          <td class="text-wrap">
                                             <div class="pp-info">
                                                 <span class="text-wrap"><?= $ekskul["nama"]; ?></span>
@@ -104,7 +95,7 @@ $ekskuls = query("SELECT * FROM ekskul JOIN user ON ekskul.id_user = user.id_use
                                                 <a href="a-update-ekskul.php?id=<?= $ekskul['id_ekskul']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $ekskul['id_ekskul']; ?>" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="a-hapus-ekskul.php?id=<?= $ekskul['id_ekskul']; ?>" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>

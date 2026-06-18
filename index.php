@@ -162,7 +162,7 @@ require 'function.php';
       <div class="jenjang-tahun">
 
         <?php
-        $jenjang = query("SELECT * FROM sub_kelompok");
+        $jenjang = query("SELECT * FROM sub_kelompok ORDER BY id_kelompok");
         $i = 1;
         foreach ($jenjang as $sub_kelompok) :
         ?>

@@ -6,7 +6,38 @@ $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
 
 if (isset($_POST["ubah-pass"])) {
-    if (ubahPass($_POST) > 0) {
+     $errors = [];
+    $email = $_SESSION['email'];
+    $pass = trim($_POST["pass"] ?? '');
+    $pass2 = trim($_POST["pass2"] ?? '');
+
+    // cek jika belum diisi dan valid
+    if ($pass == '') {
+        $errors[] = "Password wajib diisi.";
+    }
+    if ($pass2 == '') {
+        $errors[] = "Konfirmasi password wajib diisi.";
+    }
+
+    //cek kesesuaian pass
+    if ($pass != $pass2) {
+        $errors[] = "Password tidak sama.";
+    }
+
+    if (!empty($errors)) { // (cek dulu) -> klo error
+        $_SESSION['errors'] = $errors;
+        header("Location: ubah-pass.php");
+        exit;
+    }
+
+    //enkripsi md5
+    $pass_final = md5($pass);
+
+    //tambahkan ke databes
+    mysqli_query($conn, "UPDATE user SET pass = '$pass_final' WHERE email = '$email'");
+    $hasil= mysqli_affected_rows($conn);
+
+    if ($hasil > 0) {
         echo "
         <script>
         alert('Ubah kata sandi Anda berhasil!');
@@ -55,7 +86,7 @@ if (isset($_POST["ubah-pass"])) {
         <div class="lr">
             <div class="login-register">
                 <div class="back kembali mt-2" data-aos="fade-left" data-aos-duration="1000">
-                    <button onclick="history.back()" class="back-arrow" type="button">
+                    <button onclick="window.location.href='admin-beranda.php'" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>

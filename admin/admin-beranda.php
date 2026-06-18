@@ -159,7 +159,7 @@ $nama = $nama ?? '';
                 <div class="admin-table-card">
                     <div class="admin-card-title">
                         <h3>Prestasi Terbaru</h3>
-                        <a href="prestasi/admin-prestasi.php">Lihat Semua</a>
+                        <a href="prestasi/admin-prestasi.php" class="btn-l-register black">Lihat Semua</a>
                     </div>
 
                     <div class="table-responsive">
@@ -167,7 +167,7 @@ $nama = $nama ?? '';
 
                             <tbody>
                                 <?php
-                                $winners = query("SELECT * FROM prestasi ORDER BY id_prestasi DESC LIMIT 3");
+                                $winners = query("SELECT * FROM prestasi ORDER BY tanggal DESC LIMIT 3");
                                 $i = 1;
                                 foreach ($winners as $winner) :
                                 ?>
@@ -198,16 +198,16 @@ $nama = $nama ?? '';
                 <div class="admin-table-card">
                     <div class="admin-card-title">
                         <h3>Program Terbaru</h3>
-                        <a href="program/admin-program.php">Lihat Semua</a>
+                        <a href="program/admin-program.php" class="btn-l-register black">Lihat Semua</a>
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table admin-table align-middle">
+                        <table class="table admin-table align-middle program">
 
                             <tbody>
 
                                 <?php
-                                $programs = query("SELECT * FROM program ORDER BY id_program DESC LIMIT 3");
+                                $programs = query("SELECT * FROM program ORDER BY created_at DESC LIMIT 4");
                                 $i = 1;
                                 foreach ($programs as $program) :
                                 ?>

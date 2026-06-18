@@ -7,28 +7,6 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-//hapus
-if (isset($_GET["id"])  && isset($_GET["type"])) {
-
-    $id = $_GET["id"];
-    $type = $_GET["type"];
-
-    $hasil='';
-    
-    if ($type == 'kelompok') {
-        $hasil = hapus_kelompok($id);
-    } elseif ($type == 'sub_kelompok') {
-        $hasil = hapus_sub_kelompok($id);
-
-    if ($hasil > 0) {
-        echo "<script>alert('Data berhasil dihapus'); 
-        document.location.href='admin-jenjang.php';</script>";
-    } else {
-        echo "<script>alert('Data gagal dihapus');
-        document.location.href='admin-jenjang.php'</script>";
-    }
-}
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +36,15 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
             <div class="admin-table-card">
                 <div class="admin-card-title tambah">
                     <h1>Kelola Kelompok</h1>
-                    <a href="kelompok/a-tambah-kelompok.php">Tambah Kelompok</a>
+                    <div class="d-flex gap-3 align-items-center">
+                        <form method="GET">
+                            <select name="sortir-kelompok" class="form-select sortir" onchange="this.form.submit()">
+                                <option value="terbaru" <?= ($_GET['sortir-kelompok'] ?? 'terbaru') == 'terbaru' ? 'selected' : '' ?>>Input Terbaru</option>
+                                <option value="terlama" <?= ($_GET['sortir-kelompok'] ?? '') == 'terlama' ? 'selected' : '' ?>>Input Terlama</option>
+                            </select>
+                        </form>
+                        <a href="kelompok/a-tambah-kelompok.php">Tambah Kelompok</a>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table admin-table kelola-table align-middle">
@@ -66,12 +52,15 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                             <tr>
                                 <th>#</th>
                                 <th>Kelompok</th>
+                                <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $kelompok = query("SELECT * FROM kelompok");
+                            $sortir_kelompok = $_GET['sortir-kelompok'] ?? 'terbaru'; //default terbaru
+                            $order  = ($sortir_kelompok == 'terlama') ? 'ASC' : 'DESC';
+                            $kelompok = query("SELECT * FROM kelompok JOIN user ON kelompok.id_user = user.id_user ORDER BY created_at $order");
                             if (empty($kelompok)) :
                             ?>
                                 <tr>
@@ -84,12 +73,18 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                                     <tr>
                                         <td><?= $i; ?></td>
                                         <td class="text-wrap"><?= $kel["kelompok"]; ?></td>
+                                         <td>
+                                                <div class="pp-info">
+                                                    <span class="text-wrap"><?= $kel["nama"]; ?></span>
+                                                    <p><?= $kel['created_at']; ?></p>
+                                                </div>
+                                            </td>
                                         <td>
                                             <div class="aksi-btn">
                                                 <a href="kelompok/a-update-kelompok.php?id=<?= $kel['id_kelompok']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $kel['id_kelompok']; ?>&type=kelompok" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="kelompok/a-hapus-kelompok.php?id=<?= $kel['id_kelompok']; ?>&type=kelompok" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>
@@ -114,7 +109,15 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                 <div class="admin-table-card mt-4">
                     <div class="admin-card-title tambah">
                         <h1>Kelola <?= $bagi_kel["kelompok"] ?></h1>
-                        <a href="sub-kelompok/a-tambah-jenjang.php?id=<?= $bagi_kel['id_kelompok']; ?>">Tambah Jenjang</a>
+                        <div class="d-flex gap-3 align-items-center">
+                            <form method="GET">
+                                <select name="sortir-sub-kelompok" class="form-select sortir" onchange="this.form.submit()">
+                                    <option value="terbaru" <?= ($_GET['sortir-sub-kelompok'] ?? 'terbaru') == 'terbaru' ? 'selected' : '' ?>>Input Terbaru</option>
+                                    <option value="terlama" <?= ($_GET['sortir-sub-kelompok'] ?? '') == 'terlama' ? 'selected' : '' ?>>Input Terlama</option>
+                                </select>
+                            </form>
+                            <a href="sub-kelompok/a-tambah-jenjang.php?id=<?= $bagi_kel['id_kelompok']; ?>">Tambah Jenjang</a>
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table admin-table kelola-table align-middle">
@@ -124,12 +127,15 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                                     <th>Sub Kelompok</th>
                                     <th>Jenjang</th>
                                     <th>Ikon</th>
+                                    <th>Data Input</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $sub_kelompok = query("SELECT * FROM sub_kelompok WHERE id_kelompok=$id_kelompok");
+                                $sortir_sub_kelompok = $_GET['sortir-sub-kelompok'] ?? 'terbaru'; //default terbaru
+                                $order  = ($sortir_sub_kelompok == 'terlama') ? 'ASC' : 'DESC';
+                                $sub_kelompok = query("SELECT * FROM sub_kelompok JOIN user ON sub_kelompok.id_user = user.id_user WHERE id_kelompok=$id_kelompok ORDER BY created_at $order");
                                 if (empty($sub_kelompok)) :
                                 ?>
                                     <tr>
@@ -145,11 +151,17 @@ if (isset($_GET["id"])  && isset($_GET["type"])) {
                                             <td><?= $subkel["tahun"]; ?> Tahun</td>
                                             <td><?= $subkel["ikon"]; ?></td>
                                             <td>
+                                                <div class="pp-info">
+                                                    <span class="text-wrap"><?= $subkel["nama"]; ?></span>
+                                                    <p><?= $subkel['created_at']; ?></p>
+                                                </div>
+                                            </td>
+                                            <td>
                                                 <div class="aksi-btn">
                                                     <a href="sub-kelompok/a-update-jenjang.php?id=<?= $subkel['id_sub_kelompok']; ?>" class="edit">
                                                         <i class="fa-solid fa-pen"></i>
                                                     </a>
-                                                    <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $subkel['id_sub_kelompok']; ?>&type=sub_kelompok" class="delete">
+                                                    <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="sub-kelompok/a-hapus-jenjang.php?id=<?= $subkel['id_sub_kelompok']; ?>&type=sub_kelompok" class="delete">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </a>
                                                 </div>

@@ -12,7 +12,28 @@ unset($_SESSION['errors']);
 
 // tambah
 if (isset($_POST["tambah-kelompok"])) {
-    $hasil = tambah_kelompok($_POST);
+     $errors = [];
+    $kelompok = htmlspecialchars(trim($_POST["kelompok"]));
+    $id_user = $_POST["id_user"];
+
+
+    // cek jika belum diisi dan valid
+    if ($kelompok == '') {
+        $errors[] = "Nama kelompok wajib diisi.";
+    }
+    if (!empty($errors)) { // (cek dulu) -> klo error
+        $_SESSION['errors'] = $errors;
+        header("Location: /sunshine/admin/jenjang/kelompok/a-tambah-kelompok.php");
+        exit;
+    }
+
+    //query tambah data
+    $query = "INSERT INTO kelompok (kelompok, id_user) VALUES
+          ('$kelompok', '$id_user')";
+
+    mysqli_query($conn, $query);
+    $hasil= mysqli_affected_rows($conn);
+
     if ($hasil > 0) {
         echo "
         <script>
@@ -64,7 +85,7 @@ if (isset($_POST["tambah-kelompok"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow" type="button">
+                    <button onclick="window.location.href='../admin-jenjang.php'" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -92,6 +113,7 @@ if (isset($_POST["tambah-kelompok"])) {
                         <div class="form-input">
                             <label class="form-label">Kelompok <span class="required">*</span></label>
                             <input class="form-control" type="text" name="kelompok" required autocomplete="off" placeholder="Masukkan nama kelompok">
+                            <input type="hidden" name="id_user" value="<?= $_SESSION['id_user'] ?>">
                         </div>
                     </div>
 

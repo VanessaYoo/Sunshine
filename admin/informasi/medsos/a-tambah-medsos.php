@@ -12,7 +12,34 @@ unset($_SESSION['errors']);
 
 // tambah
 if (isset($_POST["tambah-medsos"])) {
-    $hasil= tambah_medsos($_POST);
+     $errors = [];
+    $link = htmlspecialchars(trim($_POST["link"]));
+    $ikon = htmlspecialchars(trim($_POST["ikon"]));
+    $id_user = $_POST["id_user"];
+
+    // cek jika belum diisi dan valid
+    if ($ikon == '') {
+        $errors[] = "Ikon wajib diisi.";
+    }
+    if ($link == '') {
+        $errors[] = "Link media sosial wajib diisi.";
+    }
+    if (!filter_var($link, FILTER_VALIDATE_URL)) {
+        $errors[] = "Format link tidak valid.";
+    }
+    if (!empty($errors)) { // (cek dulu) -> klo error
+        $_SESSION['errors'] = $errors;
+        header("Location: /sunshine/admin/informasi/medsos/a-tambah-medsos.php");
+        exit;
+    }
+
+    //query tambah data
+    $query = "INSERT INTO medsos (ikon, link, id_user) VALUES
+          ('$ikon', '$link','$id_user')";
+
+    mysqli_query($conn, $query);
+    $hasil= mysqli_affected_rows($conn);
+
    if ($hasil > 0) {
         echo "
         <script>
@@ -64,7 +91,7 @@ if (isset($_POST["tambah-medsos"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button type="button" onclick="history.back()" class="back-arrow">
+                    <button type="button" onclick="window.location.href='../admin-informasi.php'" class="back-arrow">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -98,6 +125,7 @@ if (isset($_POST["tambah-medsos"])) {
                         <div class="mb-3">
                             <label class="form-label">Ikon <span class="required">*</span></label>
                             <input class="form-control" type="text" name="ikon" required autocomplete="off" placeholder="Masukkan ikon Font Awesome">
+                            <input type="hidden" name="id_user" value="<?= $_SESSION['id_user'] ?>">
                         </div>
                     </div>
 

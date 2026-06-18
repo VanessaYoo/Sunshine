@@ -7,16 +7,6 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-    if (hapus_program($id) > 0) {
-        echo "<script>alert('Data berhasil dihapus'); 
-    document.location.href='admin-program.php';</script>";
-    } else {
-        echo "<script>alert('Data gagal dihapus');
-        document.location.href='admin-program.php'</script> ";
-    }
-}
 
 $sortir = $_GET['sortir'] ?? 'terbaru'; //default terbaru
 $order  = ($sortir == 'terlama') ? 'ASC' : 'DESC';
@@ -72,9 +62,9 @@ $programs = query("SELECT * FROM program JOIN user ON program.id_user = user.id_
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Foto</th>
                                 <th>Program</th>
                                 <th>Deskripsi</th>
-                                <th>Foto</th>
                                 <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -93,9 +83,10 @@ $programs = query("SELECT * FROM program JOIN user ON program.id_user = user.id_
                                 ?>
                                     <tr>
                                         <td><?= $i; ?></td>
+                                        
+                                         <td class="text-wrap"><img src="../../img/program/<?= $program['foto']; ?>" width="90px" alt=""></td>
                                         <td class="text-wrap"><?= $program["program"]; ?></td>
                                         <td class="text-wrap"><?= $program["deskripsi"]; ?></td>
-                                        <td class="text-wrap"><?= $program["foto"]; ?></td>
                                         <td class="text-wrap">
                                             <div class="pp-info">
                                                 <span class="text-wrap"><?= $program["nama"]; ?></span>
@@ -107,7 +98,7 @@ $programs = query("SELECT * FROM program JOIN user ON program.id_user = user.id_
                                                 <a href="a-update-program.php?id=<?= $program['id_program']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $program['id_program']; ?>" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="a-hapus-program.php?id=<?= $program['id_program']; ?>" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>

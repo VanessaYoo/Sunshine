@@ -24,32 +24,6 @@ $kelompok = $jumlah[0];
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
 
-// update
-if (isset($_POST["update-kelompok"])) {
-    $hasil= update_kelompok($_POST);
-    if ($hasil > 0) {
-        echo "
-        <script>
-      alert('Data berhasil diubah');
-      document.location.href='../admin-jenjang.php';
-        </script>
-        ";
-    } elseif ($hasil == 0) {
-        echo "
-        <script>
-        alert('Tidak ada perubahan data');
-        document.location.href='a-update-kelompok.php?id=$id';
-        </script>
-        ";
-    } else {
-        echo "
-        <script>
-        alert('Data gagal diubah');
-        document.location.href='a-update-kelompok.php?id=$id';
-        </script>
-        ";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,10 +49,10 @@ if (isset($_POST["update-kelompok"])) {
 
         <div class="content-ua admin-page">
 
-            <form action="" method="POST" class="form-card">
+            <form action="a-ubah-kelompok.php" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow" type="button">
+                    <button onclick="window.location.href='../admin-jenjang.php'" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>

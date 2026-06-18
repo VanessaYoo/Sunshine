@@ -12,8 +12,35 @@ unset($_SESSION['errors']);
 
 // tambah
 if (isset($_POST["tambah-operasional"])) {
-    $hasil= tambah_operasional($_POST);
-   if ($hasil > 0) {
+    $errors = [];
+    $hari = htmlspecialchars(trim($_POST["hari"]));
+    $jam_buka = trim($_POST["jam_buka"]);
+    $jam_tutup = trim($_POST["jam_tutup"]);
+    $id_user = $_POST["id_user"];
+
+    // cek jika belum diisi dan valid
+    if ($hari == '') {
+        $errors[] = "Hari wajib diisi.";
+    }
+    if ($jam_buka == '') {
+        $errors[] = "Jam buka wajib diisi.";
+    }
+    if ($jam_tutup == '') {
+        $errors[] = "Jam tutup wajib diisi.";
+    }
+    if (!empty($errors)) { // (cek dulu) -> klo error
+        $_SESSION['errors'] = $errors;
+        header("Location: /sunshine/admin/informasi/operasional/a-tambah-operasional.php");
+        exit;
+    }
+
+    //query tambah data
+    $query = "INSERT INTO operasional (hari, jam_buka, jam_tutup, id_user) VALUES
+          ('$hari', '$jam_buka', '$jam_tutup', '$id_user')";
+
+    mysqli_query($conn, $query);
+    $hasil= mysqli_affected_rows($conn);
+    if ($hasil > 0) {
         echo "
         <script>
       alert('Data berhasil ditambah');
@@ -64,7 +91,7 @@ if (isset($_POST["tambah-operasional"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button type="button" onclick="history.back()" class="back-arrow">
+                    <button type="button" onclick="window.location.href='../admin-informasi.php'" class="back-arrow">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -76,7 +103,7 @@ if (isset($_POST["tambah-operasional"])) {
 
                 <div class="row g-4">
 
-                   <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
+                    <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 
                     ?>
                         <div class="errors">
                             <?php foreach ($errors as $error): ?>
@@ -108,7 +135,7 @@ if (isset($_POST["tambah-operasional"])) {
                             <input class="form-control" type="time" name="jam_tutup" required autocomplete="off">
                         </div>
                     </div>
-
+                    <input type="hidden" name="id_user" value="<?= $_SESSION['id_user'] ?>">
 
                 </div>
 

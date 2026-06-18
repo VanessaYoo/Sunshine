@@ -6,7 +6,48 @@ $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
 
 if (isset($_POST["register"])) {
-    if (register($_POST) > 0) {
+    $errors = [];
+    $nama = htmlspecialchars(trim($_POST["nama"] ?? ''));
+    $email = htmlspecialchars(trim(strtolower($_POST["email"])) ?? '');
+    $pass = trim($_POST["pass"] ?? '');
+    $pass2 = trim($_POST["pass2"] ?? '');
+
+    // cek jika belum diisi dan valid
+    if ($email == '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) { //harus menggunakan formal nama + @gmail.com
+        $errors[] = "Email tidak valid.";
+    }
+    if ($pass == '') {
+        $errors[] = "Password wajib diisi.";
+    }
+    if ($pass2 == '') {
+        $errors[] = "Konfirmasi password wajib diisi.";
+    }
+
+    //cek user ada atau tidak
+    $result = mysqli_query($conn, "SELECT email FROM user WHERE email='$email'");
+    if (mysqli_fetch_assoc($result)) {
+        echo "<script>alert('Akun ini sudah pernah dibuat.');</script>";
+        return false;
+    }
+    //cek kesesuaian pass
+    if ($pass != $pass2) {
+        $errors[] = "Password tidak sama.";
+    }
+
+    if (!empty($errors)) { // (cek dulu) -> klo error di frm pendaftaran
+        $_SESSION['errors'] = $errors;
+        header("Location: register.php");
+        exit;
+    }
+
+    //enkripsi md5
+    $pass_final = md5($pass);
+
+    //tambahkan ke databes
+    mysqli_query($conn, "INSERT INTO user VALUES ('', '$email','$pass_final', '$nama')");
+    $hasil= mysqli_affected_rows($conn);
+
+    if ($hasil > 0) {
         echo "
         <script>
         alert('Registrasi akun berhasil! Silahkan login dengan akun yang telah dibuat.');

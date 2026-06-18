@@ -24,32 +24,6 @@ $operasional = $jumlah[0];
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
 
-// update
-if (isset($_POST["update-operasional"])) {
-    $hasil= update_operasional($_POST) ;
-    if ($hasil > 0) {
-        echo "
-        <script>
-      alert('Data berhasil diubah');
-      document.location.href='../admin-informasi.php';
-        </script>
-        ";
-    } elseif ($hasil == 0) {
-        echo "
-        <script>
-        alert('Tidak ada perubahan data');
-        document.location.href='a-update-operasional.php?id=$id';
-        </script>
-        ";
-    } else {
-        echo "
-        <script>
-        alert('Data gagal diubah');
-        document.location.href='../admin-operasional.php';
-        </script>
-        ";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,10 +49,10 @@ if (isset($_POST["update-operasional"])) {
 
         <div class="content-ua admin-page">
 
-            <form action="" method="POST" class="form-card">
+            <form action="a-ubah-operasional.php" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button type="button" onclick="history.back()" class="back-arrow">
+                    <button type="button" onclick="window.location.href='../admin-informasi.php'" class="back-arrow">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>

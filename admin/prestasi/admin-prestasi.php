@@ -7,16 +7,6 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-    if (hapus_prestasi($id) > 0) {
-        echo "<script>alert('Data berhasil dihapus'); 
-    document.location.href='admin-prestasi.php';</script>";
-    } else {
-        echo "<script>alert('Data gagal dihapus');
-        document.location.href='admin-prestasi.php'</script> ";
-    }
-}
 $sortir = $_GET['sortir'] ?? 'tanggal_terbaru';
 
 if ($sortir == 'tanggal_terbaru') {
@@ -82,10 +72,10 @@ $winners = query("SELECT * FROM prestasi JOIN user ON prestasi.id_user = user.id
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Foto</th>
                                 <th>Prestasi</th>
                                 <th>Tanggal</th>
                                 <th>Deskripsi</th>
-                                <th>Foto</th>
                                 <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -104,6 +94,7 @@ $winners = query("SELECT * FROM prestasi JOIN user ON prestasi.id_user = user.id
                                 ?>
                                     <tr>
                                         <td><?= $i; ?></td>
+                                        <td class="text-wrap"><img src="../../img/prestasi/<?= $winner['foto']; ?>" width="90px" alt=""></td>
                                         <td class="text-wrap"><?= $winner['prestasi']; ?></td>
                                         <td class="text-wrap"><?= date('d F Y', strtotime($winner['tanggal'])); ?></td>
                                         <td class="text-wrap">
@@ -111,7 +102,7 @@ $winners = query("SELECT * FROM prestasi JOIN user ON prestasi.id_user = user.id
                                                 <?= $winner['deskripsi']; ?>
                                             </p>
                                         </td>
-                                        <td class="text-wrap"><?= $winner['foto']; ?></td>
+                                        
                                         <td class="text-wrap">
                                             <div class="pp-info">
                                                 <span class="text-wrap"><?= $winner["nama"]; ?></span>
@@ -123,7 +114,7 @@ $winners = query("SELECT * FROM prestasi JOIN user ON prestasi.id_user = user.id
                                                 <a href="a-update-prestasi.php?id=<?= $winner['id_prestasi']; ?>" class="edit">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </a>
-                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="?id=<?= $winner['id_prestasi']; ?>" class="delete">
+                                                <a onclick="return confirm('Anda yakin ingin menghapus data?')" href="a-hapus-prestasi.php?id=<?= $winner['id_prestasi']; ?>" class="delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </div>

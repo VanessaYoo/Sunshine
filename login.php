@@ -4,10 +4,6 @@ require "function.php";
 
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
-
-if (isset($_POST["login"])) {
-    login($_POST);
-}
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +42,7 @@ if (isset($_POST["login"])) {
                     <p>Silahkan masukkan email dan password</p>
                 </div>
 
-                <form action="" method="post" class="form-lr" data-aos="fade-up" data-aos-duration="1000">
+                <form action="sv_login.php" method="post" class="form-lr" data-aos="fade-up" data-aos-duration="1000">
 
 
                     <?php if (!empty($errors)): //(cek dulu) namun hasilnya [] karna gada eror 

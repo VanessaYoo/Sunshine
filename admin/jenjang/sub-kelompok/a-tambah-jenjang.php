@@ -19,7 +19,36 @@ unset($_SESSION['errors']);
 
 // tambah
 if (isset($_POST["tambah-sub-kelompok"])) {
-    $hasil= tambah_sub_kelompok($_POST);
+    $errors = [];
+    $sub_kelompok = htmlspecialchars(trim($_POST["sub_kelompok"]));
+    $tahun = htmlspecialchars(trim($_POST["tahun"]));
+    $id_kelompok = $_POST["id_kelompok"];
+    $ikon = htmlspecialchars(trim($_POST["ikon"]));
+    $id_user = $_POST["id_user"];
+
+    // cek jika belum diisi dan valid
+    if ($ikon == '') {
+        $errors[] = "Ikon wajib diisi.";
+    }
+    if ($sub_kelompok == '') {
+        $errors[] = "Nama sub kelompok wajib diisi.";
+    }
+    if ($tahun == '') {
+        $errors[] = "Usia tahun wajib diisi.";
+    }
+    if (!empty($errors)) { // (cek dulu) -> klo error
+        $_SESSION['errors'] = $errors;
+        header("Location: /sunshine/admin/jenjang/sub-kelompok/a-tambah-jenjang.php");
+        exit;
+    }
+
+    //query tambah data
+    $query = "INSERT INTO sub_kelompok (sub_kelompok, tahun, ikon, id_kelompok, id_user) VALUES
+          ('$sub_kelompok', '$tahun', '$ikon', '$id_kelompok', '$id_user')";
+
+    mysqli_query($conn, $query);
+    $hasil= mysqli_affected_rows($conn);
+
    if ($hasil > 0) {
         echo "
         <script>
@@ -72,7 +101,7 @@ if (isset($_POST["tambah-sub-kelompok"])) {
             <form action="" method="POST" class="form-card">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow" type="button">
+                    <button onclick="window.location.href='../admin-jenjang.php'" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
@@ -118,6 +147,7 @@ if (isset($_POST["tambah-sub-kelompok"])) {
                     </div>
 
                     <input type="hidden" name="id_kelompok" value="<?= $id ?>">
+                    <input type="hidden" name="id_user" value="<?= $_SESSION['id_user'] ?>">
 
                 </div>
 

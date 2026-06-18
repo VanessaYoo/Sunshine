@@ -12,7 +12,35 @@ unset($_SESSION['errors']);
 
 // tambah
 if (isset($_POST["tambah-program"])) {
-    $hasil= tambah_program($_POST);
+    $errors = [];
+    $program = htmlspecialchars(trim($_POST["program"]));
+    $deskripsi = htmlspecialchars(trim($_POST["deskripsi"]));
+    $foto = img('foto', 'program');
+    $id_user = $_POST["id_user"];
+
+    // cek jika belum diisi dan valid
+    if (empty($foto)) {
+        $errors[] = "Foto wajib diisi.";
+    }
+    if ($program == '') {
+        $errors[] = "Nama program wajib diisi.";
+    }
+    if ($deskripsi == '') {
+        $errors[] = "Deskripsi wajib diisi.";
+    }
+    if (!empty($errors)) { // (cek dulu) -> klo error
+        $_SESSION['errors'] = $errors;
+        header("Location: /sunshine/admin/program/a-tambah-program.php");
+        exit;
+    }
+
+    //query tambah data
+    $query = "INSERT INTO program (program, deskripsi, foto, id_user) VALUES
+          ('$program', '$deskripsi', '$foto', '$id_user')";
+
+    mysqli_query($conn, $query);
+    $hasil= mysqli_affected_rows($conn);
+
    if ($hasil > 0) {
         echo "
         <script>
@@ -64,7 +92,7 @@ if (isset($_POST["tambah-program"])) {
             <form action="" method="POST" class="form-card" enctype="multipart/form-data">
 
                 <div class="back kembali mt-2">
-                    <button onclick="history.back()" class="back-arrow" type="button">
+                    <button onclick="window.location.href='admin-program.php'" class="back-arrow" type="button">
                         <i class="fas fa-angle-left"></i>
                         <p class="orange bold">Kembali</p>
                     </button>
