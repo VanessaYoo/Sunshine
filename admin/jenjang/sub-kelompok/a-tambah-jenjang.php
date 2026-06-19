@@ -1,6 +1,6 @@
 <?php
 include "../../security.php";
-require '../../../function.php';
+require '../../../koneksi.php';
 
 if (!isset($_SESSION["login"])) {
     header("Location: ../../login.php");

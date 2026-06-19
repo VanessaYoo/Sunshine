@@ -1,6 +1,7 @@
 <?php
 require "../security.php";
-require '../../function.php';
+require '../../format_img.php';
+require '../../koneksi.php';
 
 if (!isset($_SESSION["login"])) {
     header("Location: ../../login.php");

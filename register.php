@@ -1,6 +1,7 @@
 <?php
 session_start();
-require "function.php";
+require 'koneksi.php';
+require 'data_query.php';
 
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
@@ -45,7 +46,7 @@ if (isset($_POST["register"])) {
 
     //tambahkan ke databes
     mysqli_query($conn, "INSERT INTO user VALUES ('', '$email','$pass_final', '$nama')");
-    $hasil= mysqli_affected_rows($conn);
+    $hasil = mysqli_affected_rows($conn);
 
     if ($hasil > 0) {
         echo "

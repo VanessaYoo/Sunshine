@@ -1970,6 +1970,10 @@ textarea.form-control {
   margin: 2px 0 0;
   font-size: 0.95rem;
 }
+.admin-table td i.output{
+  text-align: start;
+  font-size: 2rem;
+}
 
 /* admin pendaftaran */
 .kelola-table {

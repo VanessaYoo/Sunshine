@@ -1,6 +1,7 @@
 <?php
 require "security.php";
-require "../function.php";
+require '../koneksi.php';
+require '../data_query.php';
 
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);

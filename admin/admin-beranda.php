@@ -1,6 +1,8 @@
 <?php
 require "security.php";
-require '../function.php';
+require '../koneksi.php';
+require '../data_query.php';
+
 $nama = $nama ?? '';
 ?>
 <!DOCTYPE html>

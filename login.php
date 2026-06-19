@@ -1,6 +1,7 @@
 <?php
 session_start();
-require "function.php";
+require 'koneksi.php';
+require 'data_query.php';
 
 $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
@@ -29,7 +30,7 @@ unset($_SESSION['errors']);
 <body>
     <div class="container-lr">
         <div class="left-lr" data-aos="fade-right" data-aos-duration="1000">
-             <?php
+            <?php
             $foto_hero = query("SELECT * FROM informasi WHERE id=6")[0] ?? [];
             ?>
 

@@ -1,5 +1,6 @@
   <?php
-  require 'function.php';
+  require 'koneksi.php';
+  require 'data_query.php';
   
   $id = $_GET['id'] ?? '';
 

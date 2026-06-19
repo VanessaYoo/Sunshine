@@ -1,6 +1,6 @@
 <?php
 require "../../security.php";
-require '../../../function.php';
+require '../../../koneksi.php';
 
 
 // update

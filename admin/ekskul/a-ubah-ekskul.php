@@ -1,7 +1,8 @@
 
 <?php
 require "../security.php";
-require '../../function.php';
+require '../../koneksi.php';
+require '../../format_img.php';
 
 // update
 if (isset($_POST["update-ekskul"])) {

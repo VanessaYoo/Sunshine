@@ -1,6 +1,7 @@
 <?php
 require "../security.php";
-require '../../function.php';
+require '../../koneksi.php';
+require '../../data_query.php';
 
 if (!isset($_SESSION["login"])) {
     header("Location: ../login.php");
@@ -124,9 +125,9 @@ if (!isset($_SESSION["login"])) {
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Ikon</th>
                                     <th>Sub Kelompok</th>
                                     <th>Jenjang</th>
-                                    <th>Ikon</th>
                                     <th>Data Input</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
@@ -147,9 +148,9 @@ if (!isset($_SESSION["login"])) {
                                     ?>
                                         <tr>
                                             <td><?= $i; ?></td>
+                                            <td><i class="<?= $subkel["ikon"]; ?> output"></i></td>
                                             <td><?= $subkel["sub_kelompok"]; ?></td>
                                             <td><?= $subkel["tahun"]; ?> Tahun</td>
-                                            <td><?= $subkel["ikon"]; ?></td>
                                             <td>
                                                 <div class="pp-info">
                                                     <span class="text-wrap"><?= $subkel["nama"]; ?></span>

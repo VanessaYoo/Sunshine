@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "function.php";
+require 'koneksi.php';
 
 $errors = [];
 $email = htmlspecialchars(trim(strtolower($_POST["email"])) ?? '');
@@ -35,7 +35,7 @@ if (mysqli_num_rows($result) === 1) { //ketemu 1
     } else {
         $errors[] = "Email atau passwordmu salah. ";
     }
-}else{
+} else {
     $errors[] = "Email atau passwordmu salah. ";
 }
 if (!empty($errors)) { // (cek dulu) -> klo error di frm pendaftaran

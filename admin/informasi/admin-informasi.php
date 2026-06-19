@@ -1,6 +1,7 @@
 <?php
 require "../security.php";
-require '../../function.php';
+require '../../koneksi.php';
+require '../../data_query.php';
 
 if (!isset($_SESSION["login"])) {
     header("Location: ../login.php");
@@ -374,8 +375,8 @@ unset($_SESSION['errors']);
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Link Media Sosial</th>
                                 <th>Ikon</th>
+                                <th>Link Media Sosial</th>
                                 <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -397,8 +398,8 @@ unset($_SESSION['errors']);
                                 ?>
                                     <tr>
                                         <td><?= $i; ?></td>
+                                        <td class="text-wrap"><i class="<?= $medsos['ikon']; ?> output"></i></td>
                                         <td class="text-wrap"><a href="<?= $medsos['link']; ?>" class="btn-l-register black" target="_blank"><?= $medsos['link']; ?></a></td>
-                                        <td class="text-wrap"><?= $medsos['ikon']; ?></td>
                                         <td>
                                              <div class="pp-info">
                                                 <span class="text-wrap"><?= $medsos["nama"]; ?></span>

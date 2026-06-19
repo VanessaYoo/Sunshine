@@ -1,6 +1,7 @@
 <?php
 require "../security.php";
-require '../../function.php';
+require '../../koneksi.php';
+require '../../data_query.php';
 
 if (!isset($_SESSION["login"])) {
     header("Location: ../login.php");
@@ -82,7 +83,7 @@ $ekskuls = query("SELECT * FROM ekskul JOIN user ON ekskul.id_user = user.id_use
                                 ?>
                                     <tr>
                                         <td><?= $i; ?></td>
-                                         <td class="text-wrap"><img src="../../img/ekskul/<?= $ekskul['foto']; ?>" width="90px" alt=""></td>
+                                         <td class="text-wrap"><img src="../../img/ekskul/<?= $ekskul['foto']; ?>" width="70px" alt=""></td>
                                         <td class="text-wrap"><?= $ekskul["ekskul"]; ?></td>
                                          <td class="text-wrap">
                                             <div class="pp-info">
