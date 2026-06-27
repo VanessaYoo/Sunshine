@@ -1088,6 +1088,9 @@ section#deskripsi-prestasi {
   flex-direction: column;
   align-items: start;
 }
+td .deskripsi{
+  max-width: 180px;
+}
 /* login register */
 .container-lr {
   display: flex;
@@ -2093,6 +2096,7 @@ textarea.form-control {
   gap: 5px;
 }
 
+
 /* responsive */
 /* handphone */
 @media (max-width: 750px) {
@@ -2370,7 +2374,7 @@ textarea.form-control {
   .other-prestasi h3 {
     line-height: 1.2;
   }
-  p.info.detail {
+  p.info.detail.none {
     display: none;
   }
 
@@ -2802,7 +2806,7 @@ textarea.form-control {
   }
   .d-flex.gap-3.align-items-center {
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
     gap: 10px !important;
     width: 100% !important;
   }

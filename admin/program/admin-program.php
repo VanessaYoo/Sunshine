@@ -84,10 +84,14 @@ $programs = query("SELECT * FROM program JOIN user ON program.id_user = user.id_
                                 ?>
                                     <tr>
                                         <td><?= $i; ?></td>
-                                        
-                                         <td class="text-wrap"><img src="../../img/program/<?= $program['foto']; ?>" width="90px" alt=""></td>
+
+                                        <td class="text-wrap"><img src="../../img/program/<?= $program['foto']; ?>" width="90px" alt=""></td>
                                         <td class="text-wrap"><?= $program["program"]; ?></td>
-                                        <td class="text-wrap td-none"><?= $program["deskripsi"]; ?></td>
+                                        <td class="text-wrap td-none">
+                                            <p class="info detail deskripsi">
+                                                <?= $program["deskripsi"]; ?>
+                                            </p>
+                                        </td>
                                         <td class="text-wrap">
                                             <div class="pp-info">
                                                 <span class="text-wrap"><?= $program["nama"]; ?></span>

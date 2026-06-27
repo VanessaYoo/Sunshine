@@ -96,10 +96,14 @@ $winners = query("SELECT * FROM prestasi JOIN user ON prestasi.id_user = user.id
                                     <tr>
                                         <td><?= $i; ?></td>
                                         <td class="text-wrap"><img src="../../img/prestasi/<?= $winner['foto']; ?>" width="90px" alt=""></td>
-                                        <td class="text-wrap"><?= $winner['prestasi']; ?></td>
+                                        <td class="text-wrap">
+                                            <p class="info detail deskripsi">
+                                                <?= $winner['prestasi']; ?>
+                                            </p>
+                                        </td>
                                         <td class="text-wrap"><?= date('d F Y', strtotime($winner['tanggal'])); ?></td>
                                         <td class="text-wrap td-none">
-                                            <p class="info detail">
+                                            <p class="info detail deskripsi none">
                                                 <?= $winner['deskripsi']; ?>
                                             </p>
                                         </td>
