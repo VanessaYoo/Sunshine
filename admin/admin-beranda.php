@@ -44,7 +44,7 @@ $nama = $nama ?? '';
                     Aktivitas pengelolaan data dan informasi Sunshine
                 </p>
 
-                <div class="admin-grid">
+                <div class="admin-grid admin">
                     <!-- <div class="admin-total-card">
                         <div>
                             <p>Pendaftar</p>
@@ -80,7 +80,9 @@ $nama = $nama ?? '';
                         $total_kelompok = query("SELECT COUNT(*) as total FROM kelompok")[0];
                         ?>
                         <div>
-                            <p>Total Kelompok</p>
+                            <div class="total-group">
+                                <p class="total-span">Total</p><p> Kelompok</p>
+                            </div>
                             <h2><?= $total_kelompok["total"] ?></h2>
                         </div>
                         <div class="admin-icon orange">
@@ -93,7 +95,7 @@ $nama = $nama ?? '';
                         $total_subkelompok = query("SELECT COUNT(*) as total FROM sub_kelompok")[0];
                         ?>
                         <div>
-                            <p>Total Sub Kelompok</p>
+                            <div class="total-group"><p class="total-span">Total</p><p> Sub Kelompok</p></div>
                             <h2><?= $total_subkelompok["total"] ?></h2>
                         </div>
                         <div class="admin-icon red">
@@ -106,7 +108,7 @@ $nama = $nama ?? '';
                         $total_kontak = query("SELECT COUNT(*) as total FROM kontak")[0];
                         ?>
                         <div>
-                            <p>Total Kontak</p>
+                            <div class="total-group"><p class="total-span">Total</p><p> Kontak</p></div>
                             <h2><?= $total_kontak["total"] ?></h2>
                         </div>
                         <div class="admin-icon green">
@@ -119,7 +121,9 @@ $nama = $nama ?? '';
                         $total_program = query("SELECT COUNT(*) as total FROM program")[0];
                         ?>
                         <div>
-                            <p>Total Program</p>
+                            <div class="total-group">
+                                <p class="total-span">Total</p><p> Program</p>
+                            </div>
                             <h2><?= $total_program["total"] ?></h2>
                         </div>
                         <div class="admin-icon yellow">
@@ -132,7 +136,7 @@ $nama = $nama ?? '';
                         $total_ekskul = query("SELECT COUNT(*) as total FROM ekskul")[0];
                         ?>
                         <div>
-                            <p>Total Ekstrakurikuler</p>
+                            <div class="total-group"><p class="total-span">Total</p><p> Ekstrakurikuler</p></div>
                             <h2><?= $total_ekskul["total"] ?></h2>
                         </div>
                         <div class="admin-icon purple">
@@ -145,7 +149,7 @@ $nama = $nama ?? '';
                         $total_prestasi = query("SELECT COUNT(*) as total FROM prestasi")[0];
                         ?>
                         <div>
-                            <p>Total Prestasi</p>
+                            <div class="total-group"><p class="total-span">Total</p><p> Prestasi</p></div>
                             <h2><?= $total_prestasi["total"] ?></h2>
                         </div>
                         <div class="admin-icon blue">

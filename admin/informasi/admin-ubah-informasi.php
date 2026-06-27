@@ -13,7 +13,7 @@ unset($_SESSION['errors']);
 
 //update
 if (isset($_POST["update-informasi"])) {
-        $profil = htmlspecialchars(trim($_POST["profil"]));
+    $profil = htmlspecialchars(trim($_POST["profil"]));
     $lokasi_tertulis = htmlspecialchars(trim($_POST["lokasi_tertulis"]));
     $lokasi_map = htmlspecialchars(trim($_POST["lokasi_map"]));
     $keunggulan = htmlspecialchars(trim($_POST["keunggulan"]));
@@ -129,7 +129,7 @@ if (isset($_POST["update-informasi"])) {
     mysqli_query($conn, $query_foto_hero);
     $affected_rows += mysqli_affected_rows($conn);
 
-    $hasil= $affected_rows;
+    $hasil = $affected_rows;
 
     if ($hasil > 0) {
         echo "

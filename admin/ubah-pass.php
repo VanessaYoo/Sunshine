@@ -76,6 +76,19 @@ if (isset($_POST["ubah-pass"])) {
 </head>
 
 <body>
+     <?php
+    $foto_hero = query("SELECT * FROM informasi WHERE id=10")[0] ?? [];
+    ?>
+    <style>
+        @media (600px <=width <=1107px) {
+            .container-lr {
+                background:
+                    linear-gradient(rgba(255, 119, 0, 0.5), rgba(255, 119, 0, 0.5)),
+                    url("../img/aset/<?= $foto_hero['isi_field']; ?>");
+
+            }
+        }
+    </style>
     <div class="container-lr">
         <div class="left-lr" data-aos="fade-right" data-aos-duration="1000">
             <?php

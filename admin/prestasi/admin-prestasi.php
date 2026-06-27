@@ -76,7 +76,7 @@ $winners = query("SELECT * FROM prestasi JOIN user ON prestasi.id_user = user.id
                                 <th>Foto</th>
                                 <th>Prestasi</th>
                                 <th>Tanggal</th>
-                                <th>Deskripsi</th>
+                                <th class="td-none">Deskripsi</th>
                                 <th>Data Input</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -98,7 +98,7 @@ $winners = query("SELECT * FROM prestasi JOIN user ON prestasi.id_user = user.id
                                         <td class="text-wrap"><img src="../../img/prestasi/<?= $winner['foto']; ?>" width="90px" alt=""></td>
                                         <td class="text-wrap"><?= $winner['prestasi']; ?></td>
                                         <td class="text-wrap"><?= date('d F Y', strtotime($winner['tanggal'])); ?></td>
-                                        <td class="text-wrap">
+                                        <td class="text-wrap td-none">
                                             <p class="info detail">
                                                 <?= $winner['deskripsi']; ?>
                                             </p>
