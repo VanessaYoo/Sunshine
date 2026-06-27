@@ -39,11 +39,11 @@ navLink.forEach((link) => {
 // untuk (user-sidebar.php)
 let sidebarToggle = document.getElementById("toggle-sidebar");
 let iconBars = document.querySelector(".icon-nav.user i");
-if (sidebarToggle && window.innerWidth <= 600) {
+if (sidebarToggle && window.innerWidth <= 750) {
   sidebarToggle.style.maxHeight = "0px";
 }
 function toggleSidebar() {
-  if (sidebarToggle && window.innerWidth <= 600) {
+  if (sidebarToggle && window.innerWidth <= 750) {
      let tutupDropDown = sidebarToggle.style.maxHeight === "0px";
     sidebarToggle.style.maxHeight = tutupDropDown ? "320px" : "0px";
     
@@ -54,7 +54,7 @@ function toggleSidebar() {
 const sidebarLinks = document.querySelectorAll(".sidebar .menu a");
 sidebarLinks.forEach((link) => {
   link.addEventListener("click", () => {
-    if (sidebarToggle && window.innerWidth <= 600) {
+    if (sidebarToggle && window.innerWidth <= 750) {
       sidebarToggle.style.maxHeight = "0px";
             if(iconBars) iconBars.style.color = "black";
     }
@@ -67,7 +67,7 @@ sidebarLinks.forEach((link) => {
   const iconAdmin = document.querySelector(".icon-nav.admin i");
 function toggleSidebarAdmin() {
 
-  if (sidebarAdmin && window.innerWidth <= 600) {
+  if (sidebarAdmin && window.innerWidth <= 750) {
     sidebarAdmin.classList.toggle("buka-admin");
     barAdmin.classList.toggle("geser-kanan");
     
@@ -82,7 +82,7 @@ function toggleSidebarAdmin() {
 document.querySelectorAll(".sidebar.admin .menu a").forEach(link => {
   link.addEventListener("click", () => {
     
-    if (sidebarAdmin && window.innerWidth <= 600) {
+    if (sidebarAdmin && window.innerWidth <= 750) {
       sidebarAdmin.classList.remove("buka-admin");
       if (barAdmin) barAdmin.classList.remove("geser-kanan");
       if (iconAdmin) iconAdmin.classList.replace("fa-xmark", "fa-bars"); 
